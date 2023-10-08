@@ -1,4 +1,4 @@
 unset HISTFILE
-source "$HOME/.config/shell/aliasrc"
+PS1="\[\e[1;31m\]\w \[\e[m\]$ "
 source "$HOME/.config/shell/exports"
-export PS1='\[\e[1;31m\]\w \[\e[m\]$ '
+source "$XDG_CONFIG_HOME/shell/aliasrc"
