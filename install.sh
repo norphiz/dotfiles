@@ -104,13 +104,11 @@ passwd $NAME
 
 rm /home/$NAME/.bash*
 
-git clone --depth 1 https://github.com/norphiz/dots
+git clone --depth=1 https://github.com/norphiz/dots
 
-mv dots/.config /home/$NAME/
+mv dotfiles/ /home/$NAME/.config/
 
 clear
-
-rm -fr dots/
 
 chmod +x /home/$NAME/.config/bspwm/bspwmrc
 
