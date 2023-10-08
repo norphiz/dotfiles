@@ -1,1 +1,1 @@
-My personal collection of dotfiles
+My personal collection of dotfiles and other stuff
