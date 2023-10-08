@@ -108,6 +108,10 @@ git clone --depth=1 https://github.com/norphiz/dots
 
 mv dotfiles/ /home/$NAME/.config/
 
+rm /home/$NAME/.config/LICENSE
+
+rm /home/$NAME/.config/README.md
+
 clear
 
 chmod +x /home/$NAME/.config/bspwm/bspwmrc
