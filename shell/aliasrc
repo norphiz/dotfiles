@@ -1,0 +1,71 @@
+# vi: ft=sh
+
+gcgh() {
+    git clone --depth=1 https://github.com/$@
+}
+
+gcgl() {
+    git clone --depth=1 https://gitlab.com/$@.git
+}
+
+ex() {
+    if [[ -f $1 ]]; then
+        case $1 in
+            *.gz) gzip -d $(date +%d-%m-%Y_%s) ;;
+            *.7z) 7z x $1 -o$(date +%d-%m-%Y_%s) ;;
+            *.tar) tar xf $1 -C $(date +%d-%m-%Y_%s) ;;
+            *.rar) unrar x $1 op $(date +%d-%m-%Y_%s) ;;
+            *.tgz) tar xzf $1 -C $(date +%d-%m-%Y_%s) ;;
+            *.zip) bsdunzip $1 -d $(date +%d-%m-%Y_%s) ;;
+            *.tar.xz) tar xf $1 -C $(date +%d-%m-%Y_%s) ;;
+            *.tar.gz) tar xzf $1 -C $(date +%d-%m-%Y_%s) ;;
+            *.tar.bz2) tar xjf $1 -C $(date +%d-%m-%Y_%s) ;;
+            *) echo "$1 Cannot be extracted" ;;
+        esac
+    else
+        echo "$1 is not a valid file"
+    fi
+}
+
+alias sd='sudo'
+alias ht='htop'
+alias nv='nvim'
+alias cl='clear'
+alias mv='mv -f'
+alias cp='cp -r'
+alias rm='rm -fr'
+alias re='reboot'
+alias gp='git pull'
+alias po='poweroff'
+alias am='alsamixer'
+alias mkd='mkdir -p'
+alias sdnv='sudo -e'
+alias pss='pacman -Ss'
+alias psg='pacman -Sg'
+alias pqi='pacman -Qi'
+alias pql='pacman -Ql'
+alias psi='pacman -Si'
+alias wget='curl -fLO'
+alias sdmv='sudo mv -f'
+alias sdcp='sudo cp -r'
+alias sdrm='sudo rm -fr'
+alias ls='ls -1A --color'
+alias feh='feh -FZB black'
+alias up='sudo pacman -Syu'
+alias pq='pacman -Q | grep'
+alias sdmkd='sudo mkdir -p'
+alias gc='git clone --depth=1'
+alias in='sudo pacman -S --needed'
+alias yy='xclip -selection clipboard'
+alias on='iwctl station wlan0 connect'
+alias un='sudo pacman -Rnsu --noconfirm'
+alias pp='xclip -selection clipboard -o'
+alias off='iwctl station wlan0 disconnect'
+alias pl='ffplay -loglevel 0 -nodisp -autoexit'
+alias img='qemu-img create -f qcow2 image.qcow2'
+alias wm='clear && pgrep -x Xorg || startx /bin/bspwm > /dev/null 2>&1 && clear || clear'
+alias nf='neofetch --ascii_colors 1 1 1 1 1 1 --colors 1 1 1 1 7 7 --no_config --separator " ="'
+alias uj='curl -fLO https://git.nixnet.services/Narsil/desktop_user.js/raw/branch/master/user.js'
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg && sudo sed -i "/echo/d" /boot/grub/grub.cfg'
+alias vm='qemu-system-x86_64 -drive file=image.qcow2,media=disk,cache=none,if=virtio -enable-kvm -nic user,model=virtio -boot d -device virtio-vga-gl -m 2560M -cpu host -smp 3 -display gtk,gl=on'
+alias vmefi='qemu-system-x86_64 -drive file=image.qcow2,media=disk,cache=none,if=virtio -enable-kvm -nic user,model=virtio -boot d -device virtio-vga-gl -m 2560M -cpu host -smp 3 -bios /usr/share/ovmf/x64/OVMF.fd -display gtk,gl=on'

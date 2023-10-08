@@ -1,0 +1,25 @@
+# vi: ft=sh
+
+mod4 + w
+    firefox
+
+mod4 + {a, Return}
+    alacritty
+
+mod4 + space
+    pkill -USR1 -x sxhkd
+
+mod4 + {c, q, r}
+    bspc {node -c, quit, wm -r}
+
+any + F11
+    bspc node -t {fullscreen, tiled}
+
+ctrl + alt + {2, 4, 6, 8}
+    amixer set Master {41, 59, 71, 80}
+
+mod4 + {_, shift +} {1-9}
+    bspc {desktop -f, node -d} '^{1-9}'
+
+mod4 + {_, shift +} {Left, Down, Up, Right}
+    bspc node -{f, s} {west, south, north, east}

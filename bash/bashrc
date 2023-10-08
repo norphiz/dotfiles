@@ -1,0 +1,4 @@
+unset HISTFILE
+source "$HOME/.config/shell/aliasrc"
+source "$HOME/.config/shell/exports"
+export PS1='\[\e[1;31m\]\w \[\e[m\]$ '
