@@ -1,7 +1,7 @@
 # vi: ft=sh
 
 gcgh() {
-    git clone --depth=1 https://github.com/$@
+    git clone --depth=1 https://github.com/$@.git
 }
 
 gcgl() {
@@ -16,7 +16,6 @@ alias mv='mv -f'
 alias cp='cp -r'
 alias rm='rm -fr'
 alias re='reboot'
-alias gp='git pull'
 alias po='poweroff'
 alias am='alsamixer'
 alias mkd='mkdir -p'
