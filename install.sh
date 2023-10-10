@@ -178,8 +178,8 @@ Section "InputClass"
 EndSection' > /etc/xorg.conf
 
 echo 'source $HOME/.config/shell/exports
+export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 source $XDG_CONFIG_HOME/shell/aliasrc
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 wm' > /etc/zsh/zshenv
 
 rm $0
