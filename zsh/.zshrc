@@ -11,6 +11,4 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
 export PS1='%B%F{red}%~%b%f $ '
-source $XDG_CONFIG_HOME/shell/aliasrc
-source $XDG_CONFIG_HOME/shell/exports
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
