@@ -8,25 +8,6 @@ gcgl() {
     git clone --depth=1 https://gitlab.com/$@.git
 }
 
-ex() {
-    if [[ -f $1 ]]; then
-        case $1 in
-            *.gz) gzip -d $(date +%d-%m-%Y_%s) ;;
-            *.7z) 7z x $1 -o$(date +%d-%m-%Y_%s) ;;
-            *.tar) tar xf $1 -C $(date +%d-%m-%Y_%s) ;;
-            *.rar) unrar x $1 op $(date +%d-%m-%Y_%s) ;;
-            *.tgz) tar xzf $1 -C $(date +%d-%m-%Y_%s) ;;
-            *.zip) bsdunzip $1 -d $(date +%d-%m-%Y_%s) ;;
-            *.tar.xz) tar xf $1 -C $(date +%d-%m-%Y_%s) ;;
-            *.tar.gz) tar xzf $1 -C $(date +%d-%m-%Y_%s) ;;
-            *.tar.bz2) tar xjf $1 -C $(date +%d-%m-%Y_%s) ;;
-            *) echo "$1 Cannot be extracted" ;;
-        esac
-    else
-        echo "$1 is not a valid file"
-    fi
-}
-
 alias sd='sudo'
 alias ht='htop'
 alias nv='nvim'
