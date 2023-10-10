@@ -32,7 +32,14 @@ mount $BOOT /mnt/boot/arch
 
 read -n1 -p 'Do you have a Windows(R) boot partition? [Y/n]: ' WIN
 
-if [[ $WIN != n ]]; then lsblk && mkdir /mnt/boot/windows/ && read -p 'Enter Windows(R) boot partition: ' WINBOOT && mount $WINBOOT /mnt/boot/windows/; else clear; fi
+if [[ $WIN != n ]]; then
+    lsblk
+    mkdir /mnt/boot/windows/
+    read -p 'Enter Windows(R) boot partition: ' WINBOOT
+    mount $WINBOOT /mnt/boot/windows/
+else
+    clear
+fi
 
 pacstrap /mnt base linux-zen linux-firmware grub os-prober efibootmgr neovim iwd dhcpcd bspwm polybar sxhkd xorg-server xorg-xinit xorg-xsetroot ttf-font-awesome man-db arc-gtk-theme arc-icon-theme xclip alsa-utils feh noto-fonts sudo xcursor-vanilla-dmz git alacritty intel-ucode archlinux-wallpaper redshift bash-completion zsh-syntax-highlighting zsh-completions
 
@@ -112,6 +119,8 @@ rm /home/$NAME/.config/LICENSE
 
 rm /home/$NAME/.config/README.md
 
+rm -fr /home/$NAME/.config/.git
+
 clear
 
 chmod +x /home/$NAME/.config/bspwm/bspwmrc
@@ -169,6 +178,8 @@ Section "InputClass"
 EndSection' > /etc/xorg.conf
 
 echo 'source $HOME/.config/shell/exports
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"' > /etc/zsh/zshenv
+source $XDG_CONFIG_HOME/shell/aliasrc
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+wm' > /etc/zsh/zshenv
 
 rm $0
