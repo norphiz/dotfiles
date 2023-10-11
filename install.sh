@@ -82,8 +82,6 @@ sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
 
 locale-gen
 
-echo 'LANG=en_US.UTF-8' > /etc/locale.conf
-
 echo 'KEYMAP=br-abnt2' > /etc/vconsole.conf
 
 echo 'install bluetooth /bin/true' > /etc/modprobe.d/blacklist.conf
