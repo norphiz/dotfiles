@@ -32,7 +32,7 @@ mount $BOOT /mnt/boot/arch
 
 read -n1 -p 'Do you have a Windows(R) boot partition? [Y/n]: ' WIN
 
-if [[ $WIN != n ]]; then
+if test $WIN != n; then
     lsblk
     mkdir /mnt/boot/windows/
     read -p 'Enter Windows(R) boot partition: ' WINBOOT
@@ -41,7 +41,7 @@ else
     clear
 fi
 
-pacstrap /mnt base linux-zen linux-firmware grub os-prober efibootmgr neovim iwd dhcpcd bspwm polybar sxhkd xorg-server xorg-xinit xorg-xsetroot ttf-font-awesome man-db arc-gtk-theme arc-icon-theme xclip alsa-utils feh noto-fonts sudo xcursor-vanilla-dmz git alacritty intel-ucode archlinux-wallpaper redshift bash-completion zsh-syntax-highlighting zsh-completions
+pacstrap /mnt base linux-zen linux-firmware grub os-prober efibootmgr neovim iwd dhcpcd bspwm polybar sxhkd xorg-server xorg-xinit xorg-xsetroot ttf-font-awesome man-db arc-gtk-theme arc-icon-theme xclip alsa-utils feh noto-fonts sudo xcursor-vanilla-dmz git alacritty intel-ucode archlinux-wallpaper redshift bash-completion zsh-syntax-highlighting zsh-completions terminus-font
 
 clear
 
@@ -82,7 +82,8 @@ sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
 
 locale-gen
 
-echo 'KEYMAP=br-abnt2' > /etc/vconsole.conf
+echo 'KEYMAP=br-abnt2
+FONT=ter-132n' > /etc/vconsole.conf
 
 echo 'install bluetooth /bin/true' > /etc/modprobe.d/blacklist.conf
 
