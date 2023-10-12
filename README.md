@@ -1,6 +1,6 @@
 My personal collection of dotfiles
 
-``
+``sh
 dotfiles
 ├── alacritty
 │   └── alacritty.yml
