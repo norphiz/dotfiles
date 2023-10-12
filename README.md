@@ -1,5 +1,6 @@
 My personal collection of dotfiles
 
+```
 dotfiles
 ├── alacritty
 │   └── alacritty.yml
@@ -26,3 +27,4 @@ dotfiles
 │   └── xdefaults
 └── zsh
     └── .zshrc
+```
