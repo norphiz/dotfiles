@@ -32,7 +32,7 @@ mount "$BOOT" /mnt/boot/arch
 
 read -n1 -p 'Do you have a Windows(R) boot partition? [Y/n]: ' WIN
 
-if test "$WIN" != "n"; then
+if test -z "$WIN"; then
     lsblk
     mkdir /mnt/boot/windows/
     read -p 'Enter Windows(R) boot partition: ' WINBOOT
@@ -110,7 +110,7 @@ passwd "$NAME"
 
 rm /home/"$NAME"/.bash*
 
-git clone --depth=1 https://github.com/norphiz/dots
+git clone --depth=1 https://github.com/norphiz/dotfiles.git
 
 mv dotfiles/ /home/"$NAME"/.config/
 
@@ -118,7 +118,7 @@ rm /home/"$NAME"/.config/LICENSE
 
 rm /home/"$NAME"/.config/README.md
 
-rm -fr /home/"$NAME"/.config/.git
+rm -fr /home/"$NAME"/.config/.git/
 
 clear
 
