@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -e
 
@@ -14,29 +14,29 @@ read -p 'Enter swap partition: ' SWAP
 
 read -p 'Enter root partition: ' ROOT
 
-mkfs.fat -F 32 $BOOT
+mkfs.fat -F 32 "$BOOT"
 
-mkswap $SWAP
+mkswap "$SWAP"
 
-swapon $SWAP
+swapon "$SWAP"
 
-mkfs.ext4 $ROOT
+mkfs.ext4 "$ROOT"
 
 clear
 
-mount $ROOT /mnt
+mount "$ROOT" /mnt
 
 mkdir -p /mnt/boot/arch
 
-mount $BOOT /mnt/boot/arch
+mount "$BOOT" /mnt/boot/arch
 
 read -n1 -p 'Do you have a Windows(R) boot partition? [Y/n]: ' WIN
 
-if test $WIN != n; then
+if test "$WIN" != "n"; then
     lsblk
     mkdir /mnt/boot/windows/
     read -p 'Enter Windows(R) boot partition: ' WINBOOT
-    mount $WINBOOT /mnt/boot/windows/
+    mount "$WINBOOT" /mnt/boot/windows/
 else
     clear
 fi
@@ -49,7 +49,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 sed -i 's/relatime/noatime/' /mnt/etc/fstab
 
-sed -n '/^hwclock/,$p' $0 > /mnt/chroot.sh
+sed -n '/^hwclock/,$p' "$0" > /mnt/chroot.sh
 
 chmod +x /mnt/chroot.sh
 
@@ -93,47 +93,47 @@ clear
 
 read -p 'Enter your hostname: ' HOST
 
-echo $HOST > /etc/hostname
+echo "$HOST" > /etc/hostname
 
 echo "
-127.0.0.1	localhost
-::1		localhost
-127.0.1.1	$HOST.localdomain	$HOST" >> /etc/hosts
+127.0.0.1   localhost
+::1         localhost
+127.0.1.1	$HOST.localdomain   $HOST" >> /etc/hosts
 
 read -p 'Enter your username: ' NAME
 
-useradd -mG wheel,audio,video $NAME -s /bin/zsh
+useradd -mG wheel,audio,video "$NAME" -s /bin/zsh
 
 echo 'Enter user password'
 
-passwd $NAME
+passwd "$NAME"
 
-rm /home/$NAME/.bash*
+rm /home/"$NAME"/.bash*
 
 git clone --depth=1 https://github.com/norphiz/dots
 
-mv dotfiles/ /home/$NAME/.config/
+mv dotfiles/ /home/"$NAME"/.config/
 
-rm /home/$NAME/.config/LICENSE
+rm /home/"$NAME"/.config/LICENSE
 
-rm /home/$NAME/.config/README.md
+rm /home/"$NAME"/.config/README.md
 
-rm -fr /home/$NAME/.config/.git
+rm -fr /home/"$NAME"/.config/.git
 
 clear
 
-chmod +x /home/$NAME/.config/bspwm/bspwmrc
+chmod +x /home/"$NAME"/.config/bspwm/bspwmrc
 
-mkdir -p /home/$NAME/.local/share/icons/default/
+mkdir -p /home/"$NAME"/.local/share/icons/default/
 
 echo '[Icon Theme]
-Inherits=Vanilla-DMZ' > /home/$NAME/.local/share/icons/default/index.theme
+Inherits=Vanilla-DMZ' > /home/"$NAME"/.local/share/icons/default/index.theme
 
 fc-cache -f
 
-chown $NAME -R /home/$NAME/
+chown "$NAME" -R /home/"$NAME"/
 
-chgrp $NAME -R /home/$NAME/
+chgrp "$NAME" -R /home/"$NAME"/
 
 sed -e 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet console=tty2"/' -e 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' -e 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/' -i /etc/default/grub
 
@@ -181,4 +181,4 @@ export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 source $XDG_CONFIG_HOME/shell/aliasrc
 wm' > /etc/zsh/zshenv
 
-rm $0
+rm "$0"
