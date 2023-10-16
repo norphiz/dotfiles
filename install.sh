@@ -32,7 +32,7 @@ mount "$BOOT" /mnt/boot/arch
 
 read -n1 -p 'Do you have a Windows(R) boot partition? [Y/n]: ' WIN
 
-if test -z "$WIN"; then
+if test "$WIN" != "n"; then
     lsblk
     mkdir /mnt/boot/windows/
     read -p 'Enter Windows(R) boot partition: ' WINBOOT
