@@ -98,7 +98,7 @@ echo "$HOST" > /etc/hostname
 echo "
 127.0.0.1   localhost
 ::1         localhost
-127.0.1.1	$HOST.localdomain   $HOST" >> /etc/hosts
+127.0.1.1   $HOST.localdomain   $HOST" >> /etc/hosts
 
 read -p 'Enter your username: ' NAME
 
