@@ -18,7 +18,7 @@ fi
 
 export VISUAL="nvim"
 export LESSHISTFILE="-"
-export PAGER='nvim +Man!'
+export PAGER="nvim +Man!"
 export LESS='-R -Dd+r$Du+g'
 export SUDO_PROMPT="Password:"
 export NVIM_LOG_FILE="/dev/null"
