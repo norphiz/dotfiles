@@ -41,7 +41,7 @@ else
     clear
 fi
 
-pacstrap /mnt base linux-zen linux-firmware grub os-prober efibootmgr neovim iwd dhcpcd bspwm polybar sxhkd xorg-server xorg-xinit xorg-xsetroot ttf-font-awesome man-db arc-gtk-theme arc-icon-theme xclip alsa-utils feh noto-fonts sudo xcursor-vanilla-dmz git alacritty intel-ucode archlinux-wallpaper redshift bash-completion zsh-syntax-highlighting zsh-completions terminus-font
+pacstrap /mnt base linux-zen
 
 clear
 
@@ -51,9 +51,7 @@ sed -i 's/relatime/noatime/' /mnt/etc/fstab
 
 sed -n '/^hwclock/,$p' "$0" > /mnt/chroot.sh
 
-chmod +x /mnt/chroot.sh
-
-arch-chroot /mnt ./chroot.sh
+arch-chroot /mnt bash /chroot.sh
 
 hwclock -w
 
@@ -77,6 +75,8 @@ Include = /etc/pacman.d/mirrorlist
 
 #[multilib]
 #Include = /etc/pacman.d/mirrorlist' > /etc/pacman.conf
+
+pacman -S linux-firmware grub os-prober efibootmgr neovim iwd dhcpcd bspwm polybar sxhkd xorg-server xorg-xinit xorg-xsetroot ttf-font-awesome man-db arc-gtk-theme arc-icon-theme xclip alsa-utils feh noto-fonts sudo xcursor-vanilla-dmz git alacritty intel-ucode archlinux-wallpaper redshift bash-completion zsh-syntax-highlighting zsh-completions terminus-font
 
 sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
 
@@ -108,26 +108,22 @@ echo 'Enter user password'
 
 passwd "$NAME"
 
-rm /home/"$NAME"/.bash*
+cd /home/"$NAME"
 
-git clone --depth=1 https://github.com/norphiz/dotfiles.git
+rm .bash*
 
-mv dotfiles/ /home/"$NAME"/.config/
+git clone --depth=1 https://github.com/norphiz/dotfiles.git .config
 
-rm /home/"$NAME"/.config/LICENSE
-
-rm /home/"$NAME"/.config/README.md
-
-rm -fr /home/"$NAME"/.config/.git/
+rm -fr .config/{.git,README.md,LICENSE}
 
 clear
 
-chmod +x /home/"$NAME"/.config/bspwm/bspwmrc
+chmod +x .config/bspwm/bspwmrc
 
-mkdir -p /home/"$NAME"/.local/share/icons/default/
+mkdir -p .local/share/icons/default
 
 echo '[Icon Theme]
-Inherits=Vanilla-DMZ' > /home/"$NAME"/.local/share/icons/default/index.theme
+Inherits=Vanilla-DMZ' > .local/share/icons/default/index.theme
 
 fc-cache -f
 
