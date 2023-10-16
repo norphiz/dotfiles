@@ -176,9 +176,9 @@ Section "InputClass"
     Option "AccelProfile" "flat"
 EndSection' > /etc/xorg.conf
 
-echo 'source $HOME/.config/shell/exports
-export ZDOTDIR=$XDG_CONFIG_HOME/zsh
-source $XDG_CONFIG_HOME/shell/aliasrc
+echo 'source "$HOME/.config/shell/exports"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+source "$XDG_CONFIG_HOME/shell/aliasrc"
 wm' > /etc/zsh/zshenv
 
 rm "$0"
