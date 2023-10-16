@@ -34,9 +34,9 @@ read -n1 -p 'Do you have a Windows(R) boot partition? [Y/n]: ' WIN
 
 if test "$WIN" != "n"; then
     lsblk
-    mkdir /mnt/boot/windows/
+    mkdir /mnt/boot/windows
     read -p 'Enter Windows(R) boot partition: ' WINBOOT
-    mount "$WINBOOT" /mnt/boot/windows/
+    mount "$WINBOOT" /mnt/boot/windows
 else
     clear
 fi
