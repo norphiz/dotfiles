@@ -42,5 +42,3 @@ colors:
     cyan: '#66deed'
     white: '#dfe5f2'
 live_config_reload: true
-mouse_bindings:
-  - { mouse: Right, mods: Control, action: Paste }
