@@ -1,13 +1,5 @@
 # vi: ft=sh
 
-gcgh() {
-    git clone --depth=1 https://github.com/"$@".git
-}
-
-gcgl() {
-    git clone --depth=1 https://gitlab.com/"$@".git
-}
-
 alias sd='sudo'
 alias ht='htop'
 alias nv='nvim'
