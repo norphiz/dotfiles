@@ -98,7 +98,7 @@ echo "$HOST" > /etc/hostname
 echo "
 127.0.0.1   localhost
 ::1         localhost
-127.0.1.1   $HOST.localdomain   $HOST" >> /etc/hosts
+127.0.1.1   ${HOST}.localdomain   ${HOST}" >> /etc/hosts
 
 read -p 'Enter your username: ' NAME
 
@@ -127,9 +127,9 @@ Inherits=Vanilla-DMZ' > .local/share/icons/default/index.theme
 
 fc-cache -f
 
-chown "$NAME" -R /home/"$NAME"/
+chown "$NAME" -R /home/"$NAME"
 
-chgrp "$NAME" -R /home/"$NAME"/
+chgrp "$NAME" -R /home/"$NAME"
 
 sed -e 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet console=tty2"/' -e 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' -e 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/' -i /etc/default/grub
 
