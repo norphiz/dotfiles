@@ -1,9 +1,5 @@
 # vi: ft=sh 
 
-if test $(command -v wine); then
-    export WINEPREFIX="$XDG_DATA_HOME/winepref"
-fi
-
 export LESS="-R"
 export VISUAL="nvim"
 export LESSHISTFILE="-"
