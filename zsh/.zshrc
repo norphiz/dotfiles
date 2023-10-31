@@ -4,7 +4,6 @@ unsetopt PROMPT_SP
 bindkey '^[[F' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^[[H' beginning-of-line
-autoload -U colors && colors
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
