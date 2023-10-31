@@ -13,4 +13,4 @@ pgrep -x sxhkd || sxhkd &
 pgrep -x polybar || polybar -r &
 xsetroot -cursor_name left_ptr &
 xrdb "$XDG_CONFIG_HOME"/x11/xdefaults &
-feh -r -z --bg-scale --no-fehbg /usr/share/backgrounds/ &
+feh --bg-scale --no-fehbg /usr/share/backgrounds/archlinux/lone.jpg &
