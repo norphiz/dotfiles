@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 bspc config window_gap 5
 bspc config border_width 1
@@ -12,5 +12,5 @@ setxkbmap -layout br &
 pgrep -x sxhkd || sxhkd &
 pgrep -x polybar || polybar -r &
 xsetroot -cursor_name left_ptr &
-xrdb "$XDG_CONFIG_HOME"/x11/xdefaults &
+xrdb $XDG_CONFIG_HOME/x11/xdefaults &
 feh --bg-scale --no-fehbg /usr/share/backgrounds/archlinux/lone.jpg &
