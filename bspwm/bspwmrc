@@ -7,10 +7,10 @@ bspc config focus_follows_pointer true
 bspc config normal_border_color "#5c6370"
 bspc config focused_border_color "#dfe5f2"
 
-redshift -PO 3100 &
+redshift -PO 3500 &
 setxkbmap -layout br &
 pgrep -x sxhkd || sxhkd &
 pgrep -x polybar || polybar -r &
 xsetroot -cursor_name left_ptr &
-xrdb $XDG_CONFIG_HOME/x11/xdefaults &
+xrdb "$XDG_CONFIG_HOME"/x11/xdefaults &
 feh --bg-scale --no-fehbg /usr/share/backgrounds/archlinux/lone.jpg &
