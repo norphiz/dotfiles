@@ -11,8 +11,12 @@ set noswapfile
 set ignorecase
 set shiftwidth=4
 set laststatus=0
-set termguicolors
 set shadafile=NONE
 set clipboard+=unnamedplus
 autocmd FileType * set formatoptions-=cro
+
+if $TERM != "linux"
+    set termguicolors
+endif
+
 colo onedark
