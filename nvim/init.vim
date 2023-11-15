@@ -38,7 +38,7 @@ let g:onedark_color_overrides = {
 \ "visual_grey": { "gui": "#3E4452", "cterm": "237", "cterm16": "15" },
 \ "menu_grey": { "gui": "#3E4452", "cterm": "237", "cterm16": "8" },
 \ "special_grey": { "gui": "#3B4048", "cterm": "238", "cterm16": "15" },
-\ "vertsplit": { "gui": "#181A1F", "cterm": "59", "cterm16": "15" },
+\ "vertsplit": { "gui": "#181A1F", "cterm": "59", "cterm16": "15" }
 \}
 
 colo onedark
