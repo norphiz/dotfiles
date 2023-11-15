@@ -17,6 +17,6 @@ autocmd FileType * set formatoptions-=cro
 
 if $TERM != "linux"
     set termguicolors
-endif
+end
 
 colo onedark
