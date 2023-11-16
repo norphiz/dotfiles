@@ -12,6 +12,7 @@ se nosmd
 se noswf
 se nowrap
 se cb+=unnamedplus
+
 autocmd FileType * se fo-=cro
 
 let g:onedark_color_overrides = {
@@ -40,4 +41,4 @@ if $TERM != "linux"
     se tgc
 en
 
-colo onedark
+colo onedark 
