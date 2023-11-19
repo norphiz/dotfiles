@@ -4,7 +4,7 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
 stty stop undef
-bindkey -e
+bindkey -v
 unsetopt PROMPT_SP
 bindkey '^[[F' end-of-line
 bindkey '^[[3~' delete-char
