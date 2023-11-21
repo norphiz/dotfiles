@@ -37,6 +37,8 @@ let g:onedark_color_overrides = {
 \ "gutter_fg_grey": { "gui": "#4b5263", "cterm": "238", "cterm16": "15" }
 \}
 
+let g:onedark_hide_endofbuffer = 1
+
 if $TERM != "linux"
     se tgc
 en
