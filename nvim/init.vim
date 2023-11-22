@@ -11,6 +11,7 @@ se nohls
 se nosmd
 se noswf
 se nowrap
+se sdf=NONE
 se cb+=unnamedplus
 
 autocmd FileType * se fo-=cro
@@ -43,4 +44,4 @@ if $TERM != "linux"
     se tgc
 en
 
-colo onedark 
+colo onedark
