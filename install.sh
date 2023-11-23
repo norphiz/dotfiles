@@ -76,7 +76,42 @@ Include = /etc/pacman.d/mirrorlist
 #[multilib]
 #Include = /etc/pacman.d/mirrorlist' > /etc/pacman.conf
 
-pacman -S linux-firmware grub os-prober efibootmgr neovim iwd dhcpcd bspwm polybar sxhkd xorg-server xorg-xinit xorg-xsetroot ttf-font-awesome man-db arc-gtk-theme arc-icon-theme xclip alsa-utils feh noto-fonts sudo xcursor-vanilla-dmz git alacritty intel-ucode archlinux-wallpaper redshift bash-completion zsh-syntax-highlighting zsh-completions terminus-font
+PKGS=(
+    alacritty
+    alsa-utils
+    arc-gtk-theme
+    archlinux-wallpaper
+    arc-icon-theme
+    bash-completion
+    bspwm
+    dhcpcd
+    efibootmgr
+    feh
+    git
+    grub
+    intel-ucode
+    iwd
+    linux-firmware
+    man-db
+    neovim
+    noto-fonts
+    os-prober
+    polybar
+    redshift
+    sudo
+    sxhkd
+    terminus-font
+    ttf-font-awesome
+    xclip
+    xcursor-vanilla-dmz
+    xorg-server
+    xorg-xinit
+    xorg-xsetroot
+    zsh-completions
+    zsh-syntax-highlighting
+)
+
+pacman -S "${PKGS[@]}"
 
 sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
 
@@ -131,7 +166,9 @@ chown "$NAME" -R /home/"$NAME"
 
 chgrp "$NAME" -R /home/"$NAME"
 
-sed -e 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet console=tty2"/' -e 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' -e 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/' -i /etc/default/grub
+sed -e 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet console=tty2"/' \
+    -e 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' \
+    -e 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/' -i /etc/default/grub
 
 grub-install --target=x86_64-efi --efi-directory=/boot/arch --bootloader-id=Arch
 
