@@ -94,7 +94,6 @@ PKGS=(
     linux-firmware
     man-db
     neovim
-    noto-fonts
     os-prober
     polybar
     redshift
@@ -102,6 +101,7 @@ PKGS=(
     sxhkd
     terminus-font
     ttf-font-awesome
+    ttf-liberation
     xclip
     xcursor-vanilla-dmz
     xorg-server
