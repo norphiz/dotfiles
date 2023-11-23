@@ -195,17 +195,9 @@ systemctl enable iwd
 
 systemctl enable dhcpcd
 
-echo 'Section "ServerFlags"
-    Option "OffTime" "0"
-    Option "BlankTime" "0"
-    Option "StandbyTime" "0"
-    Option "SuspendTime" "0"
-EndSection
-
-Section "InputClass"
-    Identifier "Mouse0"
+echo 'Section "InputClass"
+    Identifier "Mouse"
     Driver "libinput"
-    Option "AccelSpeed" "0"
     Option "AccelProfile" "flat"
 EndSection' > /etc/xorg.conf
 
