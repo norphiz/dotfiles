@@ -104,6 +104,7 @@ PKGS=(
     ttf-liberation
     xclip
     xcursor-vanilla-dmz
+    xdg-utils
     xorg-server
     xorg-xinit
     xorg-xsetroot
