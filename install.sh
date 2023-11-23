@@ -94,6 +94,7 @@ PKGS=(
     linux-firmware
     man-db
     neovim
+    noto-fonts
     os-prober
     polybar
     redshift
@@ -101,7 +102,6 @@ PKGS=(
     sxhkd
     terminus-font
     ttf-font-awesome
-    ttf-liberation
     xclip
     xcursor-vanilla-dmz
     xdg-utils
@@ -160,8 +160,6 @@ mkdir -p .local/share/icons/default
 
 echo '[Icon Theme]
 Inherits=Vanilla-DMZ' > .local/share/icons/default/index.theme
-
-fc-cache -f
 
 chown "$NAME" -R /home/"$NAME"
 
