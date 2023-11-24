@@ -22,24 +22,37 @@ swapon "$SWAP"
 
 mkfs.ext4 "$ROOT"
 
-clear
-
 mount "$ROOT" /mnt
 
 mkdir -p /mnt/boot/arch
 
 mount "$BOOT" /mnt/boot/arch
 
-read -n1 -p 'Do you have a Windows(R) boot partition? [Y/n]: ' WIN
+read -p 'Do you have a Windows(R) boot partition? [Y/n]: ' WIN
 
-if test "$WIN" != "n"; then
+getpart() {
     lsblk
-    mkdir /mnt/boot/windows
-    read -p 'Enter Windows(R) boot partition: ' WINBOOT
-    mount "$WINBOOT" /mnt/boot/windows
-else
+    read -p 'Enter Windows(R) boot partiton: ' WINBOOT
     clear
-fi
+    case "$WINBOOT" in
+        /dev/*)
+            mkdir -p /mnt/boot/windows
+            mount "$WINBOOT" /mnt/boot/windows
+            ;;
+        *)
+            true
+            ;;
+    esac
+}
+
+case "$WIN" in
+    [Nn])
+        true
+        ;;
+    *)
+        getpart
+        ;;
+esac
 
 pacstrap /mnt base linux-zen
 
