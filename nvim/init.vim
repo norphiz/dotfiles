@@ -3,7 +3,6 @@ se et
 se ic
 se scs
 se ls=0
-se ts=4
 se sw=4
 se noru
 se nosc
