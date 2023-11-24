@@ -139,7 +139,7 @@ passwd "$NAME"
 
 cd /home/"$NAME"
 
-rm .bash*
+rm .*
 
 git clone --depth=1 https://github.com/norphiz/dotfiles.git .config > /dev/null
 
