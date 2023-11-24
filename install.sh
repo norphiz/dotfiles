@@ -14,13 +14,13 @@ read -p 'Enter swap partition: ' SWAP
 
 read -p 'Enter root partition: ' ROOT
 
-mkfs.fat -F 32 "$BOOT"
+mkfs.fat -F 32 "$BOOT" > /dev/null
 
-mkswap "$SWAP"
+mkswap "$SWAP" > /dev/null
 
 swapon "$SWAP"
 
-mkfs.ext4 "$ROOT"
+mkfs.ext4 "$ROOT" > /dev/null
 
 mount "$ROOT" /mnt
 
@@ -28,35 +28,17 @@ mkdir -p /mnt/boot/arch
 
 mount "$BOOT" /mnt/boot/arch
 
-read -p 'Do you have a Windows(R) boot partition? [Y/n]: ' WIN
+lsblk
 
-getpart() {
-    lsblk
-    read -p 'Enter Windows(R) boot partiton: ' WINBOOT
-    clear
-    case "$WINBOOT" in
-        /dev/*)
-            mkdir -p /mnt/boot/windows
-            mount "$WINBOOT" /mnt/boot/windows
-            ;;
-        *)
-            true
-            ;;
-    esac
-}
+read -p 'Enter Windows(R) boot partiton: ' WINBOOT
 
-case "$WIN" in
-    [Nn])
-        true
-        ;;
-    *)
-        getpart
-        ;;
-esac
+mkdir -p /mnt/boot/windows
 
-pacstrap /mnt base linux-zen
+mount "$WINBOOT" /mnt/boot/windows
 
-clear
+echo 'Installing base system.'
+
+pacstrap /mnt base linux-zen > /dev/null
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
@@ -125,20 +107,18 @@ PKGS=(
     zsh-syntax-highlighting
 )
 
-pacman -S "${PKGS[@]}"
+pacman -S --noconfirm "${PKGS[@]}" > /dev/null
 
-sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
+sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen > /dev/null
 
-locale-gen
+locale-gen > /dev/null
 
 echo 'FONT=ter-128b
 KEYMAP=br-abnt2' > /etc/vconsole.conf
 
 echo 'install bluetooth /bin/true' > /etc/modprobe.d/blacklist.conf
 
-mkinitcpio -P
-
-clear
+mkinitcpio -P > /dev/null
 
 read -p 'Enter your hostname: ' HOST
 
@@ -161,11 +141,9 @@ cd /home/"$NAME"
 
 rm .bash*
 
-git clone --depth=1 https://github.com/norphiz/dotfiles.git .config
+git clone --depth=1 https://github.com/norphiz/dotfiles.git .config > /dev/null
 
 rm -fr .config/{.git,README.md,LICENSE}
-
-clear
 
 chmod +x .config/bspwm/bspwmrc
 
@@ -182,11 +160,9 @@ sed -e 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAU
     -e 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' \
     -e 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/' -i /etc/default/grub
 
-grub-install --target=x86_64-efi --efi-directory=/boot/arch --bootloader-id=Arch
+grub-install --target=x86_64-efi --efi-directory=/boot/arch --bootloader-id=Arch > /dev/null
 
-grub-mkconfig -o /boot/grub/grub.cfg
-
-clear
+grub-mkconfig -o /boot/grub/grub.cfg > /dev/null
 
 sed -i '/echo/d' /boot/grub/grub.cfg
 
@@ -203,9 +179,9 @@ NameResolvingService=resolvconf
 
 echo '%wheel ALL=(ALL:ALL) ALL' > /etc/sudoers.d/sudoers
 
-systemctl enable iwd
+systemctl enable iwd > /dev/null
 
-systemctl enable dhcpcd
+systemctl enable dhcpcd > /dev/null
 
 echo 'Section "InputClass"
     Identifier "Mouse"
@@ -217,5 +193,7 @@ echo 'source "$HOME/.config/shell/exports"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 source "$XDG_CONFIG_HOME/shell/aliasrc"
 wm' > /etc/zsh/zshenv
+
+echo 'Successfully installed.'
 
 rm "$0"
