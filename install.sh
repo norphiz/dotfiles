@@ -39,12 +39,12 @@ mount "$WINBOOT" /mnt/boot/windows
 echo 'Installing base system.'
 
 PKGS=(
+    base
     alacritty
     alsa-utils
     arc-gtk-theme
     arc-icon-theme
     archlinux-wallpaper
-    base
     bash-completion
     bspwm
     dhcpcd
