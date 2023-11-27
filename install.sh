@@ -38,7 +38,45 @@ mount "$WINBOOT" /mnt/boot/windows
 
 echo 'Installing base system.'
 
-pacstrap /mnt base linux-zen > /dev/null
+PKGS=(
+    alacritty
+    alsa-utils
+    arc-gtk-theme
+    arc-icon-theme
+    archlinux-wallpaper
+    base
+    bash-completion
+    bspwm
+    dhcpcd
+    efibootmgr
+    feh
+    git
+    grub
+    intel-ucode
+    iwd
+    linux-firmware
+    linux-zen
+    man-db
+    neovim
+    noto-fonts
+    os-prober
+    polybar
+    redshift
+    sudo
+    sxhkd
+    terminus-font
+    ttf-font-awesome
+    xclip
+    xcursor-vanilla-dmz
+    xdg-utils
+    xorg-server
+    xorg-xinit
+    xorg-xsetroot
+    zsh-completions
+    zsh-syntax-highlighting
+)
+
+pacstrap /mnt "${PKGS[@]}" > /dev/null
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
@@ -70,44 +108,6 @@ Include = /etc/pacman.d/mirrorlist
 
 #[multilib]
 #Include = /etc/pacman.d/mirrorlist' > /etc/pacman.conf
-
-PKGS=(
-    alacritty
-    alsa-utils
-    arc-gtk-theme
-    archlinux-wallpaper
-    arc-icon-theme
-    bash-completion
-    bspwm
-    dhcpcd
-    efibootmgr
-    feh
-    git
-    grub
-    intel-ucode
-    iwd
-    linux-firmware
-    man-db
-    neovim
-    noto-fonts
-    os-prober
-    polybar
-    redshift
-    sudo
-    sxhkd
-    terminus-font
-    ttf-font-awesome
-    xclip
-    xcursor-vanilla-dmz
-    xdg-utils
-    xorg-server
-    xorg-xinit
-    xorg-xsetroot
-    zsh-completions
-    zsh-syntax-highlighting
-)
-
-pacman -S --noconfirm "${PKGS[@]}" > /dev/null
 
 sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen > /dev/null
 
