@@ -184,9 +184,21 @@ systemctl enable iwd > /dev/null
 systemctl enable dhcpcd > /dev/null
 
 echo 'Section "InputClass"
+    Identifier "Keyboard"
+    Option "XkbLayout" "br"
+EndSection
+
+Section "InputClass"
     Identifier "Mouse"
     Driver "libinput"
     Option "AccelProfile" "flat"
+EndSection
+
+Section "ServerFlags"
+    Option "OffTime" "0"
+    Option "BlankTime" "0"
+    Option "StandbyTime" "0"
+    Option "SuspendTime" "0"
 EndSection' > /etc/xorg.conf
 
 echo 'source "$HOME/.config/shell/exports"
