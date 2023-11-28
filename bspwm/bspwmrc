@@ -7,10 +7,8 @@ bspc config focus_follows_pointer true
 bspc config normal_border_color "#5c6370"
 bspc config focused_border_color "#dfe5f2"
 
-xset s off -dpms &
 redshift -PO 3300 &
 xrdb "$XRESOURCES" &
-setxkbmap -layout br &
 pidof sxhkd || sxhkd &
 pidof polybar || polybar -r &
 xsetroot -cursor_name left_ptr &
