@@ -8,11 +8,11 @@ clear
 
 lsblk
 
-read -p 'Enter boot partition: ' BOOT
+read -p "Enter boot partition: " BOOT
 
-read -p 'Enter swap partition: ' SWAP
+read -p "Enter swap partition: " SWAP
 
-read -p 'Enter root partition: ' ROOT
+read -p "Enter root partition: " ROOT
 
 mkfs.fat -F 32 "$BOOT" > /dev/null
 
@@ -30,13 +30,13 @@ mount "$BOOT" /mnt/boot/arch
 
 lsblk
 
-read -p 'Enter Windows(R) boot partiton: ' WINBOOT
+read -p "Enter Windows(R) boot partiton: " WINBOOT
 
 mkdir -p /mnt/boot/windows
 
 mount "$WINBOOT" /mnt/boot/windows
 
-echo 'Installing base system.'
+echo "Installing base system."
 
 PKGS=(
     base
@@ -80,15 +80,15 @@ pacstrap /mnt "${PKGS[@]}" > /dev/null
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-sed -i 's/relatime/noatime/' /mnt/etc/fstab
+sed -i "s/relatime/noatime/" /mnt/etc/fstab
 
-sed -n '/^hwclock/,$p' "$0" > /mnt/chroot.sh
+sed -n "/^hwclock/,$p" "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash /chroot.sh
 
 hwclock -w
 
-echo '[options]
+echo "[options]
 Color
 CheckSpace
 ILoveCandy
@@ -107,20 +107,20 @@ Include = /etc/pacman.d/mirrorlist
 Include = /etc/pacman.d/mirrorlist
 
 #[multilib]
-#Include = /etc/pacman.d/mirrorlist' > /etc/pacman.conf
+#Include = /etc/pacman.d/mirrorlist" > /etc/pacman.conf
 
-sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen > /dev/null
+sed -i "s/#en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen > /dev/null
 
 locale-gen > /dev/null
 
-echo 'FONT=ter-128b
-KEYMAP=br-abnt2' > /etc/vconsole.conf
+echo "FONT=ter-128b
+KEYMAP=br-abnt2" > /etc/vconsole.conf
 
-echo 'install bluetooth /bin/true' > /etc/modprobe.d/blacklist.conf
+echo "install bluetooth /bin/true" > /etc/modprobe.d/blacklist.conf
 
 mkinitcpio -P > /dev/null
 
-read -p 'Enter your hostname: ' HOST
+read -p "Enter your hostname: " HOST
 
 echo "$HOST" > /etc/hostname
 
@@ -129,11 +129,11 @@ echo "
 ::1         localhost
 127.0.1.1   $HOST.localdomain   $HOST" >> /etc/hosts
 
-read -p 'Enter your username: ' NAME
+read -p "Enter your username: " NAME
 
 useradd -mG wheel,audio,video "$NAME" -s /bin/zsh
 
-echo 'Enter user password'
+echo "Enter user password"
 
 passwd "$NAME"
 
@@ -141,7 +141,7 @@ cd /home/"$NAME"
 
 rm .*
 
-git clone --depth=1 https://github.com/norphiz/dotfiles.git .config > /dev/null
+git clone --depth=1 https://github.com/norphiz/dotfiles .config > /dev/null
 
 rm -fr .config/{.git,README.md,LICENSE}
 
@@ -149,35 +149,35 @@ chmod +x .config/bspwm/bspwmrc
 
 mkdir -p .local/share/icons/default
 
-echo '[Icon Theme]
-Inherits=Vanilla-DMZ' > .local/share/icons/default/index.theme
+echo "[Icon Theme]
+Inherits=Vanilla-DMZ" > .local/share/icons/default/index.theme
 
 chown "$NAME" -R /home/"$NAME"
 
 chgrp "$NAME" -R /home/"$NAME"
 
 sed -e 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet console=tty2"/' \
-    -e 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' \
-    -e 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/' -i /etc/default/grub
+    -e "s/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/" \
+    -e "s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/" -i /etc/default/grub
 
 grub-install --target=x86_64-efi --efi-directory=/boot/arch --bootloader-id=Arch > /dev/null
 
 grub-mkconfig -o /boot/grub/grub.cfg > /dev/null
 
-sed -i '/echo/d' /boot/grub/grub.cfg
+sed -i "/echo/d" /boot/grub/grub.cfg
 
 mkdir /etc/iwd/
 
-echo '[General]
+echo "[General]
 AddressRandomization=once
 AddressRandomizationRange=nic
 
 [Network]
 NameResolvingService=resolvconf
 
-# vi: ft=dosini' > /etc/iwd/main.conf
+# vi: ft=dosini" > /etc/iwd/main.conf
 
-echo '%wheel ALL=(ALL:ALL) ALL' > /etc/sudoers.d/sudoers
+echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers.d/sudoers
 
 systemctl enable iwd > /dev/null
 
@@ -206,6 +206,6 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 source "$XDG_CONFIG_HOME/shell/aliasrc"
 wm' > /etc/zsh/zshenv
 
-echo 'Successfully installed.'
+echo "Successfully installed."
 
 rm "$0"
