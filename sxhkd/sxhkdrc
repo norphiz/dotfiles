@@ -19,7 +19,7 @@ ctrl + alt + {2, 4, 6, 8}
     amixer set Master {41, 59, 71, 80}
 
 mod4 + {_, shift +} {1-9}
-    bspc {desktop -f, node -d} '^{1-9}'
+    bspc {desktop -f, node -d} "^{1-9}"
 
 mod4 + {Left, Down, Up, Right}
     bspc node -f {west, south, north, east}
