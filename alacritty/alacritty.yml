@@ -18,27 +18,27 @@ font:
   size: 14
 colors:
   primary:
-    background: '#21242b'
-    foreground: '#dfe5f2'
+    background: "#21242b"
+    foreground: "#dfe5f2"
   selection:
     text: CellForeground
-    background: '#434c5e'
+    background: "#434c5e"
   normal:
-    black: '#3e4452'
-    red: '#ff6e7a'
-    green: '#c0fa96'
-    yellow: '#ffd587'
-    blue: '#6ebeff'
-    magenta: '#e387ff'
-    cyan: '#66deed'
-    white: '#dfe5f2'
+    black: "#3e4452"
+    red: "#ff6e7a"
+    green: "#c0fa96"
+    yellow: "#ffd587"
+    blue: "#6ebeff"
+    magenta: "#e387ff"
+    cyan: "#66deed"
+    white: "#dfe5f2"
   bright:
-    black: '#5c6370'
-    red: '#ff6e7a'
-    green: '#c0fa96'
-    yellow: '#ffd587'
-    blue: '#6ebeff'
-    magenta: '#e387ff'
-    cyan: '#66deed'
-    white: '#dfe5f2'
+    black: "#5c6370"
+    red: "#ff6e7a"
+    green: "#c0fa96"
+    yellow: "#ffd587"
+    blue: "#6ebeff"
+    magenta: "#e387ff"
+    cyan: "#66deed"
+    white: "#dfe5f2"
 live_config_reload: true
