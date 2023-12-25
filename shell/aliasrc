@@ -1,6 +1,5 @@
 # vi: ft=sh
 
-alias sd='sudo'
 alias ht='htop'
 alias nv='nvim'
 alias cl='clear'
@@ -18,6 +17,7 @@ alias pqs='pacman -Qs'
 alias pqi='pacman -Qi'
 alias pql='pacman -Ql'
 alias pqe='pacman -Qe'
+alias psg='pacman -Sg'
 alias wget='curl -fLO'
 alias sdmv='sudo mv -f'
 alias sdcp='sudo cp -r'
