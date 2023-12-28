@@ -1,0 +1,50 @@
+[window.padding]
+x = 10
+y = 10
+
+[font]
+size = 14
+
+[font.normal]
+family = "Mono"
+style = "Regular"
+
+[font.bold]
+family = "Mono"
+style = "Bold"
+
+[font.italic]
+family = "Mono"
+style = "Italic"
+
+[font.bold_italic]
+family = "Mono"
+style = "Bold Italic"
+
+[colors.primary]
+background = "#21242b"
+foreground = "#dfe5f2"
+
+[colors.selection]
+background = "#434c5e"
+text = "CellForeground"
+
+[colors.normal]
+black = "#3e4452"
+blue = "#6ebeff"
+cyan = "#66deed"
+green = "#c0fa96"
+magenta = "#e387ff"
+red = "#ff6e7a"
+white = "#dfe5f2"
+yellow = "#ffd587"
+
+[colors.bright]
+black = "#5c6370"
+blue = "#6ebeff"
+cyan = "#66deed"
+green = "#c0fa96"
+magenta = "#e387ff"
+red = "#ff6e7a"
+white = "#dfe5f2"
+yellow = "#ffd587"
