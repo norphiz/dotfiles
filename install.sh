@@ -24,13 +24,15 @@ mkfs.ext4 "$ROOT" > /dev/null
 
 mount "$ROOT" /mnt
 
+mkdir /mnt/boot
+
+mount "$BOOT" /mnt/boot
+
 lsblk
 
 read -p "Enter Windows(R) boot partiton: " WINBOOT
 
-mkdir -p /mnt/boot/windows
-
-mount "$BOOT" /mnt/boot
+mkdir /mnt/boot/windows
 
 mount "$WINBOOT" /mnt/boot/windows
 
