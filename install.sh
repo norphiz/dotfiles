@@ -24,15 +24,13 @@ mkfs.ext4 "$ROOT" > /dev/null
 
 mount "$ROOT" /mnt
 
-mkdir -p /mnt/boot/arch
-
-mount "$BOOT" /mnt/boot/arch
-
 lsblk
 
 read -p "Enter Windows(R) boot partiton: " WINBOOT
 
 mkdir -p /mnt/boot/windows
+
+mount "$BOOT" /mnt/boot
 
 mount "$WINBOOT" /mnt/boot/windows
 
@@ -82,7 +80,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 sed -i "s/relatime/noatime/" /mnt/etc/fstab
 
-sed -n "/^hwclock/,$p" "$0" > /mnt/chroot.sh
+sed -n '/^hwclock/,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash /chroot.sh
 
@@ -152,15 +150,13 @@ mkdir -p .local/share/icons/default
 echo "[Icon Theme]
 Inherits=Vanilla-DMZ" > .local/share/icons/default/index.theme
 
-chown "$NAME" -R /home/"$NAME"
-
-chgrp "$NAME" -R /home/"$NAME"
+chown -R "$NAME:$NAME" /home/"$NAME"
 
 sed -e 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet console=tty2"/' \
     -e "s/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/" \
     -e "s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/" -i /etc/default/grub
 
-grub-install --target=x86_64-efi --efi-directory=/boot/arch --bootloader-id=Arch > /dev/null
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch > /dev/null
 
 grub-mkconfig -o /boot/grub/grub.cfg > /dev/null
 
