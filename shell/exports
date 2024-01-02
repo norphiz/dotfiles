@@ -3,6 +3,7 @@
 export LESS="-R"
 export VISUAL="nvim"
 export LESSHISTFILE="-"
+export EDITOR="$VISUAL"
 export PAGER="nvim +Man!"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
