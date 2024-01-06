@@ -43,8 +43,8 @@ PKGS=(
     alacritty
     alsa-utils
     arc-gtk-theme
-    arc-icon-theme
     archlinux-wallpaper
+    arc-icon-theme
     bash-completion
     bspwm
     dhcpcd
@@ -66,6 +66,8 @@ PKGS=(
     sxhkd
     terminus-font
     ttf-font-awesome
+    vulkan-intel
+    vulkan-mesa-layers
     xclip
     xcursor-vanilla-dmz
     xdg-utils
