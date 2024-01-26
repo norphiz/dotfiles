@@ -66,8 +66,6 @@ PKGS=(
     sxhkd
     terminus-font
     ttf-font-awesome
-    vulkan-intel
-    vulkan-mesa-layers
     xclip
     xcursor-vanilla-dmz
     xdg-utils
