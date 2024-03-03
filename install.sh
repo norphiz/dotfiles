@@ -113,6 +113,8 @@ sed -i "s/#en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen > /dev/null
 
 locale-gen > /dev/null
 
+echo 'LANG="en_US.UTF-8"' > /etc/locale.conf
+
 echo "FONT=ter-128b
 KEYMAP=br-abnt2" > /etc/vconsole.conf
 
