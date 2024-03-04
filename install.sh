@@ -113,7 +113,7 @@ sed -i "s/#en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen > /dev/null
 
 locale-gen > /dev/null
 
-echo 'LANG="en_US.UTF-8"' > /etc/locale.conf
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
 echo "FONT=ter-128b
 KEYMAP=br-abnt2" > /etc/vconsole.conf
@@ -201,7 +201,8 @@ Section "ServerFlags"
     Option "SuspendTime" "0"
 EndSection' > /etc/xorg.conf
 
-echo 'source "$HOME/.config/shell/exports"
+echo 'source /etc/profile
+source "$HOME/.config/shell/exports"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 source "$XDG_CONFIG_HOME/shell/aliasrc"
 wm' > /etc/zsh/zshenv
