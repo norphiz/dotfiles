@@ -12,7 +12,7 @@ mod4 + space
 mod4 + {c, shift + q, r}
     bspc {node -c, quit, wm -r}
 
-any + F11
+mod4 + f
     bspc node -t {fullscreen, tiled}
 
 ctrl + alt + {2, 4, 6, 8}
