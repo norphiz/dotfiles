@@ -42,6 +42,7 @@ PKGS=(
     base
     alacritty
     alsa-utils
+    alsa-plugins
     arc-gtk-theme
     archlinux-wallpaper
     arc-icon-theme
@@ -108,6 +109,8 @@ Include = /etc/pacman.d/mirrorlist
 
 #[multilib]
 #Include = /etc/pacman.d/mirrorlist" > /etc/pacman.conf
+
+echo 'defaults.pcm.rate_converter "speexrate_medium"' > /etc/asound.conf
 
 sed -i "s/#en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen > /dev/null
 
