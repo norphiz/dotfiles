@@ -65,6 +65,7 @@ PKGS=(
     redshift
     sudo
     sxhkd
+    speexdsp
     terminus-font
     ttf-font-awesome
     xclip
@@ -128,11 +129,6 @@ mkinitcpio -P > /dev/null
 read -p "Enter your hostname: " HOST
 
 echo "$HOST" > /etc/hostname
-
-echo "
-127.0.0.1   localhost
-::1         localhost
-127.0.1.1   $HOST.localdomain   $HOST" >> /etc/hosts
 
 read -p "Enter your username: " NAME
 
