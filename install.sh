@@ -191,12 +191,6 @@ echo 'Section "InputClass"
     Option "XkbLayout" "br"
 EndSection
 
-Section "InputClass"
-    Identifier "Mouse"
-    Driver "libinput"
-    Option "AccelProfile" "flat"
-EndSection
-
 Section "ServerFlags"
     Option "OffTime" "0"
     Option "BlankTime" "0"
