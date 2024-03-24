@@ -74,6 +74,7 @@ PKGS=(
     xorg-server
     xorg-xinit
     xorg-xsetroot
+    zram-generator
     zsh-completions
     zsh-syntax-highlighting
 )
@@ -178,9 +179,22 @@ NameResolvingService=resolvconf
 
 echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers.d/sudoers
 
-systemctl enable iwd > /dev/null
+echo "[zram0]
+zram-size = ram / 2
+compression-algorithm = zstd
+swap-priority = 100
+fs-type = swap" > /etc/systemd/zram-generator.conf
 
-systemctl enable dhcpcd > /dev/null
+echo "vm.swappiness = 180
+vm.watermark_boost_factor = 0
+vm.watermark_scale_factor = 125
+vm.page-cluster = 0" > /etc/sysctl.d/99-vm-zram-parameters.conf
+
+systemctl start systemd-zram-setup@zram0.service
+
+systemctl enable iwd.service > /dev/null
+
+systemctl enable dhcpcd.service > /dev/null
 
 echo 'Section "InputClass"
     Identifier "Keyboard"
