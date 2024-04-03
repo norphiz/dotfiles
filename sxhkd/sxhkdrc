@@ -1,7 +1,16 @@
 # vi: ft=sh
 
-mod4 + w
+XF86HomePage
     brave --disable-3d-apis --user-agent="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+XF86AudioRaiseVolume
+    amixer set Master 20%+
+
+XF86AudioLowerVolume
+    amixer set Master 20%-
+
+XF86AudioMute
+    amixer set Master {mute, unmute}
 
 mod4 + {a, Return}
     alacritty
@@ -14,9 +23,6 @@ mod4 + {c, shift + q, r}
 
 mod4 + f
     bspc node -t {fullscreen, tiled}
-
-ctrl + alt + {2, 4, 6, 8}
-    amixer set Master {41, 59, 71, 80}
 
 mod4 + {_, shift +} {1-9}
     bspc {desktop -f, node -d} {1-9}
