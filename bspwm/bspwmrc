@@ -1,7 +1,7 @@
 #!/bin/bash
 
 bspc monitor -d {1..9}
-bspc config window_gap 5
+bspc config window_gap 3
 bspc config border_width 1
 bspc config focus_follows_pointer true
 bspc config normal_border_color "#5c6370"
