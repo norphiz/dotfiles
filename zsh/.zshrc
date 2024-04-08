@@ -10,4 +10,5 @@ bindkey "^[[F" end-of-line
 bindkey "^[[3~" delete-char
 bindkey "^[[H" beginning-of-line
 export PS1="%B%F{red}%~%b%f $ "
+export ZLE_REMOVE_SUFFIX_CHARS=""
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
