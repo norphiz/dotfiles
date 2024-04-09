@@ -41,8 +41,8 @@ echo "Installing base system."
 PKGS=(
     base
     alacritty
-    alsa{,-utils,-plugins}
-    arc{,-gtk-theme,-icon-theme}
+    alsa{-utils,-plugins}
+    arc{-gtk-theme,-icon-theme}
     archlinux-wallpaper
     bash-completion
     bspwm
@@ -53,7 +53,7 @@ PKGS=(
     grub
     intel-ucode
     iwd
-    linux{,-zen,-firmware}
+    linux{-zen,-firmware}
     man-db
     neovim
     noto-fonts{,-extra,-emoji,}
@@ -67,9 +67,9 @@ PKGS=(
     xclip
     xcursor-vanilla-dmz
     xdg-utils
-    xorg{,-server,-xinit,-xsetroot}
+    xorg{-server,-xinit,-xsetroot}
     zram-generator
-    zsh{,-completions,-syntax-highlighting}
+    zsh{-completions,-syntax-highlighting}
 )
 
 pacstrap /mnt "${PKGS[@]}" > /dev/null
