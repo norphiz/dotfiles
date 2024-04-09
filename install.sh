@@ -59,6 +59,7 @@ PKGS=(
     linux-zen
     man-db
     neovim
+    noto-fonts-emoji
     os-prober
     polybar
     redshift
@@ -67,6 +68,7 @@ PKGS=(
     speexdsp
     terminus-font
     ttf-liberation
+    ttf-joypixels
     xclip
     xcursor-vanilla-dmz
     xdg-utils
