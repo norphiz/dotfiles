@@ -64,6 +64,8 @@ PKGS=(
     sxhkd
     speexdsp
     terminus-font
+    ttf-font-awesome
+    ttf-joypixels
     xclip
     xcursor-vanilla-dmz
     xdg-utils
