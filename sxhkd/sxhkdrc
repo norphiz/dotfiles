@@ -4,10 +4,10 @@ XF86HomePage
     brave --disable-3d-apis --user-agent="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
 XF86AudioRaiseVolume
-    amixer set Master 20%+
+    amixer set Master 10%+
 
 XF86AudioLowerVolume
-    amixer set Master 20%-
+    amixer set Master 10%-
 
 XF86AudioMute
     amixer set Master {mute, unmute}
