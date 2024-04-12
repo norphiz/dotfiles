@@ -182,12 +182,34 @@ compression-algorithm = zstd
 swap-priority = 100
 fs-type = swap" > /etc/systemd/zram-generator.conf
 
-echo "vm.swappiness = 180
-vm.watermark_boost_factor = 0
-vm.watermark_scale_factor = 125
-vm.page-cluster = 0" > /etc/sysctl.d/99-vm-zram-parameters.conf
+echo "vm.page-cluster = 0
+vm.watermark_scale_factor = 125" > /etc/sysctl.d/99-vm-zram-parameters.conf
 
-systemctl start systemd-zram-setup@zram0.service
+echo '<driconf>
+    <device>
+        <application name="Default">
+            <option name="vblank_mode" value="0"/>
+        </application>
+    </device>
+</driconf>' > /etc/drirc
+
+echo "w /proc/sys/vm/compaction_proactiveness - - - - 0
+w /proc/sys/vm/watermark_boost_factor - - - - 1
+w /proc/sys/vm/min_free_kbytes - - - - 1048576
+w /proc/sys/vm/watermark_scale_factor - - - - 500
+w /proc/sys/vm/swappiness - - - - 10
+w /sys/kernel/mm/lru_gen/enabled - - - - 5
+w /proc/sys/vm/zone_reclaim_mode - - - - 0
+w /sys/kernel/mm/transparent_hugepage/enabled - - - - madvise
+w /sys/kernel/mm/transparent_hugepage/shmem_enabled - - - - advise
+w /sys/kernel/mm/transparent_hugepage/defrag - - - - never
+w /proc/sys/vm/page_lock_unfairness - - - - 1
+w /proc/sys/kernel/sched_child_runs_first - - - - 0
+w /proc/sys/kernel/sched_autogroup_enabled - - - - 1
+w /proc/sys/kernel/sched_cfs_bandwidth_slice_us - - - - 3000
+w /sys/kernel/debug/sched/base_slice_ns  - - - - 3000000
+w /sys/kernel/debug/sched/migration_cost_ns - - - - 500000
+w /sys/kernel/debug/sched/nr_migrate - - - - 8" > /etc/tmpfiles.d/consistent-response-time-for-gaming.conf
 
 systemctl enable iwd.service > /dev/null
 
