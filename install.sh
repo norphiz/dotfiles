@@ -225,11 +225,7 @@ Section "ServerFlags"
     Option "SuspendTime" "0"
 EndSection' > /etc/xorg.conf
 
-echo 'source /etc/profile
-source "$HOME/.config/shell/exports"
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-source "$XDG_CONFIG_HOME/shell/aliasrc"
-wm' > /etc/zsh/zshenv
+echo 'export ZDOTDIR="$HOME/.config/zsh/"' > /etc/zsh/zshenv
 
 echo "Successfully installed."
 
