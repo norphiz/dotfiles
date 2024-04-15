@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 bspc monitor -d {1..9}
 bspc config window_gap 3
@@ -7,9 +7,9 @@ bspc config focus_follows_pointer true
 bspc config normal_border_color "#5c6370"
 bspc config focused_border_color "#dfe5f2"
 
-redshift -PO 3600 &
 xrdb "$XRESOURCES" &
 pidof sxhkd || sxhkd &
 pidof polybar || polybar -r &
 xsetroot -cursor_name left_ptr &
+redshift -PO 3700 > /dev/null 2>&1 &
 feh --bg-scale --no-fehbg /usr/share/backgrounds/archlinux/lone.jpg &
