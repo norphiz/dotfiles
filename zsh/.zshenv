@@ -1,0 +1,23 @@
+export LESS="-R"
+export VISUAL="nvim"
+export LESSHISTFILE="-"
+export EDITOR="$VISUAL"
+export WINEARCH="win32"
+export PAGER="nvim +Man!"
+export SUDO_PROMPT="Password:"
+export NVIM_LOG_FILE="/dev/null"
+export XAUTHORITY="/tmp/Xauthority"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export WINEPREFIX="$XDG_DATA_HOME/osupref"
+export XDG_CACHE_HOME="$XDG_DATA_HOME/cache"
+export XRESOURCES="$XDG_CONFIG_HOME/x11/xdefaults"
+export FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0"
+export LS_COLORS="di=1;31:*.jpg=1;34:*.png=1;34:*.zip=1;35:*.osk=1;35:*.osz=1;35:*.osr=1;35:\
+*.osu=1;35:\
+*.osb=1;35:\
+*.zst=1;35:\
+*.mp3=1;36:\
+*.ogg=1;36:\
+*.wav=1;36"
