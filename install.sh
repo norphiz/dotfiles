@@ -20,7 +20,7 @@ mkswap "$SWAP" > /dev/null
 
 swapon "$SWAP"
 
-mkfs.ext4 "$ROOT" > /dev/null
+mkfs.ext4 -L ROOT "$ROOT" > /dev/null
 
 mount "$ROOT" /mnt
 
@@ -50,14 +50,12 @@ PKGS=(
     efibootmgr
     feh
     git
-    grub
     intel-ucode
     iwd
     linux{-zen,-firmware}
     man-db
     neovim
     noto-fonts{,-extra,-emoji,}
-    os-prober
     polybar
     redshift
     sudo
@@ -78,7 +76,9 @@ pacstrap /mnt "${PKGS[@]}" > /dev/null
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-sed -i "s/relatime/noatime/" /mnt/etc/fstab
+sed -e "s/relatime/noatime/" \
+    -e "s/fmask=0077/fmask=0137/" \
+    -e "s/umask=0077/umask=0027/" -i /mnt/etc/fstab
 
 sed -n '/^hwclock/,$p' "$0" > /mnt/chroot.sh
 
@@ -151,15 +151,7 @@ Inherits=Vanilla-DMZ" > .local/share/icons/default/index.theme
 
 chown -R "$NAME:$NAME" /home/"$NAME"
 
-sed -e 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet console=tty2"/' \
-    -e "s/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/" \
-    -e "s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/" -i /etc/default/grub
-
 fc-cache -f
-
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch > /dev/null
-
-grub-mkconfig -o /boot/grub/grub.cfg > /dev/null
 
 sed -i "/echo/d" /boot/grub/grub.cfg
 
@@ -208,6 +200,21 @@ w /proc/sys/kernel/sched_cfs_bandwidth_slice_us - - - - 3000
 w /sys/kernel/debug/sched/base_slice_ns  - - - - 3000000
 w /sys/kernel/debug/sched/migration_cost_ns - - - - 500000
 w /sys/kernel/debug/sched/nr_migrate - - - - 8" > /etc/tmpfiles.d/consistent-response-time-for-gaming.conf
+
+bootctl install > /dev/null 2>&1
+
+echo "default arch.conf
+timeout 10
+console-mode max
+editor no" > /boot/loader/loader.conf
+
+echo "title Arch Linux
+linux vmlinuz-linux-zen
+initrd initramfs-linux-zen.img
+initrd intel-ucode.img
+options root=LABEL=ROOT rw quiet console=tty2" > /boot/loader/entries/arch.conf
+
+systemctl enable systemd-boot-update > /dev/null
 
 systemctl enable iwd > /dev/null
 
