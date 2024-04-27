@@ -72,13 +72,13 @@ PKGS=(
     zsh{-completions,-syntax-highlighting}
 )
 
-pacstrap /mnt "${PKGS[@]}" > /dev/null
+pacstrap -K /mnt "${PKGS[@]}" > /dev/null
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
 sed -e "s/relatime/noatime/" \
-    -e "s/fmask=0077/fmask=0137/" \
-    -e "s/umask=0077/umask=0027/" -i /mnt/etc/fstab
+    -e "s/fmask=0022/fmask=0137/" \
+    -e "s/umask=0022/umask=0027/" -i /mnt/etc/fstab
 
 sed -n '/^hwclock/,$p' "$0" > /mnt/chroot.sh
 
