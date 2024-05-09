@@ -28,7 +28,7 @@ mount "$ROOT" /mnt
 
 mount -m "$BOOT" /mnt/boot
 
-mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/boot/efi
+mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
 reflector -c ',BR' -p https -f 5 --sort age --save /etc/pacman.d/mirrorlist
 
@@ -75,11 +75,11 @@ locale-gen
 
 systemctl enable {iwd,dhcpcd,systemd-boot-update}
 
-bootctl --esp-path=/boot/efi --boot-path=/boot install
+bootctl install
 
 echo 'timeout 0
 editor no
-default arch' > /boot/efi/loader/loader.conf
+default arch' > /efi/loader/loader.conf
 
 echo 'title Arch Linux
 linux vmlinuz-linux
