@@ -14,39 +14,31 @@ read -r -p 'Enter the swap partition: ' SWAP
 
 read -r -p 'Enter the root partition: ' ROOT
 
-clear
+mkfs.fat -F 32 "$ESP"
 
-mkfs.fat -F 32 "$ESP" > /dev/null 2>&1
-
-mkswap "$SWAP" > /dev/null 2>&1
+mkswap "$SWAP"
 
 swapon "$SWAP"
 
-mkfs.ext4 -L ROOT "$ROOT" > /dev/null 2>&1
+mkfs.ext4 -L ROOT "$ROOT"
 
-mkfs.ext4 "$BOOT" > /dev/null 2>&1
+mkfs.ext4 "$BOOT"
 
 mount "$ROOT" /mnt
 
-mount -m -o fmask=0077,dmask=0077 "$ESP" /mnt/efi
+mount -m "$BOOT" /mnt/boot
+
+mount -m -o fmask=0077,dmask=0077 "$ESP" /mnt/boot/efi
 
 reflector -c ',BR' -p https -f 5 --sort age --save /etc/pacman.d/mirrorlist
-
-clear
 
 pacstrap -i -K /mnt base iwd sudo dhcpcd xcursor-vanilla-dmz linux{,-firmware}
 
 clear
 
-cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
-
-mount "$BOOT" /boot
-
 genfstab -U /mnt >> /mnt/etc/fstab
 
 read -r -p 'Enter hostname: ' HNAME
-
-clear
 
 sed -i 's/#en_US/en_US/' /mnt/etc/locale.gen
 
@@ -77,13 +69,9 @@ arch-chroot /mnt bash chroot.sh
 
 read -r -p 'Enter your username: ' UNAME
 
-clear
-
 useradd -mG wheel,audio,video "$UNAME"
 
 passwd "$UNAME"
-
-clear
 
 locale-gen > /dev/null 2>&1
 
