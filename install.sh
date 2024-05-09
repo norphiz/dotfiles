@@ -34,7 +34,7 @@ reflector -c ',BR' -p https -f 5 --sort age --save /etc/pacman.d/mirrorlist
 
 clear
 
-pacstrap -K /mnt base iwd sudo dhcpcd linux{,-firmware}
+pacstrap -K /mnt base iwd sudo dhcpcd xcursor-vanilla-dmz linux{,-firmware}
 
 clear
 
