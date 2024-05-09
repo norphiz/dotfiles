@@ -73,11 +73,11 @@ useradd -mG wheel,audio,video "$UNAME"
 
 passwd "$UNAME"
 
-locale-gen > /dev/null 2>&1
+locale-gen
 
-systemctl enable {iwd,dhcpcd,systemd-boot-update} > /dev/null 2>&1
+systemctl enable {iwd,dhcpcd,systemd-boot-update}
 
-bootctl install > /dev/null 2>&1
+bootctl install
 
 echo 'timeout 0
 editor no
