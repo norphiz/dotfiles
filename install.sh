@@ -6,7 +6,7 @@ cfdisk
 
 clear
 
-read -r -p 'Enter the esp partition: ' ESP
+read -r -p 'Enter the uefi partition: ' UEFI
 
 read -r -p 'Enter the boot partition: ' BOOT
 
@@ -14,7 +14,9 @@ read -r -p 'Enter the swap partition: ' SWAP
 
 read -r -p 'Enter the root partition: ' ROOT
 
-mkfs.fat -F 32 "$ESP"
+mkfs.fat -F 32 "$UEFI"
+
+mkfs.fat -F 32 "$BOOT"
 
 mkswap "$SWAP"
 
@@ -22,17 +24,15 @@ swapon "$SWAP"
 
 mkfs.ext4 -L ROOT "$ROOT"
 
-mkfs.ext4 "$BOOT"
-
 mount "$ROOT" /mnt
 
 mount -m "$BOOT" /mnt/boot
 
-mount -m -o fmask=0077,dmask=0077 "$ESP" /mnt/boot/efi
+mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/boot/efi
 
 reflector -c ',BR' -p https -f 5 --sort age --save /etc/pacman.d/mirrorlist
 
-pacstrap -i -K /mnt base iwd sudo dhcpcd xcursor-vanilla-dmz linux{,-firmware}
+pacstrap -i -K /mnt base iwd intel-ucode sudo dhcpcd linux{,-firmware}
 
 clear
 
@@ -40,7 +40,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 read -r -p 'Enter hostname: ' HNAME
 
-sed -i 's/#en_US/en_US/' /mnt/etc/locale.gen
+sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /mnt/etc/locale.gen
 
 mkdir -p /mnt/etc/iwd
 
@@ -57,9 +57,7 @@ NameResolvingService=resolvconf
 
 # vi: ft=dosini' > /etc/iwd/main.conf
 
-sed -e 's/rel/noa/' \
-    -e 's/fmask=0022/fmask=0077/' \
-    -e 's/dmask=0022/dmask=0077/' -i /mnt/etc/fstab
+sed 's/rel/no/' -i /mnt/etc/fstab
 
 sed -n '/^#chroot/,$p' "$0" > /mnt/chroot.sh
 
@@ -77,11 +75,11 @@ locale-gen
 
 systemctl enable {iwd,dhcpcd,systemd-boot-update}
 
-bootctl install
+bootctl --esp-path=/boot/efi --boot-path=/boot install
 
 echo 'timeout 0
 editor no
-default arch' > /boot/loader/loader.conf
+default arch' > /boot/efi/loader/loader.conf
 
 echo 'title Arch Linux
 linux vmlinuz-linux
