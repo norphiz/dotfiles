@@ -60,18 +60,14 @@ echo 'KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 
 echo '%wheel ALL=(ALL:ALL) ALL' > /mnt/etc/sudoers.d/sudoers
 
-echo '[General]
-AddressRandomization=once
-AddressRandomizationRange=full
-
-[Network]
+echo '[Network]
 NameResolvingService=resolvconf
 
 # vi: ft=dosini' > /etc/iwd/main.conf
 
 sed -e 's/rel/noa/' \
-    -e 's/fmask=0022/fmask=0137/' \
-    -e 's/dmask=0022/dmask=0027/' -i /mnt/etc/fstab
+    -e 's/fmask=0022/fmask=0077/' \
+    -e 's/dmask=0022/dmask=0077/' -i /mnt/etc/fstab
 
 sed -n '/^#chroot/,$p' "$0" > /mnt/chroot.sh
 
@@ -87,9 +83,11 @@ useradd -mG wheel,audio,video "$UNAME"
 
 passwd "$UNAME"
 
+clear
+
 locale-gen > /dev/null 2>&1
 
-systemctl enable {iwd,dhcpcd,systemd-boot-update} > /dev/null
+systemctl enable {iwd,dhcpcd,systemd-boot-update} > /dev/null 2>&1
 
 bootctl install > /dev/null 2>&1
 
