@@ -1,205 +1,108 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+set -eu
 
 cfdisk
 
 clear
 
-lsblk
+read -r -p 'Enter the esp partition: ' ESP
 
-read -p "Enter boot partition: " BOOT
+read -r -p 'Enter the boot partition: ' BOOT
 
-read -p "Enter swap partition: " SWAP
+read -r -p 'Enter the swap partition: ' SWAP
 
-read -p "Enter root partition: " ROOT
+read -r -p 'Enter the root partition: ' ROOT
 
-mkfs.fat -F 32 "$BOOT" > /dev/null
+clear
 
-mkswap "$SWAP" > /dev/null
+mkfs.fat -F 32 "$ESP" > /dev/null 2>&1
+
+mkswap "$SWAP" > /dev/null 2>&1
 
 swapon "$SWAP"
 
-mkfs.ext4 -L ROOT "$ROOT" > /dev/null
+mkfs.ext4 -L ROOT "$ROOT" > /dev/null 2>&1
+
+mkfs.ext4 "$BOOT" > /dev/null 2>&1
 
 mount "$ROOT" /mnt
 
-mkdir /mnt/boot
+mount -m "$ESP" /mnt/efi
 
-mount "$BOOT" /mnt/boot
+reflector -c ',BR' -p https -f 5 --sort age --save /etc/pacman.d/mirrorlist
 
-lsblk
+clear
 
-read -p "Enter Windows(R) boot partiton: " WINBOOT
+pacstrap -K /mnt base iwd sudo dhcpcd linux{,-firmware}
 
-mkdir /mnt/boot/windows
+clear
 
-mount "$WINBOOT" /mnt/boot/windows
+cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 
-echo "Installing base system."
-
-PKGS=(
-    base
-    alacritty
-    alsa{-utils,-plugins}
-    arc{-gtk-theme,-icon-theme}
-    archlinux-wallpaper
-    bash-completion
-    bspwm
-    dhcpcd
-    efibootmgr
-    feh
-    git
-    intel-ucode
-    iwd
-    linux{-zen,-firmware}
-    man-db
-    neovim
-    noto-fonts{,-extra,-emoji,}
-    polybar
-    redshift
-    sudo
-    sxhkd
-    speexdsp
-    terminus-font
-    ttf-font-awesome
-    ttf-joypixels
-    xclip
-    xcursor-vanilla-dmz
-    xdg-utils
-    xorg{-server,-xinit,-xsetroot}
-    zsh{-completions,-syntax-highlighting}
-)
-
-pacstrap -K /mnt "${PKGS[@]}" > /dev/null
+mount "$BOOT" /boot
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-sed -e "s/relatime/noatime/" \
-    -e "s/fmask=0022/fmask=0137/" \
-    -e "s/dmask=0022/dmask=0027/" -i /mnt/etc/fstab
+read -r -p 'Enter hostname: ' HNAME
 
-sed -n '/^hwclock/,$p' "$0" > /mnt/chroot.sh
+clear
 
-arch-chroot /mnt bash /chroot.sh
+sed -i 's/#en_US/en_US/' /mnt/etc/locale.gen
 
-hwclock -w
+mkdir -p /mnt/etc/iwd
 
-echo "[options]
-Color
-CheckSpace
-ILoveCandy
-CacheDir = /tmp/
-Architecture = auto
-ParallelDownloads = 5
-DisableDownloadTimeout
-HoldPkg = pacman glibc
-LocalFileSigLevel = Optional
-SigLevel = Required DatabaseOptional
+echo "$HNAME" > /mnt/etc/hostname
 
-[core]
-Include = /etc/pacman.d/mirrorlist
+echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 
-[extra]
-Include = /etc/pacman.d/mirrorlist
+echo 'KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 
-#[multilib]
-#Include = /etc/pacman.d/mirrorlist" > /etc/pacman.conf
+echo '%wheel ALL=(ALL:ALL) ALL' > /mnt/etc/sudoers.d/sudoers
 
-echo 'defaults.pcm.rate_converter "speexrate_medium"' > /etc/asound.conf
-
-sed -i "s/#en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen > /dev/null
-
-locale-gen > /dev/null
-
-echo "LANG=en_US.UTF-8" > /etc/locale.conf
-
-echo "FONT=ter-128b
-KEYMAP=br-abnt2" > /etc/vconsole.conf
-
-echo "install bluetooth /bin/true" > /etc/modprobe.d/blacklist.conf
-
-mkinitcpio -P > /dev/null
-
-read -p "Enter your hostname: " HOST
-
-echo "$HOST" > /etc/hostname
-
-read -p "Enter your username: " NAME
-
-useradd -mG wheel,audio,video "$NAME" -s /bin/zsh
-
-echo "Enter user password"
-
-passwd "$NAME"
-
-cd /home/"$NAME"
-
-rm .*
-
-git clone --depth=1 https://github.com/norphiz/dotfiles .config > /dev/null
-
-rm -fr .config/{.git,README.md,LICENSE}
-
-chmod +x .config/bspwm/bspwmrc
-
-mkdir -p .local/share/icons/default
-
-echo "[Icon Theme]
-Inherits=Vanilla-DMZ" > .local/share/icons/default/index.theme
-
-chown -R "$NAME:$NAME" /home/"$NAME"
-
-fc-cache -f
-
-sed -i "/echo/d" /boot/grub/grub.cfg
-
-mkdir /etc/iwd/
-
-echo "[General]
+echo '[General]
 AddressRandomization=once
 AddressRandomizationRange=full
 
 [Network]
 NameResolvingService=resolvconf
 
-# vi: ft=dosini" > /etc/iwd/main.conf
+# vi: ft=dosini' > /etc/iwd/main.conf
 
-echo "%wheel ALL=(ALL:ALL) ALL" > /etc/sudoers.d/sudoers
+sed -e 's/rel/noa/' \
+    -e 's/fmask=0022/fmask=0137/' \
+    -e 's/dmask=0022/dmask=0027/' -i /mnt/etc/fstab
+
+sed -n '/^#chroot/,$p' "$0" > /mnt/chroot.sh
+
+arch-chroot /mnt bash chroot.sh
+
+#chroot
+
+read -r -p 'Enter your username: ' UNAME
+
+clear
+
+useradd -mG wheel,audio,video "$UNAME"
+
+passwd "$UNAME"
+
+locale-gen > /dev/null 2>&1
+
+systemctl enable {iwd,dhcpcd,systemd-boot-update} > /dev/null
 
 bootctl install > /dev/null 2>&1
 
-echo "default arch.conf
-timeout 10
-console-mode max
-editor no" > /boot/loader/loader.conf
+echo 'timeout 0
+editor no
+default arch' > /boot/loader/loader.conf
 
-echo "title Arch Linux
-linux vmlinuz-linux-zen
-initrd initramfs-linux-zen.img
+echo 'title Arch Linux
+linux vmlinuz-linux
 initrd intel-ucode.img
-options root=LABEL=ROOT rw quiet console=tty2" > /boot/loader/entries/arch.conf
+initrd booster-linux.img
+options root=LABEL=ROOT rw quiet loglevel=0' > /boot/loader/entries/arch.conf
 
-systemctl enable systemd-boot-update > /dev/null
-
-systemctl enable iwd > /dev/null
-
-systemctl enable dhcpcd > /dev/null
-
-echo 'Section "InputClass"
-    Identifier "Keyboard"
-    Option "XkbLayout" "br"
-EndSection
-
-Section "ServerFlags"
-    Option "OffTime" "0"
-    Option "BlankTime" "0"
-    Option "StandbyTime" "0"
-    Option "SuspendTime" "0"
-EndSection' > /etc/xorg.conf
-
-echo 'export ZDOTDIR="$HOME/.config/zsh/"' > /etc/zsh/zshenv
-
-echo "Successfully installed."
+echo 'Successfully installed.'
 
 rm "$0"
