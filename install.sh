@@ -28,7 +28,7 @@ mkfs.ext4 "$BOOT" > /dev/null 2>&1
 
 mount "$ROOT" /mnt
 
-mount -m "$ESP" /mnt/efi
+mount -m -o fmask=0077,dmask=0077 "$ESP" /mnt/efi
 
 reflector -c ',BR' -p https -f 5 --sort age --save /etc/pacman.d/mirrorlist
 
