@@ -30,7 +30,7 @@ mount -m "$BOOT" /mnt/boot
 
 mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
-reflector -c ',BR' -p https -f 5 --sort age --save /etc/pacman.d/mirrorlist
+reflector -c 'BR,' -p https -f 5 --sort age --save /etc/pacman.d/mirrorlist
 
 pacstrap -i -K /mnt base iwd intel-ucode sudo dhcpcd linux{,-firmware}
 
@@ -40,9 +40,9 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 read -r -p 'Enter hostname: ' HNAME
 
-sed -i 's/#en_US.UTF-8/en_US.UTF-8/' /mnt/etc/locale.gen
+sed 's/#en_US.UTF-8/en_US.UTF-8/' -i /mnt/etc/locale.gen
 
-mkdir -p /mnt/etc/iwd
+mkdir /mnt/etc/iwd
 
 echo "$HNAME" > /mnt/etc/hostname
 
