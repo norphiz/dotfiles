@@ -1,0 +1,15 @@
+[submodule "nvim/pack/plugins/start/dracula.vim"]
+    path = nvim/pack/plugins/start/dracula.vim
+    url = https://github.com/dracula/vim.git
+
+[submodule "nvim/pack/plugins/start/nvim-autopairs"]
+    path = nvim/pack/plugins/start/nvim-autopairs
+    url = https://github.com/windwp/nvim-autopairs.git
+
+[submodule "nvim/pack/plugins/start/nvim-treesitter"]
+    path = nvim/pack/plugins/start/nvim-treesitter
+    url = https://github.com/nvim-treesitter/nvim-treesitter.git
+
+[submodule "nvim/pack/plugins/start/nvim-colorizer"]
+    path = nvim/pack/plugins/start/nvim-colorizer
+    url = https://github.com/norcalli/nvim-colorizer.git
