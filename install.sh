@@ -32,7 +32,7 @@ mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
 reflector -c 'BR,' -p https -f 5 --sort age --save /etc/pacman.d/mirrorlist
 
-pacstrap -i -K /mnt base iwd intel-ucode sudo dhcpcd linux{,-firmware}
+pacstrap -i -K /mnt base iwd intel-ucode git sudo dhcpcd linux{,-firmware}
 
 clear
 
@@ -73,7 +73,7 @@ passwd "$UNAME"
 
 locale-gen
 
-systemctl enable {iwd,dhcpcd,systemd-boot-update}
+systemctl -q enable {iwd,dhcpcd,systemd-boot-update}
 
 bootctl install
 
@@ -86,6 +86,18 @@ linux vmlinuz-linux
 initrd intel-ucode.img
 initrd booster-linux.img
 options root=LABEL=ROOT rw quiet loglevel=0' > /boot/loader/entries/arch.conf
+
+git clone -q --depth 1 https://github.com/norphiz/dotfiles.git "/home/$NAME/.config"
+
+git clone -q --depth 1 https://github.com/dracula/wallpaper.git "/home/$NAME/.local/share/wallpaper"
+
+git clone -q --depth 1 https://github.com/dracula/vim.git "/home/$NAME/.config/nvim/pack/plugins/start/dracula.vim"
+
+git clone -q --depth 1 https://github.com/windwp/nvim-autopairs.git "/home/$NAME/.config/nvim/pack/plugins/start/nvim-autopairs"
+
+git clone -q --depth 1 https://github.com/norcalli/nvim-colorizer.lua.git "/home/$NAME/.config/nvim/pack/plugins/start/nvim-colorizer"
+
+git clone -q --depth 1 https://github.com/nvim-treesitter/nvim-treesitter.git "/home/$NAME/.config/nvim/pack/plugins/start/nvim-treesitter"
 
 echo 'Successfully installed.'
 
