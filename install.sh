@@ -95,8 +95,6 @@ git clone -q --depth 1 https://github.com/dracula/vim.git "/home/$NAME/.config/n
 
 git clone -q --depth 1 https://github.com/windwp/nvim-autopairs.git "/home/$NAME/.config/nvim/pack/plugins/start/nvim-autopairs"
 
-git clone -q --depth 1 https://github.com/norcalli/nvim-colorizer.lua.git "/home/$NAME/.config/nvim/pack/plugins/start/nvim-colorizer"
-
 git clone -q --depth 1 https://github.com/nvim-treesitter/nvim-treesitter.git "/home/$NAME/.config/nvim/pack/plugins/start/nvim-treesitter"
 
 echo 'Successfully installed.'
