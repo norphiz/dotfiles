@@ -6,19 +6,16 @@ vim.g.ic = true
 vim.o.sc = true
 vim.o.ru = false
 vim.o.scs = true
-vim.o.swf = true
+vim.o.swf = false
 vim.o.smd = false
 vim.o.sdf = "NONE"
 vim.o.wrap = false
+vim.o.fcs = "eob: "
 vim.o.cb = "unnamedplus"
 
 vim.cmd.colo "dracula"
 
-if os.getenv "TERM" ~= "linux" then
-    vim.o.tgc = true
-end
-
-vim.api.nvim_set_hl(0, "EndOfBuffer", {fg = "#282a36", ctermfg = "black"})
+vim.api.nvim_set_keymap("n", ";", ":", {})
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "*",
@@ -27,14 +24,18 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
-require "colorizer".setup()
+if os.getenv "TERM" ~= "linux" then
+    vim.o.tgc = true
+end
 
-require "nvim-autopairs".setup()
+if os.execute "test -d $HOME/.config/nvim/pack/plugins/start/nvim-autopairs" == 0 then
+    require "nvim-autopairs".setup()
+end
 
-require "nvim-treesitter.configs".setup {
-    vim.opt.rtp:append "~/.local/share/nvim/treesitter",
-    parser_install_dir = "~/.local/share/nvim/treesitter",
-    highlight = {
-        enable = true
+if os.execute "test -d $HOME/.config/nvim/pack/plugins/start/nvim-treesitter" == 0 then
+    require "nvim-treesitter.configs".setup {
+        highlight = {
+            enable = true
+        }
     }
-}
+end
