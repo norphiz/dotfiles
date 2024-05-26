@@ -7,8 +7,6 @@ do
     riverctl map normal Mod4+Shift "$INDEX" set-view-tags "$TAGS"
 done
 
-wlr-randr --output VGA-1 --mode 1920x1080
-
 riverctl border-width 1
 riverctl keyboard-layout br
 riverctl mouse pointer-accel flat
