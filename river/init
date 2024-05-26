@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+for INDEX in {1..9}
+do
+    TAGS=$((1 << (INDEX - 1)))
+    riverctl map normal Mod4 "$INDEX" set-focused-tags "$TAGS"
+    riverctl map normal Mod4+Shift "$INDEX" set-view-tags "$TAGS"
+done
+
+wlr-randr --output VGA-1 --mode 1920x1080
+
+riverctl border-width 1
+riverctl keyboard-layout br
+riverctl mouse pointer-accel flat
+riverctl default-layout rivertile
+riverctl focus-follows-cursor normal
+riverctl xcursor-theme Vanilla-DMZ 16
+riverctl hide-cursor when-typing enabled
+riverctl border-color-focused 0xff79c6
+riverctl border-color-unfocused 0x6272a4
+riverctl default-attach-mode below
+
+riverctl map normal Mod4 c close
+riverctl map normal Mod4+Shift q exit
+riverctl map normal Mod4 Return spawn foot
+riverctl map normal Mod4 right focus-view next
+riverctl map normal Mod4+Shift right swap next
+riverctl map normal Mod4 left focus-view previous
+riverctl map normal Mod4+Shift left swap previous
+riverctl map normal Mod4+Shift f toggle-fullscreen
+
+rivertile -view-padding 1 -outer-padding 1 -main-ratio 0.5 &
+
+swaybg -i ~/.local/share/wallpaper/first-collection/arch.png -m fill -o '*' &
