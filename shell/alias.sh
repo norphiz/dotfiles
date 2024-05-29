@@ -2,16 +2,15 @@ updt-plugins() {
     local BASE="$HOME/.config/nvim/pack/plugins/start"
     local PLUGINS=(
         "$BASE/vim"
-        "$BASE/nvim-autopairs"
+        "$BASE/mini.nvim"
         "$BASE/nvim-treesitter"
         "$HOME/.local/share/wallpaper"
         "$ZDOTDIR/fast-syntax-highlighting"
     )
-    for DIR in "${PLUGINS[@]}"
+    local INDEX
+    for INDEX in "${PLUGINS[@]}"
     do
-        cd "$DIR"
-        git pull
-        cd "$HOME"
+        git -C "$INDEX" pull
     done
 }
 
@@ -22,10 +21,10 @@ alias rm='rm -fr'
 alias ls='eza -a'
 alias cat='bat -pp'
 alias pqe='pacman -Qe'
-alias pql='pacman -Ql'
 alias pss='pacman -Ss'
 alias pqi='pacman -Qi'
 alias psi='pacman -Si'
+alias pql='pacman -Qlq'
 alias sdls='sudo eza -a'
 alias pqdt='pacman -Qdtq'
 alias inst='sudo pacman -S'
