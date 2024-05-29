@@ -33,7 +33,7 @@ if os.getenv "TERM" ~= "linux" then
 end
 
 if os.execute "test -d ~/.config/nvim/pack/plugins/start/vim" then
-    vim.cmd.colo "dracula
+    vim.cmd.colo "dracula"
 end
 
 if os.execute "test -d ~/.config/nvim/pack/plugins/start/nvim-treesitter" then
