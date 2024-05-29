@@ -17,9 +17,9 @@ vim.o.sdf = "NONE"
 vim.o.fcs = "eob: "
 vim.o.cb = "unnamedplus"
 
-vim.cmd.colo "dracula"
-
 vim.api.nvim_set_keymap("n", ";", ":", {})
+
+vim.api.nvim_set_keymap("n", "<C-q>", ":q!<CR>", {silent = true})
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "*",
@@ -32,14 +32,24 @@ if os.getenv "TERM" ~= "linux" then
     vim.o.tgc = true
 end
 
-if os.execute "test -d ~/.config/nvim/pack/plugins/start/nvim-autopairs" then
-    require "nvim-autopairs".setup()
+if os.execute "test -d ~/.config/nvim/pack/plugins/start/vim" then
+    vim.cmd.colo "dracula
 end
 
 if os.execute "test -d ~/.config/nvim/pack/plugins/start/nvim-treesitter" then
     require "nvim-treesitter.configs".setup {
         highlight = {
             enable = true
+        }
+    }
+end
+
+if os.execute "test -d ~/.config/nvim/pack/plugins/start/mini.nvim" then
+    require "mini.pairs".setup()
+    require "mini.animate".setup()
+    require "mini.hipatterns".setup {
+        highlighters = {
+            hex_color = require "mini.hipatterns".gen_highlighter.hex_color()
         }
     }
 end
