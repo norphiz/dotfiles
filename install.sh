@@ -113,9 +113,9 @@ git clone -q --depth 1 https://github.com/norphiz/dotfiles.git "/home/$UNAME/.co
 
 git clone -q --depth 1 https://github.com/dracula/wallpaper.git "/home/$UNAME/.local/share/wallpaper"
 
-git clone -q --depth 1 https://github.com/dracula/vim.git "/home/$UNAME/.config/nvim/pack/plugins/start/dracula.vim"
+git clone -q --depth 1 https://github.com/dracula/vim.git "/home/$UNAME/.config/nvim/pack/plugins/start/vim"
 
-git clone -q --depth 1 https://github.com/windwp/nvim-autopairs.git "/home/$UNAME/.config/nvim/pack/plugins/start/nvim-autopairs"
+git clone -q --depth 1 https://github.com/echasnovski/mini.nvim.git "/home/$UNAME/.config/nvim/pack/plugins/start/mini.nvim"
 
 git clone -q --depth 1 https://github.com/nvim-treesitter/nvim-treesitter.git "/home/$UNAME/.config/nvim/pack/plugins/start/nvim-treesitter"
 
