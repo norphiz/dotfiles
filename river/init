@@ -14,8 +14,8 @@ riverctl default-layout rivertile
 riverctl default-attach-mode below
 riverctl focus-follows-cursor normal
 riverctl xcursor-theme Vanilla-DMZ 16
-riverctl hide-cursor when-typing enabled
 riverctl border-color-focused 0xff79c6
+riverctl hide-cursor when-typing enabled
 riverctl border-color-unfocused 0x6272a4
 
 riverctl map normal Mod4 c close
@@ -31,4 +31,4 @@ foot -s &
 
 rivertile -view-padding 1 -outer-padding 1 -main-ratio 0.5 &
 
-swaybg -i ~/.local/share/wallpaper/first-collection/arch.png -m fill -o '*' &
+swaybg -m fill -o '*' -i ~/.local/share/wallpaper/first-collection/arch.png &
