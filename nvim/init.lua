@@ -1,17 +1,17 @@
 vim.o.ls = 0
 vim.o.sw = 4
 
+vim.o.nu = true
+vim.o.et = true
+vim.g.ic = true
+vim.o.scs = true
+
 vim.o.ru = false
+vim.o.sc = false
 vim.o.swf = false
 vim.o.smd = false
 vim.o.hls = false
 vim.o.wrap = false
-
-vim.o.nu = true
-vim.o.et = true
-vim.g.ic = true
-vim.o.sc = true
-vim.o.scs = true
 
 vim.o.sdf = "NONE"
 vim.o.fcs = "eob: "
@@ -19,7 +19,16 @@ vim.o.cb = "unnamedplus"
 
 vim.api.nvim_set_keymap("n", ";", ":", {})
 
+vim.api.nvim_set_keymap("n", "<C-x>", ":x<CR>", {silent = true})
+
 vim.api.nvim_set_keymap("n", "<C-q>", ":q!<CR>", {silent = true})
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    pattern = "*.txt",
+    callback = function()
+        vim.cmd.winc "L"
+    end
+})
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "*",
