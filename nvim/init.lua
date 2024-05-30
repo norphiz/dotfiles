@@ -43,6 +43,12 @@ end
 
 if os.execute "test -d ~/.config/nvim/pack/plugins/start/vim" then
     vim.cmd.colo "dracula"
+    vim.api.nvim_set_hl(0, "Normal", {
+            ctermfg = 253,
+            ctermbg = 236,
+            fg = "#f8f8f2",
+            bg = "NONE"
+    })
 end
 
 if os.execute "test -d ~/.config/nvim/pack/plugins/start/nvim-treesitter" then
