@@ -27,15 +27,21 @@ read -r -p 'Enter the swap partition: ' SWAP
 
 read -r -p 'Enter the root partition: ' ROOT
 
-mkfs.fat -F 32 "$UEFI"
+mkfs.fat -F 32 -n XBOOTLDR "$BOOT"
 
-mkfs.fat -F 32 "$BOOT"
-
-mkswap "$SWAP"
+mkswap -L SWAP "$SWAP"
 
 swapon "$SWAP"
 
 mkfs.ext4 -L ROOT "$ROOT"
+
+read -r -p 'Format the uefi partition? [N/y}: ' FORMAT_ANSWER
+
+case "$FORMAT_ANSWER" in
+    [yY]) mkfs.fat -F 32 -n UEFI "$UEFI" ;;
+    [nN]) true ;;
+    *) true ;;
+esac
 
 clear
 
