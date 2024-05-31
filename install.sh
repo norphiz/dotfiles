@@ -35,7 +35,7 @@ swapon "$SWAP"
 
 mkfs.ext4 -L ROOT "$ROOT"
 
-read -r -p 'Format the uefi partition? [N/y}: ' FORMAT_ANSWER
+read -r -p 'Format the uefi partition? [N/y]: ' FORMAT_ANSWER
 
 case "$FORMAT_ANSWER" in
     [yY]) mkfs.fat -F 32 -n UEFI "$UEFI" ;;
