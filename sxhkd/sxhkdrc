@@ -18,7 +18,7 @@ mod4 + {a, Return}
 mod4 + space
     pkill -USR1 -x sxhkd
 
-mod4 + {c, shift + q, r}
+mod4 + {c, shift + q, shift + r}
     bspc {node -c, quit, wm -r}
 
 mod4 + f
