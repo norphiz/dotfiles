@@ -3,11 +3,8 @@ zstyle ':completion:*' menu select=1
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
-stty stop undef
 bindkey -e
-unsetopt PROMPT_SP
-PS1='%B%F{blue}%~%b%f $ '
-ZLE_REMOVE_SUFFIX_CHARS=''
+PS1='%B%F{blue}%1~%b%f $ '
 bindkey '^[[F' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^[[H' beginning-of-line
