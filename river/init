@@ -14,9 +14,9 @@ riverctl default-layout rivertile
 riverctl default-attach-mode below
 riverctl focus-follows-cursor normal
 riverctl xcursor-theme Vanilla-DMZ 16
-riverctl border-color-focused 0xff79c6
+riverctl border-color-focused 0xbd93f9
 riverctl hide-cursor when-typing enabled
-riverctl border-color-unfocused 0x6272a4
+riverctl border-color-unfocused 0x21222c
 
 riverctl map normal Mod4 c close
 riverctl map normal Mod4+Shift q exit
