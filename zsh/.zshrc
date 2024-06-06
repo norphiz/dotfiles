@@ -1,9 +1,9 @@
+bindkey -e
 autoload -U compinit
 zstyle ':completion:*' menu select=1
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
-bindkey -e
 PS1='%B%F{blue}%1~%b%f $ '
 bindkey '^[[F' end-of-line
 bindkey '^[[3~' delete-char
