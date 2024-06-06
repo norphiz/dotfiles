@@ -8,8 +8,8 @@ bspc config normal_border_color "#bd93f9"
 bspc config focused_border_color "#21222c"
 
 xrdb "$XRESOURCES" &
-pidof sxhkd || sxhkd &
-pidof polybar || polybar -r &
+pidof -q sxhkd || sxhkd &
+pidof -q polybar || polybar -r &
 xsetroot -cursor_name left_ptr &
 redshift -PO 3700 > /dev/null 2>&1 &
 feh --bg-scale --no-fehbg /usr/share/backgrounds/archlinux/lone.jpg &
