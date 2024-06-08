@@ -37,11 +37,11 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
-if os.getenv "TERM" ~= "linux" then
+if os.getenv("TERM") ~= "linux" then
     vim.o.tgc = true
 end
 
-if os.execute "test -d ~/.config/nvim/pack/plugins/start/vim" then
+if os.execute("test -d ~/.config/nvim/pack/plugins/start/vim") == 0 then
     vim.cmd.colo "dracula"
     vim.api.nvim_set_hl(0, "Normal", {
             ctermfg = 253,
@@ -51,7 +51,7 @@ if os.execute "test -d ~/.config/nvim/pack/plugins/start/vim" then
     })
 end
 
-if os.execute "test -d ~/.config/nvim/pack/plugins/start/nvim-treesitter" then
+if os.execute("test -d ~/.config/nvim/pack/plugins/start/nvim-treesitter") == 0 then
     require "nvim-treesitter.configs".setup {
         highlight = {
             enable = true
@@ -59,12 +59,12 @@ if os.execute "test -d ~/.config/nvim/pack/plugins/start/nvim-treesitter" then
     }
 end
 
-if os.execute "test -d ~/.config/nvim/pack/plugins/start/mini.nvim" then
-    require "mini.pairs".setup()
-    require "mini.animate".setup()
-    require "mini.hipatterns".setup {
+if os.execute("test -d ~/.config/nvim/pack/plugins/start/mini.nvim") == 0 then
+    require("mini.pairs").setup()
+    require("mini.animate").setup()
+    require("mini.hipatterns").setup {
         highlighters = {
-            hex_color = require "mini.hipatterns".gen_highlighter.hex_color()
+            hex_color = require("mini.hipatterns").gen_highlighter.hex_color()
         }
     }
 end
