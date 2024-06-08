@@ -23,6 +23,7 @@ start-river() {
         case "$ANSWER" in
             [yY]) exec river -no-xwayland -log-level error
                 break ;;
+            [nN]) break;;
         esac
     done
 }
@@ -36,6 +37,7 @@ start-bspwm() {
         case "$ANSWER" in
             [yY]) XAUTHORITY="/tmp/Xauthority" exec startx "$(command -v)" -- -quiet
                 break ;;
+            [nN]) break ;;
         esac
     done
 }
