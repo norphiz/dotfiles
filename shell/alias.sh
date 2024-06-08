@@ -14,7 +14,7 @@ updt-plugins() {
     done
 }
 
-startriver() {
+start-river() {
     clear
     local ANSWER
     read -n 1 -r -p 'Start river? [Y/n]: ' ANSWER
@@ -24,7 +24,7 @@ startriver() {
     esac
 }
 
-startbspwm() {
+start-bspwm() {
     clear
     local ANSWER
     read -n 1 -r -p 'Start bspwm? [Y/n]: ' ANSWER
