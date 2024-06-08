@@ -17,21 +17,27 @@ updt-plugins() {
 start-river() {
     clear
     local ANSWER
-    read -n 1 -r -p 'Start river? [Y/n]: ' ANSWER
-    case "$ANSWER" in
-        [yY]) exec river -no-xwayland -log-level error ;;
-        [nN]) true ;;
-    esac
+    while true
+    do
+        read -n 1 -r -p 'Start river? [N/y]: ' ANSWER
+        case "$ANSWER" in
+            [yY]) exec river -no-xwayland -log-level error
+                break ;;
+        esac
+    done
 }
 
 start-bspwm() {
     clear
     local ANSWER
-    read -n 1 -r -p 'Start bspwm? [Y/n]: ' ANSWER
-    case "$ANSWER" in
-        [yY]) XAUTHORITY="/tmp/Xauthority" exec startx "$(command -v bspwm)" -- -quiet ;;
-        [nN]) true ;;
-    esac
+    while true
+    do
+        read -n 1 -r -p 'Start bspwm? [N/y]: ' ANSWER
+        case "$ANSWER" in
+            [yY]) XAUTHORITY="/tmp/Xauthority" exec startx "$(command -v)" -- -quiet
+                break ;;
+        esac
+    done
 }
 
 alias nv='nvim'
@@ -47,6 +53,7 @@ alias pqe='pacman -Qe'
 alias pqi='pacman -Qi'
 alias pqs='pacman -Qs'
 alias pql='pacman -Qlq'
+alias sdcp='sudo cp -r'
 alias sdls='sudo eza -a'
 alias pqdt='pacman -Qdtq'
 alias inst='sudo pacman -S'
