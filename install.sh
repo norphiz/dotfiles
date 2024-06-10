@@ -40,7 +40,6 @@ read -r -p 'Format the uefi partition? [N/y]: ' FORMAT_ANSWER
 case "$FORMAT_ANSWER" in
     [yY]) mkfs.fat -F 32 -n UEFI "$UEFI" ;;
     [nN]) true ;;
-    *) true ;;
 esac
 
 clear
