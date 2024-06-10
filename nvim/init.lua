@@ -42,7 +42,7 @@ if os.getenv("TERM") ~= "linux" then
 end
 
 if os.execute("test -d ~/.config/nvim/pack/plugins/start/vim") == 0 then
-    vim.cmd.colo "dracula"
+    vim.cmd.colo("dracula")
     vim.api.nvim_set_hl(0, "Normal", {
             ctermfg = 253,
             ctermbg = 236,
@@ -52,7 +52,7 @@ if os.execute("test -d ~/.config/nvim/pack/plugins/start/vim") == 0 then
 end
 
 if os.execute("test -d ~/.config/nvim/pack/plugins/start/nvim-treesitter") == 0 then
-    require "nvim-treesitter.configs".setup {
+    require("nvim-treesitter.configs").setup {
         highlight = {
             enable = true
         }
