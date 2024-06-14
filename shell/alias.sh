@@ -14,34 +14,6 @@ updt-plugins() {
     done
 }
 
-start-river() {
-    clear
-    local ANSWER
-    while true
-    do
-        read -n 1 -r -p 'Start river? [N/y]: ' ANSWER
-        case "$ANSWER" in
-            [yY]) exec river -no-xwayland -log-level error
-                break ;;
-            [nN]) break;;
-        esac
-    done
-}
-
-start-bspwm() {
-    clear
-    local ANSWER
-    while true
-    do
-        read -n 1 -r -p 'Start bspwm? [N/y]: ' ANSWER
-        case "$ANSWER" in
-            [yY]) XAUTHORITY="/tmp/Xauthority" exec startx "$(command -v)" -- -quiet
-                break ;;
-            [nN]) break ;;
-        esac
-    done
-}
-
 alias nv='nvim'
 alias cl='clear'
 alias cp='cp -r'
@@ -49,6 +21,7 @@ alias rm='rm -fr'
 alias ls='eza -a'
 alias cat='bat -pp'
 alias sdnv='sudo -e'
+alias sdmv='sudo mv'
 alias psi='pacman -Si'
 alias pss='pacman -Ss'
 alias pqe='pacman -Qe'
@@ -64,3 +37,5 @@ alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
 alias gc='git clone -q --recursive --depth 1'
 alias grep='batgrep --context=0 --no-separator --paging=never'
+alias start-river='pidof -q river || exec river -no-xwayland -log-level error && clear || clear'
+alias start-bspwm='pidof -q bspwm || XAUTHORITY="$HOME/.local/share/Xauthority" exec startx /usr/bin/bspwm -- -quiet && clear || clear'
