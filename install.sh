@@ -92,8 +92,7 @@ passwd "$UNAME"
 
 locale-gen
 
-if test "$(command -v iwd)"
-then
+if test "$(command -v iwd)"; then
     systemctl -q enable iwd
     mkdir /etc/iwd
     echo '[Network]
