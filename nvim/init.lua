@@ -61,7 +61,6 @@ end
 
 if os.execute("test -d ~/.config/nvim/pack/plugins/start/mini.nvim") == 0 then
     require("mini.pairs").setup()
-    require("mini.animate").setup()
     require("mini.hipatterns").setup {
         highlighters = {
             hex_color = require("mini.hipatterns").gen_highlighter.hex_color()
