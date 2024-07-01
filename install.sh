@@ -35,12 +35,13 @@ swapon "$SWAP"
 
 mkfs.ext4 -L ROOT "$ROOT"
 
-read -r -p 'Format the uefi partition? [N/y]: ' FORMAT_ANSWER
-
-case "$FORMAT_ANSWER" in
-    [yY]) mkfs.fat -F 32 -n UEFI "$UEFI" ;;
-    [nN]) true ;;
-esac
+while true; do
+    read -r -p 'Format the uefi partition? [N/y]: ' FORMAT_ANSWER
+    case "$FORMAT_ANSWER" in
+        [yY]) mkfs.fat -F 32 -n UEFI "$UEFI" && break ;;
+        [nN]) break ;;
+    esac
+done
 
 clear
 
@@ -49,8 +50,6 @@ mount "$ROOT" /mnt
 mount -m "$BOOT" /mnt/boot
 
 mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
-
-reflector -c ',BR' -p https -f 5 --sort rate --save /etc/pacman.d/mirrorlist
 
 printf 'Packages to be installed: %s\n' "${PKG_ARRAY[@]}"
 
@@ -99,11 +98,11 @@ if test "$(command -v iwd)"; then
 NameResolvingService=resolvconf' > /etc/iwd/main.conf
 fi
 
-systemctl -q enable {dhcpcd,systemd-boot-update}
+systemctl -q enable dhcpcd systemd-boot-update
 
 bootctl install
 
-echo 'timeout 0
+echo 'timeout 10
 editor no
 default arch' > /efi/loader/loader.conf
 
@@ -111,17 +110,7 @@ echo 'title Arch Linux
 linux vmlinuz-linux
 initrd intel-ucode.img
 initrd booster-linux.img
-options root=LABEL=ROOT rw quiet loglevel=0' > /boot/loader/entries/arch.conf
-
-git clone -q --depth 1 https://github.com/norphiz/dotfiles.git "/home/$UNAME/.config"
-
-git clone -q --depth 1 https://github.com/dracula/wallpaper.git "/home/$UNAME/.local/share/wallpaper"
-
-git clone -q --depth 1 https://github.com/dracula/vim.git "/home/$UNAME/.config/nvim/pack/plugins/start/vim"
-
-git clone -q --depth 1 https://github.com/echasnovski/mini.nvim.git "/home/$UNAME/.config/nvim/pack/plugins/start/mini.nvim"
-
-git clone -q --depth 1 https://github.com/nvim-treesitter/nvim-treesitter.git "/home/$UNAME/.config/nvim/pack/plugins/start/nvim-treesitter"
+options root=LABEL=ROOT rw quiet' > /boot/loader/entries/arch.conf
 
 echo 'Successfully installed.'
 
