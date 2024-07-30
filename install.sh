@@ -5,6 +5,7 @@ set -eu
 PKG_ARRAY=(
     base
     git
+    glibc-locales
     sudo
     dhcpcd
     booster
@@ -65,8 +66,6 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 read -r -p 'Enter hostname: ' HUNAME
 
-sed 's/#en_US.UTF-8/en_US.UTF-8/' -i /mnt/etc/locale.gen
-
 echo "$HUNAME" > /mnt/etc/hostname
 
 echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
@@ -88,8 +87,6 @@ read -r -p 'Enter your username: ' UNAME
 useradd -mG wheel,audio,video "$UNAME"
 
 passwd "$UNAME"
-
-locale-gen
 
 if test "$(command -v iwd)"; then
     systemctl -q enable iwd
