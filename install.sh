@@ -58,7 +58,7 @@ read -r -p 'Enter extra packages to be installed: ' EXTRA_PKGS
 
 PKG_ARRAY+=("$EXTRA_PKGS")
 
-pacstrap -K /mnt "${PKG_ARRAY[@]}"
+pacstrap -i -K /mnt "${PKG_ARRAY[@]}"
 
 clear
 
