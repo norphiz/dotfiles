@@ -4,7 +4,6 @@ set -eu
 
 PKG_ARRAY=(
     base
-    git
     glibc-locales
     sudo
     dhcpcd
@@ -52,7 +51,7 @@ mount -m "$BOOT" /mnt/boot
 
 mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
-printf 'Packages to be installed: %s\n' "${PKG_ARRAY[@]}"
+echo "Packages to be installed: ${PKG_ARRAY[*]}"
 
 read -r -p 'Enter extra packages to be installed: ' EXTRA_PKGS
 
