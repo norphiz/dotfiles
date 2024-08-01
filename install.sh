@@ -53,9 +53,13 @@ mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
 echo "Packages to be installed: ${PKG_ARRAY[*]}"
 
-read -r -p 'Enter extra packages to be installed: ' EXTRA_PKGS
-
-PKG_ARRAY+=("$EXTRA_PKGS")
+while true; do
+    read -r -p 'Do you want to add extra packages to be installed? [N/y] ' ANSWER
+    case "$ANSWER" in
+        [yY]) read -r -p 'Enter extra packages to be installed: ' EXTRA_PKGS && PKG_ARRAY+=("$EXTRA_PKGS") && break ;;
+        [nN]) break ;;
+    esac
+done
 
 pacstrap -i -K /mnt "${PKG_ARRAY[@]}"
 
