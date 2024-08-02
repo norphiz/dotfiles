@@ -2,116 +2,128 @@
 
 set -eu
 
-PKG_ARRAY=(
-    base
-    glibc-locales
-    sudo
-    dhcpcd
-    booster
-    linux
-    intel-ucode
-    linux-firmware
-)
+main()
+{
+    cfdisk
 
-cfdisk
+    clear
 
-clear
+    lsblk
+    
+    local UEFI BOOT SWAP ROOT ANSWER PACKAGES
 
-lsblk
+    read -r -p 'Enter the uefi partition: ' UEFI
+    
+    read -r -p 'Enter the boot partition: ' BOOT
 
-read -r -p 'Enter the uefi partition: ' UEFI
+    read -r -p 'Enter the swap partition: ' SWAP
 
-read -r -p 'Enter the boot partition: ' BOOT
+    read -r -p 'Enter the root partition: ' ROOT
 
-read -r -p 'Enter the swap partition: ' SWAP
+    mkfs.fat -F 32 -n XBOOTLDR "$BOOT"
 
-read -r -p 'Enter the root partition: ' ROOT
+    mkswap -q -L SWAP "$SWAP"
 
-mkfs.fat -F 32 -n XBOOTLDR "$BOOT"
+    swapon "$SWAP"
 
-mkswap -L SWAP "$SWAP"
+    mkfs.ext4 -q -L ROOT "$ROOT"
 
-swapon "$SWAP"
+    clear
 
-mkfs.ext4 -L ROOT "$ROOT"
+    while true
+    do
+        read -r -p 'Format the uefi partition? [N/y]: ' ANSWER
 
-while true; do
-    read -r -p 'Format the uefi partition? [N/y]: ' FORMAT_ANSWER
-    case "$FORMAT_ANSWER" in
-        [yY]) mkfs.fat -F 32 -n UEFI "$UEFI" && break ;;
-        [nN]) break ;;
-    esac
-done
+        case "$ANSWER" in
+            [yY])
+                mkfs.fat -F 32 -n UEFI "$UEFI"
+                break
+                ;;
+            [nN])
+                break
+                ;;
+        esac
+    done
 
-clear
+    mount "$ROOT" /mnt
 
-mount "$ROOT" /mnt
+    mount -m "$BOOT" /mnt/boot
 
-mount -m "$BOOT" /mnt/boot
+    mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
-mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
+    PACKAGES=(linux-firmware glibc-locales sudo dhcpcd)
 
-echo "Packages to be installed: ${PKG_ARRAY[*]}"
+    read -r -p 'Enter extra packages to be installed: ' -a EXTRA
 
-while true; do
-    read -r -p 'Do you want to add extra packages to be installed? [N/y] ' ANSWER
-    case "$ANSWER" in
-        [yY]) read -r -p 'Enter extra packages to be installed: ' EXTRA_PKGS && PKG_ARRAY+=("$EXTRA_PKGS") && break ;;
-        [nN]) break ;;
-    esac
-done
+    PACKAGES+=("${EXTRA[@]}")
 
-pacstrap -i -K /mnt "${PKG_ARRAY[@]}"
+    pacstrap -i -K base booster linux intel-ucode "${PACKAGES[@]}"
 
-clear
+    genfstab -U /mnt >> /mnt/etc/fstab
 
-genfstab -U /mnt >> /mnt/etc/fstab
+    sed 's/rel/no/' -i /mnt/etc/fstab
 
-read -r -p 'Enter hostname: ' HUNAME
+    local HOSTNAME
 
-echo "$HUNAME" > /mnt/etc/hostname
+    read -r -p 'Enter hostname: ' HOSTNAME
 
-echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
+    echo "$HOSTNAME" > /mnt/etc/hostname
 
-echo 'KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
+    echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 
-echo '%wheel ALL=(ALL:ALL) ALL' > /mnt/etc/sudoers.d/sudoers
+    echo 'KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 
-sed 's/rel/no/' -i /mnt/etc/fstab
+    echo '%wheel ALL=(ALL:ALL) ALL' > /mnt/etc/sudoers.d/sudoers
+    
+    sed -n '85,$p' "$0" > /mnt/chroot.sh
 
-sed -n '/^#chroot/,$p' "$0" > /mnt/chroot.sh
+    arch-chroot /mnt bash chroot.sh
+}
 
-arch-chroot /mnt bash chroot.sh
+main
 
-#chroot
+#!/usr/bin/env bash
 
-read -r -p 'Enter your username: ' UNAME
+set -eu
 
-useradd -mG wheel,audio,video "$UNAME"
+after_chroot()
+{
+    local NAME
 
-passwd "$UNAME"
+    read -r -p 'Enter username' NAME
 
-if test "$(command -v iwd)"; then
-    systemctl -q enable iwd
-    mkdir /etc/iwd
-    echo '[Network]
-NameResolvingService=resolvconf' > /etc/iwd/main.conf
-fi
+    useradd -mG wheel,audio,video "$NAME"
 
-systemctl -q enable dhcpcd systemd-boot-update
+    passwd "$NAME"
 
-bootctl install
+    if test "$(command -v iwd)"
+    then
+        systemctl -q enable iwd
 
-echo 'timeout 10
-editor no
-default arch' > /efi/loader/loader.conf
+        mkdir /etc/iwd
 
-echo 'title Arch Linux
-linux vmlinuz-linux
-initrd intel-ucode.img
-initrd booster-linux.img
-options root=LABEL=ROOT rw quiet' > /boot/loader/entries/arch.conf
+        echo '[Network]' > /etc/iwd/main.conf
+        
+        echo 'NameResolvingService=resolvconf' >> /etc/iwd/main.conf
+    fi
 
-echo 'Successfully installed.'
+    systemctl -q enable dhcpcd systemd-boot-update
 
-rm "$0"
+    bootctl install
+
+    echo 'timeout 0
+    editor no
+    default arch' > /efi/loader/loader.conf
+
+    echo 'title Arch Linux
+    linux vmlinuz-linux
+    initrd intel-ucode.img
+    initrd booster-linux.img
+    options root=LABEL=ROOT rw quiet' > /boot/loader/entries/arch.conf
+
+    echo 'Successfully installed.'
+
+    rm "$0"
+}
+
+after_chroot
