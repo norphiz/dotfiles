@@ -1,19 +1,3 @@
-updt-plugins() {
-    local BASE="$HOME/.config/nvim/pack/plugins/start"
-    local PLUGINS=(
-        "$BASE/vim"
-        "$BASE/mini.nvim"
-        "$BASE/nvim-treesitter"
-        "$HOME/.local/share/wallpaper"
-        "$ZDOTDIR/fast-syntax-highlighting"
-    )
-    local INDEX
-    for INDEX in "${PLUGINS[@]}"
-    do
-        git -C "$INDEX" pull
-    done
-}
-
 alias nv='nvim'
 alias cl='clear'
 alias cp='cp -r'
@@ -36,6 +20,55 @@ alias pscc='sudo pacman -Scc'
 alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
 alias gc='git clone -q --recursive --depth 1'
-alias grep='batgrep --context=0 --no-separator --paging=never'
-alias start-river='pidof -q river || exec river -no-xwayland -log-level error && clear || clear'
-alias start-bspwm='pidof -q bspwm || XAUTHORITY="$HOME/.local/share/Xauthority" exec startx /usr/bin/bspwm -- -quiet && clear || clear'
+alias start-river='pidof -q river && clear || exec river'
+
+updt-plugins()
+{
+    local INDEX PLUGINS BASE="$HOME/.config/nvim/pack/plugins/start"
+
+    PLUGINS=(
+        "$BASE/vim"
+        "$BASE/nvim-autopairs"
+        "$BASE/nvim-treesitter"
+        "$HOME/.local/share/wallpaper"
+        "$ZDOTDIR/fast-syntax-highlighting"
+    )
+
+    for INDEX in "${PLUGINS[@]}"
+    do
+        git -C "$INDEX" pull
+    done
+}
+
+setup-plugins()
+{
+    local GH="https://github.com"
+    
+    local PACK="$HOME/.config/nvim/pack/plugins/start"
+
+    gc "$GH/dracula/vim" "$PACK/vim"
+
+    gc "$GH/echasnovski/mini.nvim" "$PACK/mini.nvim"
+    
+    gc "$GH/nvim-treesitter/nvim-treesitter" \
+        "$PACK/nvim-treesitter"
+
+    gc "$GH/zdharma-continuum/fast-syntax-highlighting" \
+        "$ZDOTDIR/fast-syntax-highlighting"
+    
+    gc "$GH/dracula/wallpaper" "$HOME/.local/share/wallpaper"
+}
+
+start-bspwm()
+{
+    if test "$(pidof bspwm)"
+    then
+        clear
+    else
+        local XAUTHORITY="$HOME/.local/share/Xauthority"
+        
+        exec startx /usr/bin/bspwm -- -quiet
+        
+        clear
+    fi
+}
