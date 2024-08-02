@@ -77,7 +77,7 @@ main()
     
     sed -n '85,$p' "$0" > /mnt/chroot.sh
 
-    arch-chroot /mnt bash chroot.sh
+    arch-chroot /mnt bash /chroot.sh
 }
 
 main
@@ -92,7 +92,7 @@ after_chroot()
 
     read -r -p 'Enter username' NAME
 
-    useradd -mG wheel,audio,video "$NAME"
+    useradd -m -G wheel,audio,video "$NAME"
 
     passwd "$NAME"
 
