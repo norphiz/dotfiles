@@ -10,3 +10,4 @@ bindkey "^[[3~" delete-char
 bindkey "^[[H" beginning-of-line
 source "$HOME/.config/shell/env.sh"
 source "$HOME/.config/shell/alias.sh"
+source "$ZDOTDIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
