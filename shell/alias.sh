@@ -28,7 +28,7 @@ updt-plugins()
 
     PLUGINS=(
         "$BASE/vim"
-        "$BASE/nvim-autopairs"
+        "$BASE/mini.nvim"
         "$BASE/nvim-treesitter"
         "$HOME/.local/share/wallpaper"
         "$ZDOTDIR/fast-syntax-highlighting"
