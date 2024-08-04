@@ -26,7 +26,7 @@ vim.api.nvim_set_keymap("n", "<C-q>", ":q!<CR>", {silent = true})
 vim.api.nvim_create_autocmd("BufWinEnter", {
     pattern = "*.txt",
     callback = function()
-        vim.cmd.winc "L"
+        vim.cmd.winc("L")
     end
 })
 
@@ -52,18 +52,13 @@ if os.execute("test -d ~/.config/nvim/pack/plugins/start/vim") == 0 then
 end
 
 if os.execute("test -d ~/.config/nvim/pack/plugins/start/nvim-treesitter") == 0 then
-    require("nvim-treesitter.configs").setup {
+    require("nvim-treesitter.configs").setup({
         highlight = {
             enable = true
         }
-    }
+    })
 end
 
-if os.execute("test -d ~/.config/nvim/pack/plugins/start/mini.nvim") == 0 then
-    require("mini.pairs").setup()
-    require("mini.hipatterns").setup {
-        highlighters = {
-            hex_color = require("mini.hipatterns").gen_highlighter.hex_color()
-        }
-    }
+if os.execute("test -d ~/.config/nvim/pack/plugins/start/nvim-autopairs") == 0 then
+    require("nvim-autopairs").setup()
 end
