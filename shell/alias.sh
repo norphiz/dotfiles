@@ -28,7 +28,7 @@ updt-plugins()
 
     PLUGINS=(
         "$BASE/vim"
-        "$BASE/mini.nvim"
+        "$BASE/nvim-autopairs"
         "$BASE/nvim-treesitter"
         "$HOME/.local/share/wallpaper"
         "$ZDOTDIR/fast-syntax-highlighting"
@@ -47,11 +47,11 @@ setup-plugins()
     local PACK="$HOME/.config/nvim/pack/plugins/start"
 
     gc "$GH/dracula/vim" "$PACK/vim"
-
-    gc "$GH/echasnovski/mini.nvim" "$PACK/mini.nvim"
     
     gc "$GH/nvim-treesitter/nvim-treesitter" \
         "$PACK/nvim-treesitter"
+
+    gc "$GH/windwp/nvim-autopairs" "$PACK/nvim-autopairs"
 
     gc "$GH/zdharma-continuum/fast-syntax-highlighting" \
         "$ZDOTDIR/fast-syntax-highlighting"
