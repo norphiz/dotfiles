@@ -68,7 +68,5 @@ start-bspwm()
         local XAUTHORITY="$HOME/.local/share/Xauthority"
         
         exec startx /usr/bin/bspwm -- -quiet
-        
-        clear
     fi
 }
