@@ -78,7 +78,7 @@ main()
 
     echo '%wheel ALL=(ALL:ALL) ALL' > /mnt/etc/sudoers.d/sudoers
     
-    sed -n '85,$p' "$0" > /mnt/chroot.sh
+    sed -n '88,$p' "$0" > /mnt/chroot.sh
 
     arch-chroot /mnt bash /chroot.sh
 }
