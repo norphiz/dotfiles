@@ -56,8 +56,6 @@ main()
 
     PACKAGES=(linux-firmware glibc-locales sudo dhcpcd)
 
-    echo "Packages to be installed: ${PACKAGES[*]}"
-
     read -r -p 'Enter extra packages to be installed: ' -a EXTRA
 
     PACKAGES+=("${EXTRA[@]}")
