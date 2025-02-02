@@ -20,7 +20,7 @@ main()
 
     read -r -p 'Enter the root partition: ' ROOT
 
-    mkfs.fat -F 32 -n XBOOTLDR "$BOOT"
+    mkfs.ext4 -L XBOOTLDR "$BOOT"
 
     mkswap -q -L SWAP "$SWAP"
 
@@ -60,7 +60,7 @@ main()
 
     PACKAGES+=("${EXTRA[@]}")
 
-    pacstrap -i -K base booster linux intel-ucode "${PACKAGES[@]}"
+    pacstrap -i -K /mnt base booster linux intel-ucode "${PACKAGES[@]}"
 
     genfstab -U /mnt >> /mnt/etc/fstab
 
