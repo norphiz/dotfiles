@@ -2,8 +2,7 @@
 
 set -eu
 
-main()
-{
+main() {
     cfdisk
 
     clear
@@ -20,7 +19,7 @@ main()
 
     read -r -p 'Enter the root partition: ' ROOT
 
-    mkfs.ext4 -L XBOOTLDR "$BOOT"
+    mkfs.fat -F 32 -n BOOT "$BOOT"
 
     mkswap -q -L SWAP "$SWAP"
 
@@ -54,13 +53,20 @@ main()
 
     mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
-    PACKAGES=(linux-firmware glibc-locales sudo dhcpcd)
+    PACKAGES=(terminus-font glibc-locales sudo dhcpcd linux-firmware)
+
+    echo "Packages to be installed: ${PACKAGES[*]}"
 
     read -r -p 'Enter extra packages to be installed: ' -a EXTRA
 
     PACKAGES+=("${EXTRA[@]}")
 
     pacstrap -i -K /mnt base booster linux intel-ucode "${PACKAGES[@]}"
+    
+    mkdir /mnt/etc/iwd
+
+    echo '[Network]
+    NameResolvingService=resolvconf' >> /mnt/etc/iwd/main.conf
 
     genfstab -U /mnt >> /mnt/etc/fstab
 
@@ -74,13 +80,25 @@ main()
 
     echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 
-    echo 'KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
+    echo 'FONT=ter-128b
+    KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 
     echo '%wheel ALL=(ALL:ALL) ALL' > /mnt/etc/sudoers.d/sudoers
     
-    sed -n '88,$p' "$0" > /mnt/chroot.sh
+    bootctl -q --esp-path=/mnt/efi --boot-path=/mnt/boot install
 
-    arch-chroot /mnt bash /chroot.sh
+    echo 'editor no
+    timeout 10' > /mnt/efi/loader/loader.conf
+
+    echo 'title Arch Linux
+    linux vmlinuz-linux
+    initrd intel-ucode.img
+    initrd booster-linux.img
+    options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
+    
+    sed -n '106,$p' "$0" > /mnt/tmp/chroot.sh
+
+    arch-chroot /mnt bash /tmp/chroot.sh
 }
 
 main
@@ -89,8 +107,8 @@ main
 
 set -eu
 
-after_chroot()
-{
+after_chroot() {
+
     local NAME
 
     read -r -p 'Enter username' NAME
@@ -99,34 +117,9 @@ after_chroot()
 
     passwd "$NAME"
 
-    if test "$(command -v iwd)"
-    then
-        systemctl -q enable iwd
-
-        mkdir /etc/iwd
-
-        echo '[Network]' > /etc/iwd/main.conf
-        
-        echo 'NameResolvingService=resolvconf' >> /etc/iwd/main.conf
-    fi
-
-    systemctl -q enable dhcpcd systemd-boot-update
-
-    bootctl install
-
-    echo 'timeout 0
-    editor no
-    default arch' > /efi/loader/loader.conf
-
-    echo 'title Arch Linux
-    linux vmlinuz-linux
-    initrd intel-ucode.img
-    initrd booster-linux.img
-    options root=LABEL=ROOT rw quiet' > /boot/loader/entries/arch.conf
+    systemctl -q enable iwd dhcpcd systemd-boot-update
 
     echo 'Successfully installed.'
-
-    rm "$0"
 }
 
 after_chroot
