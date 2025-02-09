@@ -1,14 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -eu
 
 main() {
 
-    cfdisk
-
-    clear
-
-    lsblk
+    lsblk -f
     
     local UEFI BOOT SWAP ROOT ANSWER PACKAGES
 
@@ -20,9 +16,7 @@ main() {
 
     read -r -p 'Enter the root partition: ' ROOT
 
-    mkfs.fat -F 32 -n BOOT "$BOOT"
-
-    clear
+    mkfs.fat -F 32 -n BOOT "$BOOT" > /dev/null
 
     mkswap -q -L SWAP "$SWAP"
 
@@ -37,8 +31,6 @@ main() {
         case "$ANSWER" in
             [yY])
                 mkfs.fat -F 32 -n UEFI "$UEFI"
-
-                clear
                 
                 break
                 
@@ -52,29 +44,21 @@ main() {
 
     mount "$ROOT" /mnt
 
+    pactrap -G -K -M /mnt base > /dev/null
+
     mount -m "$BOOT" /mnt/boot
 
     mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
-    PACKAGES=(terminus-font glibc-locales sudo dhcpcd linux-firmware)
-
-    echo "Packages to be installed: ${PACKAGES[*]}"
-
-    read -r -p 'Enter extra packages to be installed: ' -a EXTRA
-
-    PACKAGES+=("${EXTRA[@]}")
-
-    pacstrap -K /mnt base booster linux intel-ucode "${PACKAGES[@]}"
-    
     genfstab -U /mnt >> /mnt/etc/fstab
 
     sed 's/rel/no/' -i /mnt/etc/fstab
 
-    local HOSTNAME
+    read -r -p 'Enter hostname: ' ANSWER
 
-    read -r -p 'Enter hostname: ' HOSTNAME
+    clear
 
-    echo "$HOSTNAME" > /mnt/etc/hostname
+    echo "$ANSWER" > /mnt/etc/hostname
 
     echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 
@@ -94,26 +78,42 @@ main() {
     initrd booster-linux.img
     options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
     
-    sed -n '102,$p' "$0" > /mnt/tmp/chroot.sh
+    sed -n '88,$p' "$0" > /mnt/chroot.sh
 
-    arch-chroot /mnt bash /tmp/chroot.sh
+    arch-chroot /mnt bash chroot.sh
 }
 
 main
 
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -eu
 
 after_chroot() {
+    
+    local PACKAGES NAME
 
-    local NAME
+    PACKAGES=(terminus-font glibc-locales sudo dhcpcd linux-firmware)
 
-    read -r -p 'Enter username' NAME
+    echo "Packages to be installed: ${PACKAGES[*]}"
+
+    read -r -p 'Enter extra packages to be installed: ' -a EXTRA
+
+    clear
+
+    PACKAGES+=("${EXTRA[@]}")
+
+    pacman -S --noconfirm booster linux intel-ucode "${PACKAGES[@]}"
+
+    read -r -p 'Enter username: ' NAME
+
+    clear
 
     useradd -m -G wheel,audio,video "$NAME"
 
     passwd "$NAME"
+
+    clear
 
     if test "$(command -v iwctl)"
     then
@@ -128,6 +128,8 @@ after_chroot() {
     systemctl -q enable dhcpcd systemd-boot-update
 
     echo 'Successfully installed.'
+
+    rm "$0"
 }
 
 after_chroot
