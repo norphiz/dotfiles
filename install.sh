@@ -62,7 +62,7 @@ main() {
 
     PACKAGES+=("${EXTRA[@]}")
 
-    pacstrap -i -K /mnt base booster linux intel-ucode "${PACKAGES[@]}"
+    pacstrap -K /mnt base booster linux intel-ucode "${PACKAGES[@]}"
     
     genfstab -U /mnt >> /mnt/etc/fstab
 
