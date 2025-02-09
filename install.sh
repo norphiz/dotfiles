@@ -3,6 +3,7 @@
 set -eu
 
 main() {
+
     cfdisk
 
     clear
@@ -21,13 +22,13 @@ main() {
 
     mkfs.fat -F 32 -n BOOT "$BOOT"
 
+    clear
+
     mkswap -q -L SWAP "$SWAP"
 
     swapon "$SWAP"
 
     mkfs.ext4 -q -L ROOT "$ROOT"
-
-    clear
 
     while true
     do
@@ -63,11 +64,6 @@ main() {
 
     pacstrap -i -K /mnt base booster linux intel-ucode "${PACKAGES[@]}"
     
-    mkdir /mnt/etc/iwd
-
-    echo '[Network]
-    NameResolvingService=resolvconf' >> /mnt/etc/iwd/main.conf
-
     genfstab -U /mnt >> /mnt/etc/fstab
 
     sed 's/rel/no/' -i /mnt/etc/fstab
@@ -96,7 +92,7 @@ main() {
     initrd booster-linux.img
     options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
     
-    sed -n '106,$p' "$0" > /mnt/tmp/chroot.sh
+    sed -n '102,$p' "$0" > /mnt/tmp/chroot.sh
 
     arch-chroot /mnt bash /tmp/chroot.sh
 }
@@ -117,7 +113,17 @@ after_chroot() {
 
     passwd "$NAME"
 
-    systemctl -q enable iwd dhcpcd systemd-boot-update
+    if test "$(command -v iwctl)"
+    then
+        mkdir /etc/iwd
+
+        echo '[Network]
+        NameResolvingService=resolvconf' >> /etc/iwd/main.conf
+
+        systemctl -q enable iwd
+    fi
+
+    systemctl -q enable dhcpcd systemd-boot-update
 
     echo 'Successfully installed.'
 }
