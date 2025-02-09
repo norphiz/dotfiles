@@ -129,3 +129,5 @@ after_chroot() {
 }
 
 after_chroot
+
+exit
