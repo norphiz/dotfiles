@@ -37,6 +37,8 @@ main() {
         case "$ANSWER" in
             [yY])
                 mkfs.fat -F 32 -n UEFI "$UEFI"
+
+                clear
                 
                 break
                 
