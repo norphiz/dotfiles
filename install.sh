@@ -103,6 +103,8 @@ after_chroot()
 
     pacman -S --noconfirm booster linux intel-ucode "${PACKAGES[@]}"
 
+    clear
+
     read -r -p 'Enter username: ' NAME
 
     clear
