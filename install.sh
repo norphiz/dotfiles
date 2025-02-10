@@ -2,8 +2,8 @@
 
 set -eu
 
-main() {
-
+main()
+{
     lsblk -f
     
     local UEFI BOOT SWAP ROOT ANSWER PACKAGES
@@ -89,8 +89,8 @@ main
 
 set -eu
 
-after_chroot() {
-    
+after_chroot()
+{   
     local PACKAGES NAME
 
     PACKAGES=(terminus-font glibc-locales sudo dhcpcd linux-firmware)
