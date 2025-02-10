@@ -76,7 +76,7 @@ main()
     initrd booster-linux.img
     options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
     
-    sed -n '88,$p' "$0" > /mnt/chroot.sh
+    sed -n '86,$p' "$0" > /mnt/chroot.sh
 
     arch-chroot /mnt bash chroot.sh
 }
