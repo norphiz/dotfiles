@@ -51,14 +51,6 @@ if os.execute("test -d ~/.config/nvim/pack/plugins/start/vim") == 0 then
     })
 end
 
-if os.execute("test -d ~/.config/nvim/pack/plugins/start/nvim-treesitter") == 0 then
-    require("nvim-treesitter.configs").setup({
-        highlight = {
-            enable = true
-        }
-    })
-end
-
 if os.execute("test -d ~/.config/nvim/pack/plugins/start/nvim-autopairs") == 0 then
     require("nvim-autopairs").setup()
 end
