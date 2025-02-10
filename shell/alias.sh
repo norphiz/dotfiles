@@ -44,9 +44,6 @@ setup-plugins()
         PACK="$HOME/.config/nvim/pack/plugins/start"
 
     gc "$GH/dracula/vim" "$PACK/vim"
-    
-    gc "$GH/nvim-treesitter/nvim-treesitter" \
-        "$PACK/nvim-treesitter"
 
     gc "$GH/windwp/nvim-autopairs" "$PACK/nvim-autopairs"
 
