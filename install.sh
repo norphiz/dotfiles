@@ -31,6 +31,8 @@ main()
         case "$ANSWER" in
             [yY])
                 mkfs.fat -F 32 -n UEFI "$UEFI" > /dev/null
+
+                break
                 
                 ;;
             [nN])
@@ -42,7 +44,7 @@ main()
 
     mount "$ROOT" /mnt
 
-    pactrap -G -K -M /mnt base > /dev/null
+    pacstrap -G -K -M /mnt base > /dev/null
 
     mount -m "$BOOT" /mnt/boot
 
