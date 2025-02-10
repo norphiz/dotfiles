@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 for INDEX in {1..9}
 do
@@ -8,8 +8,6 @@ do
 done
 
 riverctl border-width 1
-riverctl keyboard-layout br
-riverctl mouse pointer-accel flat
 riverctl default-layout rivertile
 riverctl default-attach-mode below
 riverctl focus-follows-cursor normal
@@ -17,15 +15,31 @@ riverctl xcursor-theme Vanilla-DMZ 16
 riverctl border-color-focused 0xbd93f9
 riverctl hide-cursor when-typing enabled
 riverctl border-color-unfocused 0x21222c
+riverctl keyboard-layout -options 'grp:win_space_toggle' 'br,us'
+
+riverctl rule-add -app-id 'firefox' ssd
+
+riverctl map-pointer normal Mod4 BTN_LEFT move-view
+riverctl map-pointer normal Mod4 BTN_RIGHT resize-view
 
 riverctl map normal Mod4 c close
 riverctl map normal Mod4+Shift q exit
 riverctl map normal Mod4 Return spawn foot
-riverctl map normal Mod4 right focus-view next
-riverctl map normal Mod4+Shift right swap next
-riverctl map normal Mod4 left focus-view previous
-riverctl map normal Mod4+Shift left swap previous
+riverctl map normal Mod4 Right focus-view next
+riverctl map normal Mod4+Shift Right swap next
+riverctl map normal Mod4 Left focus-view previous
+riverctl map normal Mod4+Shift Left swap previous
 riverctl map normal Mod4+Shift f toggle-fullscreen
+riverctl map normal None XF86HomePage spawn firefox
+riverctl map normal Mod4+Shift r spawn 'bash ~/.config/river/init'
+riverctl map normal None XF86AudioMute spawn 'amixer set Master toggle'
+riverctl map normal None XF86AudioRaiseVolume spawn 'amixer set Master 10%+'
+riverctl map normal None XF86AudioLowerVolume spawn 'amixer set Master 10%-'
 
+riverctl spawn 'gsettings set org.gnome.desktop.interface gtk-theme gtk'
 riverctl spawn 'rivertile -view-padding 1 -outer-padding 1 -main-ratio 0.5'
+riverctl spawn 'gsettings set org.gnome.desktop.interface font-name Sans 11'
 riverctl spawn 'swaybg -i ~/.local/share/wallpaper/first-collection/arch.png'
+riverctl spawn 'gsettings set org.gnome.desktop.interface cursor-theme Vanilla-DMZ'
+
+riverctl input pointer-4292-33032-YSPRINGTECH_USB_OPTICAL_MOUSE accel-profile flat
