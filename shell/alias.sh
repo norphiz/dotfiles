@@ -19,20 +19,18 @@ alias inst='sudo pacman -S'
 alias pscc='sudo pacman -Scc'
 alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
-alias gc='git clone -q --recursive --depth 1'
-alias start-river='pidof -q river && clear || exec river'
+alias gc='git clone -q --depth 1'
+alias start-river='pidof -q river && clear || exec river -no-xwayland'
 
 updt-plugins()
 {
-    local INDEX PLUGINS BASE="$HOME/.config/nvim/pack/plugins/start"
-
-    PLUGINS=(
-        "$BASE/vim"
-        "$BASE/nvim-autopairs"
-        "$BASE/nvim-treesitter"
-        "$HOME/.local/share/wallpaper"
-        "$ZDOTDIR/fast-syntax-highlighting"
-    )
+    local INDEX BASE="$HOME/.config/nvim/pack/plugins/start" \
+        PLUGINS=(
+            "$BASE/vim"
+            "$BASE/nvim-autopairs"
+            "$HOME/.local/share/wallpaper"
+            "$ZDOTDIR/fast-syntax-highlighting"
+        )
 
     for INDEX in "${PLUGINS[@]}"
     do
@@ -42,9 +40,8 @@ updt-plugins()
 
 setup-plugins()
 {
-    local GH="https://github.com"
-    
-    local PACK="$HOME/.config/nvim/pack/plugins/start"
+    local GH="https://github.com" \
+        PACK="$HOME/.config/nvim/pack/plugins/start"
 
     gc "$GH/dracula/vim" "$PACK/vim"
     
@@ -57,16 +54,4 @@ setup-plugins()
         "$ZDOTDIR/fast-syntax-highlighting"
     
     gc "$GH/dracula/wallpaper" "$HOME/.local/share/wallpaper"
-}
-
-start-bspwm()
-{
-    if test "$(pidof bspwm)"
-    then
-        clear
-    else
-        local XAUTHORITY="$HOME/.local/share/Xauthority"
-        
-        exec startx /usr/bin/bspwm -- -quiet
-    fi
 }
