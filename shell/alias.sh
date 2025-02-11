@@ -24,13 +24,14 @@ alias start-river='pidof -q river && clear || exec river -no-xwayland'
 
 updt-plugins()
 {
-    local INDEX BASE="$HOME/.config/nvim/pack/plugins/start" \
-        PLUGINS=(
-            "$BASE/vim"
-            "$BASE/nvim-autopairs"
-            "$HOME/.local/share/wallpaper"
-            "$ZDOTDIR/fast-syntax-highlighting"
-        )
+    local INDEX PLUGINS BASE="$HOME/.config/nvim/pack/plugins/start"
+    
+    PLUGINS=(
+        "$BASE/vim"
+        "$BASE/nvim-autopairs"
+        "$HOME/.local/share/wallpaper"
+        "$ZDOTDIR/fast-syntax-highlighting"
+    )
 
     for INDEX in "${PLUGINS[@]}"
     do
@@ -44,7 +45,7 @@ setup-plugins()
         PACK="$HOME/.config/nvim/pack/plugins/start"
 
     gc "$GH/dracula/vim" "$PACK/vim"
-
+    
     gc "$GH/windwp/nvim-autopairs" "$PACK/nvim-autopairs"
 
     gc "$GH/zdharma-continuum/fast-syntax-highlighting" \
