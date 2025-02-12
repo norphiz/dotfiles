@@ -6,7 +6,7 @@ main()
 {
     lsblk -f
     
-    local UEFI BOOT SWAP ROOT ANSWER PACKAGES
+    local UEFI BOOT SWAP ROOT ANSWER
 
     read -r -p 'Enter the uefi partition: ' UEFI
     
@@ -78,7 +78,7 @@ main()
     initrd booster-linux.img
     options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
     
-    sed -n '86,$p' "$0" > /mnt/chroot.sh
+    sed -n '88,$p' "$0" > /mnt/chroot.sh
 
     arch-chroot /mnt bash chroot.sh
 }
@@ -91,9 +91,17 @@ set -eu
 
 after_chroot()
 {   
-    local PACKAGES NAME
+    local PACKAGES NAME EXTRA
 
-    PACKAGES=(terminus-font glibc-locales sudo dhcpcd linux-firmware)
+    PACKAGES=(
+        sudo
+        linux
+        dhcpcd
+        booster
+        intel-ucode
+        glibc-locales
+        linux-firmware
+    )
 
     echo "Packages to be installed: ${PACKAGES[*]}"
 
@@ -103,7 +111,7 @@ after_chroot()
 
     PACKAGES+=("${EXTRA[@]}")
 
-    pacman -S --noconfirm booster linux intel-ucode "${PACKAGES[@]}"
+    pacman -S --noconfirm "${PACKAGES[@]}"
 
     clear
 
