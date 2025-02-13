@@ -50,7 +50,7 @@ main()
 
     mount "$ROOT" /mnt
 
-    pacstrap -G -K -M /mnt base > /dev/null 2>&1
+    pacstrap -K /mnt base > /dev/null 2>&1
 
     mount -m "$BOOT" /mnt/boot
 
@@ -115,11 +115,9 @@ after_chroot()
 
     PACKAGES+=("${EXTRA[@]}")
 
-    pacman -S --noconfirm "${PACKAGES[@]}"
+    pacman -S --noconfirm "${PACKAGES[@]}" > /dev/null
 
-    clear
-    
-    echo '%wheel ALL=(ALL:ALL) ALL' > /mnt/etc/sudoers.d/sudoers
+    echo '%wheel ALL=(ALL:ALL) ALL' > /etc/sudoers.d/sudoers
     
     read -r -p 'Enter username: ' NAME
 
@@ -142,8 +140,6 @@ after_chroot()
     fi
 
     systemctl -q enable dhcpcd systemd-boot-update
-
-    echo 'Successfully installed.'
 
     rm "$0"
 }
