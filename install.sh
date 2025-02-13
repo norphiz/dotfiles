@@ -16,6 +16,8 @@ main()
 
     read -r -p 'Enter the root partition: ' ROOT
 
+    clear
+
     mkfs.fat -F 32 -n BOOT "$BOOT" > /dev/null
 
     mkswap -q -L SWAP "$SWAP"
@@ -31,11 +33,15 @@ main()
         case "$ANSWER" in
             [yY])
                 mkfs.fat -F 32 -n UEFI "$UEFI" > /dev/null
+                
+                clear
 
                 break
                 
                 ;;
             [nN])
+                clear
+
                 break
                 
                 ;;
@@ -44,7 +50,7 @@ main()
 
     mount "$ROOT" /mnt
 
-    pacstrap -G -K -M /mnt base > /dev/null
+    pacstrap -G -K -M /mnt base > /dev/null 2>&1
 
     mount -m "$BOOT" /mnt/boot
 
@@ -65,8 +71,6 @@ main()
     echo 'FONT=ter-128b
     KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 
-    echo '%wheel ALL=(ALL:ALL) ALL' > /mnt/etc/sudoers.d/sudoers
-    
     bootctl -q --esp-path=/mnt/efi --boot-path=/mnt/boot install
 
     echo 'editor no
@@ -114,7 +118,9 @@ after_chroot()
     pacman -S --noconfirm "${PACKAGES[@]}"
 
     clear
-
+    
+    echo '%wheel ALL=(ALL:ALL) ALL' > /mnt/etc/sudoers.d/sudoers
+    
     read -r -p 'Enter username: ' NAME
 
     clear
