@@ -142,8 +142,8 @@ after_chroot()
     systemctl -q enable dhcpcd systemd-boot-update
 
     rm "$0"
+
+    exit
 }
 
 after_chroot
-
-exit
