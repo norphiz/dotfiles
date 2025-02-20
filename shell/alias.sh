@@ -53,3 +53,32 @@ setup-plugins()
     
     gc "$GH/nordtheme/dircolors" "$HOME/.local/share/dircolors"
 }
+
+setup-stuff()
+{
+    local STUFF
+
+    STUFF=(
+        git
+        eza
+        bat
+        foot
+        wofi
+        labwc
+        neovim
+        man-db
+        swaybg
+        firefox
+        man-pages
+        wl-clipboard
+        arc-gtk-theme
+        arc-icon-theme
+        zsh-completions
+        bash-completions
+        archlinux-wallpaper
+        xcursor-vanilla-dmz
+        firefox-ublock-origin
+    )
+
+    sudo pacman -S --needed "${STUFF[@]}"
+}
