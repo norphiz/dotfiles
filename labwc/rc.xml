@@ -5,12 +5,14 @@
         <font place="" size="12.5"/>
     </theme>
     <keyboard numlock="off">
-        <default/>
         <keybind key="W-S-q">
             <action name="Exit"/>
         </keybind>
         <keybind key="W-c">
             <action name="Close"/>
+        </keybind>
+        <keybind key="A-Tab">
+            <action name="NextWindow"/>
         </keybind>
         <keybind key="W-S-r">
             <action name="Reconfigure"/>
@@ -42,8 +44,26 @@
         <keybind key="XF86_HomePage">
             <action name="Execute" command="firefox"/>
         </keybind>
+        <keybind key="W-Left">
+            <action name="SnapToEdge" direction="left"/>
+        </keybind>
+        <keybind key="W-Down">
+            <action name="SnapToEdge" direction="down"/>
+        </keybind>
+        <keybind key="W-Right">
+            <action name="SnapToEdge" direction="right"/>
+        </keybind>
         <keybind key="W-l">
             <action name="Execute" command="wofi -S drun"/>
+        </keybind>
+        <keybind key="XF86_AudioLowerVolume">
+            <action name="Execute" command="amixer sset Master 5%-"/>
+        </keybind>
+        <keybind key="XF86_AudioRaiseVolume">
+            <action name="Execute" command="amixer sset Master 5%+"/>
+        </keybind>
+        <keybind key="XF86_AudioMute">
+            <action name="Execute" command="amixer sset Master toggle"/>
         </keybind>
     </keyboard>
     <windowRules>
