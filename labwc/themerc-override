@@ -1,0 +1,20 @@
+## Inactive Menu
+menu.border.color:                              #81a1c1
+menu.items.bg.color:                            #2e3440
+menu.items.text.color:                          #d8dee9
+
+## Active Menu
+menu.items.active.bg.color:                     #81a1c1
+menu.items.active.text.color:                   #2e3440
+
+## Active Window
+window.active.border.color:                     #81a1c1
+window.active.title.bg.color:                   #81a1c1
+window.active.label.text.color:                 #2e3440
+window.active.button.unpressed.image.color:     #2e3440
+
+## Inactive Window
+window.inactive.border.color:                   #3b4252
+window.inactive.title.bg.color:                 #3b4252
+window.inactive.label.text.color:               #d8dee9
+window.inactive.button.unpressed.image.color:   #d8dee9
