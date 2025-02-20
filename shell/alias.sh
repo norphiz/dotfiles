@@ -20,7 +20,7 @@ alias pscc='sudo pacman -Scc'
 alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
 alias gc='git clone -q --depth 1'
-alias start-river='pidof -q river && clear || exec river -no-xwayland'
+alias start-labwc='pidof -q labwc && clear || exec labwc'
 
 updt-plugins()
 {
@@ -29,7 +29,7 @@ updt-plugins()
     PLUGINS=(
         "$BASE/vim"
         "$BASE/nvim-autopairs"
-        "$HOME/.local/share/wallpaper"
+        "$HOME/.local/share/dircolors"
         "$ZDOTDIR/fast-syntax-highlighting"
     )
 
@@ -44,12 +44,12 @@ setup-plugins()
     local GH="https://github.com" \
         PACK="$HOME/.config/nvim/pack/plugins/start"
 
-    gc "$GH/dracula/vim" "$PACK/vim"
-    
+    gc "$GH/nordtheme/vim" "$PACK/vim"
+
     gc "$GH/windwp/nvim-autopairs" "$PACK/nvim-autopairs"
 
     gc "$GH/zdharma-continuum/fast-syntax-highlighting" \
         "$ZDOTDIR/fast-syntax-highlighting"
     
-    gc "$GH/dracula/wallpaper" "$HOME/.local/share/wallpaper"
+    gc "$GH/nordtheme/dircolors" "$HOME/.local/share/dircolors"
 }
