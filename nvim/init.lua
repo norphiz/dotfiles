@@ -42,15 +42,10 @@ if os.getenv("TERM") ~= "linux" then
 end
 
 if os.execute("test -d ~/.config/nvim/pack/plugins/start/vim") == 0 then
-    vim.cmd.colo("dracula")
-    vim.api.nvim_set_hl(0, "Normal", {
-            ctermfg = 253,
-            ctermbg = 236,
-            fg = "#f8f8f2",
-            bg = "NONE"
-    })
+    vim.cmd.colo("nord")
+    vim.api.nvim_set_hl(0, "Normal", { fg = "#d8dee9", bg = "NONE" })
 end
 
 if os.execute("test -d ~/.config/nvim/pack/plugins/start/nvim-autopairs") == 0 then
     require("nvim-autopairs").setup()
-end
+end 
