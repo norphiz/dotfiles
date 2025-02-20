@@ -38,6 +38,9 @@
         <keybind key="W-5">
             <action name="GoToDesktop" to="5"/>
         </keybind>
+        <keybind key="W-l">
+            <action name="Execute" command="wofi"/>
+        </keybind>
         <keybind key="W-Return">
             <action name="Execute" command="foot -m"/>
         </keybind>
@@ -52,9 +55,6 @@
         </keybind>
         <keybind key="W-Right">
             <action name="SnapToEdge" direction="right"/>
-        </keybind>
-        <keybind key="W-l">
-            <action name="Execute" command="wofi -S drun"/>
         </keybind>
         <keybind key="XF86_AudioLowerVolume">
             <action name="Execute" command="amixer sset Master 5%-"/>
