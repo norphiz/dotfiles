@@ -1,0 +1,6 @@
+show=drun
+prompt=Search
+insensitive=true
+allow_images=true
+cache_file=/dev/null
+sort_order=alphabetical
