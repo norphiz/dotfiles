@@ -70,6 +70,7 @@ setup-stuff()
         swaybg
         firefox
         man-pages
+        gammastep
         wl-clipboard
         arc-gtk-theme
         arc-icon-theme
