@@ -20,7 +20,7 @@ alias pscc='sudo pacman -Scc'
 alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
 alias gc='git clone -q --depth 1'
-alias start-labwc='pidof -q labwc && clear || exec labwc'
+alias start-labwc='pidof -q labwc && clear || exec labwc > /tmp/labwc.log 2>&1'
 
 updt-plugins()
 {
