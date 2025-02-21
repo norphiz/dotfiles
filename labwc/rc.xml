@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <labwc_config>
     <desktops number="5"/>
-    <theme cornerRadius="0" dropShadows="on">
-        <font size="12.5"/>
-    </theme>
+    <theme dropShadows="yes" cornerRadius="0"/>
+    <windowRules>
+        <windowRule identifier="firefox" serverDecoration="yes">
+            <action name="Maximize"/>
+        </windowRule>
+    </windowRules>
     <keyboard numlock="off">
         <keybind key="W-S-q">
             <action name="Exit"/>
@@ -72,18 +75,13 @@
             <action name="SnapToEdge" direction="right"/>
         </keybind>
         <keybind key="XF86_AudioLowerVolume">
-            <action name="Execute" command="amixer sset Master -5%"/>
+            <action name="Execute" command="amixer sset Master 5%-"/>
         </keybind>
         <keybind key="XF86_AudioRaiseVolume">
-            <action name="Execute" command="amixer sset Master +5%"/>
+            <action name="Execute" command="amixer sset Master 5%+"/>
         </keybind>
         <keybind key="XF86_AudioMute">
             <action name="Execute" command="amixer sset Master toggle"/>
         </keybind>
     </keyboard>
-    <windowRules>
-        <windowRule identifier="firefox" serverDecoration="on">
-            <action name="Maximize"/>
-        </windowRule>
-    </windowRules>
 </labwc_config>
