@@ -1,3 +1,5 @@
+window.button.width:                            50
+
 ## Inactive Menu
 menu.border.color:                              #81a1c1
 menu.items.bg.color:                            #2e3440
@@ -18,3 +20,4 @@ window.inactive.border.color:                   #3b4252
 window.inactive.title.bg.color:                 #3b4252
 window.inactive.label.text.color:               #d8dee9
 window.inactive.button.unpressed.image.color:   #d8dee9
+
