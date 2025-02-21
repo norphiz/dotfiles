@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <labwc_config>
     <desktops number="5"/>
-    <theme cornerRadius="0">
-        <font place="" size="12.5"/>
+    <theme cornerRadius="0" dropShadows="on">
+        <font size="12.5"/>
     </theme>
     <keyboard numlock="off">
         <keybind key="W-S-q">
@@ -38,6 +38,21 @@
         <keybind key="W-5">
             <action name="GoToDesktop" to="5"/>
         </keybind>
+        <keybind key="W-S-1">
+            <action name="SendToDesktop" to="1"/>
+        </keybind>
+        <keybind key="W-S-2">
+            <action name="SendToDesktop" to="2"/>
+        </keybind>
+        <keybind key="W-S-3">
+            <action name="SendToDesktop" to="3"/>
+        </keybind>
+        <keybind key="W-S-4">
+            <action name="SendToDesktop" to="4"/>
+        </keybind>
+        <keybind key="W-S-5">
+            <action name="SendToDesktop" to="5"/>
+        </keybind>
         <keybind key="W-l">
             <action name="Execute" command="wofi"/>
         </keybind>
@@ -57,10 +72,10 @@
             <action name="SnapToEdge" direction="right"/>
         </keybind>
         <keybind key="XF86_AudioLowerVolume">
-            <action name="Execute" command="amixer sset Master 5%-"/>
+            <action name="Execute" command="amixer sset Master -5%"/>
         </keybind>
         <keybind key="XF86_AudioRaiseVolume">
-            <action name="Execute" command="amixer sset Master 5%+"/>
+            <action name="Execute" command="amixer sset Master +5%"/>
         </keybind>
         <keybind key="XF86_AudioMute">
             <action name="Execute" command="amixer sset Master toggle"/>
