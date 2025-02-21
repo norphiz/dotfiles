@@ -1,23 +1,26 @@
-window.button.width:                            50
+# Menu border
+menu.border.color:                              #81a1c1
 
-## Active Menu
+# Menu items background
+menu.items.bg.color:                            #2e3440
 menu.items.active.bg.color:                     #81a1c1
+
+# Menu items text
+menu.items.text.color:                          #d8dee9
 menu.items.active.text.color:                   #2e3440
 
-## Active Window
+# Window border
 window.active.border.color:                     #81a1c1
+window.inactive.border.color:                   #2e3440
+
+# Window titlebar background
 window.active.title.bg.color:                   #81a1c1
+window.inactive.title.bg.color:                 #2e3440
+
+# Window titlebar text
 window.active.label.text.color:                 #2e3440
-window.active.button.unpressed.image.color:     #2e3440
-
-## Inactive Menu
-menu.border.color:                              #81a1c1
-menu.items.bg.color:                            #2e3440
-menu.items.text.color:                          #d8dee9
-
-## Inactive Window
-window.inactive.border.color:                   #3b4252
-window.inactive.title.bg.color:                 #3b4252
 window.inactive.label.text.color:               #d8dee9
-window.inactive.button.unpressed.image.color:   #d8dee9
 
+# Window buttons
+window.active.button.unpressed.image.color:     #2e3440
+window.inactive.button.unpressed.image.color:   #d8dee9
