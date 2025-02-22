@@ -1,3 +1,4 @@
+gammastep -PO 6500K > /dev/null 2>&1 &
 swaybg -i /usr/share/backgrounds/archlinux/small.png > /dev/null 2>&1 &
 gsettings set org.gnome.desktop.interface icon-theme Arc > /dev/null 2>&1 &
 gsettings set org.gnome.desktop.interface gtk-theme Arc-Dark > /dev/null 2>&1 &
