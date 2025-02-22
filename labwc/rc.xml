@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <labwc_config>
     <desktops number="5"/>
-    <theme dropShadows="yes" cornerRadius="0"/>
+    <theme cornerRadius="0" dropShadows="yes"/>
     <libinput>
         <device category="non-touch" accelProfile="flat"/>
     </libinput>
@@ -16,6 +16,9 @@
         </keybind>
         <keybind key="W-c">
             <action name="Close"/>
+        </keybind>
+        <keybind key="W-d">
+            <action name="Iconify"/>
         </keybind>
         <keybind key="A-Tab">
             <action name="NextWindow"/>
