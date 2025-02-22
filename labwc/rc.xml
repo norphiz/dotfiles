@@ -2,6 +2,9 @@
 <labwc_config>
     <desktops number="5"/>
     <theme dropShadows="yes" cornerRadius="0"/>
+    <libinput>
+        <device category="non-touch" accelProfile="flat"/>
+    </libinput>
     <windowRules>
         <windowRule identifier="firefox" serverDecoration="yes">
             <action name="Maximize"/>
