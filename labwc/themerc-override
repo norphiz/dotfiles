@@ -1,5 +1,5 @@
 # Menu border
-menu.border.color:                              #81a1c1
+menu.border.color:                              #2e3440
 
 # Menu items background
 menu.items.bg.color:                            #2e3440
@@ -10,17 +10,17 @@ menu.items.text.color:                          #d8dee9
 menu.items.active.text.color:                   #2e3440
 
 # Window border
-window.active.border.color:                     #81a1c1
+window.active.border.color:                     #2e3440
 window.inactive.border.color:                   #2e3440
 
 # Window titlebar background
-window.active.title.bg.color:                   #81a1c1
+window.active.title.bg.color:                   #2e3440
 window.inactive.title.bg.color:                 #2e3440
 
 # Window titlebar text
-window.active.label.text.color:                 #2e3440
-window.inactive.label.text.color:               #d8dee9
+window.active.label.text.color:                 #d8dee9
+window.inactive.label.text.color:               #81a1c1
 
 # Window buttons
-window.active.button.unpressed.image.color:     #2e3440
-window.inactive.button.unpressed.image.color:   #d8dee9
+window.active.button.unpressed.image.color:     #d8dee9
+window.inactive.button.unpressed.image.color:   #81a1c1
