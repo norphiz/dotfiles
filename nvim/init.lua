@@ -3,7 +3,7 @@ vim.o.sw = 4
 
 vim.o.nu = true
 vim.o.et = true
-vim.g.ic = true
+vim.o.ic = true
 vim.o.scs = true
 
 vim.o.ru = false
