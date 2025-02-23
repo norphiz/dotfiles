@@ -46,7 +46,8 @@ done
 
 mount "$ROOT" /mnt
 
-pacstrap -K /mnt base > /dev/null 2>&1
+pacstrap -K /mnt base sudo dhcpcd booster glibc-locales \
+    linux-firmware > /dev/null 2>&1
 
 mount -m "$BOOT" /mnt/boot
 
@@ -67,7 +68,7 @@ echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 echo 'FONT=ter-128b
 KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 
-bootctl install -q --esp-path=/mnt/efi --boot-path=/mnt/boot
+bootctl install --esp-path=/mnt/efi --boot-path=/mnt/boot > /dev/null
 
 echo 'editor no
 timeout 10' > /mnt/efi/loader/loader.conf
@@ -78,7 +79,7 @@ initrd intel-ucode.img
 initrd booster-linux.img
 options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
 
-sed -n '85,$p' "$0" > /mnt/chroot.sh
+sed -n '86,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash chroot.sh
 
@@ -87,14 +88,19 @@ arch-chroot /mnt bash chroot.sh
 set -eu
 
 PACKAGES=(
-    sudo
     linux
-    dhcpcd
-    booster
     intel-ucode
-    glibc-locales
-    linux-firmware
 )
+
+echo "Packages to be installed: ${PACKAGES[*]}"
+
+read -r -p 'Enter extra packages to be installed: ' -a EXTRA
+
+PACKAGES+=("${EXTRA[@]}")
+
+pacman -S --noconfirm "${PACKAGES[@]}" > /dev/null
+
+clear
 
 read -r -p 'Enter username: ' NAME
 
@@ -105,16 +111,6 @@ useradd -m -G wheel,audio,video "$NAME"
 passwd "$NAME"
 
 clear
-
-echo "Packages to be installed: ${PACKAGES[*]}"
-
-read -r -p 'Enter extra packages to be installed: ' -a EXTRA
-
-clear
-
-PACKAGES+=("${EXTRA[@]}")
-
-pacman -S --noconfirm "${PACKAGES[@]}" > /dev/null
 
 echo '%wheel ALL=(ALL:ALL) ALL' > /etc/sudoers.d/sudoers
 
