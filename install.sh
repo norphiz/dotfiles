@@ -4,8 +4,6 @@ set -eu
 
 lsblk -f
 
-local UEFI BOOT SWAP ROOT ANSWER
-
 read -r -p 'Enter the uefi partition: ' UEFI
 
 read -r -p 'Enter the boot partition: ' BOOT
@@ -69,7 +67,7 @@ echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 echo 'FONT=ter-128b
 KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 
-bootctl -q --esp-path=/mnt/efi --boot-path=/mnt/boot install
+bootctl install -q --esp-path=/mnt/efi --boot-path=/mnt/boot
 
 echo 'editor no
 timeout 10' > /mnt/efi/loader/loader.conf
@@ -80,7 +78,7 @@ initrd intel-ucode.img
 initrd booster-linux.img
 options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
 
-sed -n '87,$p' "$0" > /mnt/chroot.sh
+sed -n '85,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash chroot.sh
 
