@@ -3,5 +3,6 @@ swaybg -i /usr/share/backgrounds/archlinux/small.png > /dev/null 2>&1 &
 gsettings set org.gnome.desktop.interface icon-theme 'Arc' > /dev/null 2>&1 &
 gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Dark' > /dev/null 2>&1 &
 gsettings set org.gnome.desktop.interface font-name 'sans 10.5' > /dev/null 2>&1 &
-gsettings set org.gnome.desktop.interface document-font-name 'monospace 10.5' > /dev/null 2>&1 &
+gsettings set org.gnome.desktop.interface font-antialiasing 'rgba' > /dev/null 2>&1 &
+gsettings set org.gnome.desktop.interface document-font-name 'sans 10.5' > /dev/null 2>&1 &
 gsettings set org.gnome.desktop.interface monospace-font-name 'monospace 10.5' > /dev/null 2>&1 &
