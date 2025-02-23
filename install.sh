@@ -2,148 +2,136 @@
 
 set -eu
 
-main()
-{
-    lsblk -f
-    
-    local UEFI BOOT SWAP ROOT ANSWER
+lsblk -f
 
-    read -r -p 'Enter the uefi partition: ' UEFI
-    
-    read -r -p 'Enter the boot partition: ' BOOT
+local UEFI BOOT SWAP ROOT ANSWER
 
-    read -r -p 'Enter the swap partition: ' SWAP
+read -r -p 'Enter the uefi partition: ' UEFI
 
-    read -r -p 'Enter the root partition: ' ROOT
+read -r -p 'Enter the boot partition: ' BOOT
 
-    clear
+read -r -p 'Enter the swap partition: ' SWAP
 
-    mkfs.fat -F 32 -n BOOT "$BOOT" > /dev/null
+read -r -p 'Enter the root partition: ' ROOT
 
-    mkswap -q -L SWAP "$SWAP"
+clear
 
-    swapon "$SWAP"
+mkfs.fat -F 32 -n BOOT "$BOOT" > /dev/null
 
-    mkfs.ext4 -q -L ROOT "$ROOT"
+mkswap -q -L SWAP "$SWAP"
 
-    while true
-    do
-        read -r -p 'Format the uefi partition? [N/y]: ' ANSWER
+swapon "$SWAP"
 
-        case "$ANSWER" in
-            [yY])
-                mkfs.fat -F 32 -n UEFI "$UEFI" > /dev/null
-                
-                clear
+mkfs.ext4 -q -L ROOT "$ROOT"
 
-                break
-                
-                ;;
-            [nN])
-                clear
+while true
+do
+    read -r -p 'Format the uefi partition? [N/y]: ' ANSWER
 
-                break
-                
-                ;;
-        esac
-    done
+    case "$ANSWER" in
+        [yY])
+            mkfs.fat -F 32 -n UEFI "$UEFI" > /dev/null
 
-    mount "$ROOT" /mnt
+            clear
 
-    pacstrap -K /mnt base > /dev/null 2>&1
+            break
 
-    mount -m "$BOOT" /mnt/boot
+            ;;
+        [nN])
+            clear
 
-    mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
+            break
 
-    genfstab -U /mnt >> /mnt/etc/fstab
+            ;;
+    esac
+done
 
-    sed 's/rel/no/' -i /mnt/etc/fstab
+mount "$ROOT" /mnt
 
-    read -r -p 'Enter hostname: ' ANSWER
+pacstrap -K /mnt base > /dev/null 2>&1
 
-    clear
+mount -m "$BOOT" /mnt/boot
 
-    echo "$ANSWER" > /mnt/etc/hostname
+mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
-    echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
+genfstab -U /mnt >> /mnt/etc/fstab
 
-    echo 'FONT=ter-128b
-    KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
+sed 's/rel/no/' -i /mnt/etc/fstab
 
-    bootctl -q --esp-path=/mnt/efi --boot-path=/mnt/boot install
+read -r -p 'Enter hostname: ' ANSWER
 
-    echo 'editor no
-    timeout 10' > /mnt/efi/loader/loader.conf
+clear
 
-    echo 'title Arch Linux
-    linux vmlinuz-linux
-    initrd intel-ucode.img
-    initrd booster-linux.img
-    options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
-    
-    sed -n '92,$p' "$0" > /mnt/chroot.sh
+echo "$ANSWER" > /mnt/etc/hostname
 
-    arch-chroot /mnt bash chroot.sh
-}
+echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 
-main
+echo 'FONT=ter-128b
+KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
+
+bootctl -q --esp-path=/mnt/efi --boot-path=/mnt/boot install
+
+echo 'editor no
+timeout 10' > /mnt/efi/loader/loader.conf
+
+echo 'title Arch Linux
+linux vmlinuz-linux
+initrd intel-ucode.img
+initrd booster-linux.img
+options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
+
+sed -n '87,$p' "$0" > /mnt/chroot.sh
+
+arch-chroot /mnt bash chroot.sh
 
 #!/bin/bash
 
 set -eu
 
-after_chroot()
-{   
-    local PACKAGES NAME EXTRA
+PACKAGES=(
+    sudo
+    linux
+    dhcpcd
+    booster
+    intel-ucode
+    glibc-locales
+    linux-firmware
+)
 
-    PACKAGES=(
-        sudo
-        linux
-        dhcpcd
-        booster
-        intel-ucode
-        glibc-locales
-        linux-firmware
-    )
+read -r -p 'Enter username: ' NAME
 
-    echo "Packages to be installed: ${PACKAGES[*]}"
+clear
 
-    read -r -p 'Enter extra packages to be installed: ' -a EXTRA
+useradd -m -G wheel,audio,video "$NAME"
 
-    clear
+passwd "$NAME"
 
-    PACKAGES+=("${EXTRA[@]}")
+clear
 
-    pacman -S --noconfirm "${PACKAGES[@]}" > /dev/null
+echo "Packages to be installed: ${PACKAGES[*]}"
 
-    echo '%wheel ALL=(ALL:ALL) ALL' > /etc/sudoers.d/sudoers
-    
-    read -r -p 'Enter username: ' NAME
+read -r -p 'Enter extra packages to be installed: ' -a EXTRA
 
-    clear
+clear
 
-    useradd -m -G wheel,audio,video "$NAME"
+PACKAGES+=("${EXTRA[@]}")
 
-    passwd "$NAME"
+pacman -S --noconfirm "${PACKAGES[@]}" > /dev/null
 
-    clear
+echo '%wheel ALL=(ALL:ALL) ALL' > /etc/sudoers.d/sudoers
 
-    if test "$(command -v iwctl)"
-    then
-        mkdir /etc/iwd
+if test "$(command -v iwctl)"
+then
+    mkdir /etc/iwd
 
-        echo '[Network]
-        NameResolvingService=resolvconf' >> /etc/iwd/main.conf
+    echo '[Network]
+    NameResolvingService=resolvconf' >> /etc/iwd/main.conf
 
-        systemctl -q enable iwd
-    fi
+    systemctl -q enable iwd
+fi
 
-    systemctl -q enable dhcpcd systemd-boot-update
+systemctl -q enable dhcpcd systemd-boot-update
 
-    rm "$0"
+rm "$0"
 
-    exit
-}
-
-after_chroot
+exit
