@@ -5,11 +5,6 @@
     <libinput>
         <device category="non-touch" accelProfile="flat"/>
     </libinput>
-    <windowRules>
-        <windowRule identifier="firefox" serverDecoration="yes">
-            <action name="Maximize"/>
-        </windowRule>
-    </windowRules>
     <keyboard numlock="off">
         <keybind key="W-S-q">
             <action name="Exit"/>
