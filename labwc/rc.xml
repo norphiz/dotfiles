@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <labwc_config>
     <theme cornerRadius="0"/>
-    <libinput><device category="non-touch" accelProfile="flat"/></libinput>
+    <mouse>
+        <context name="Desktop">
+            <mousebind button="Right" action="Press">
+                <action name="None"/>
+            </mousebind>
+        </context>
+    </mouse>
+    <libinput>
+        <device category="non-touch" accelProfile="flat"/>
+    </libinput>
     <keyboard numlock="off">
         <keybind key="W-c"><action name="Close"/></keybind>
         <keybind key="W-S-q"><action name="Exit"/></keybind>
