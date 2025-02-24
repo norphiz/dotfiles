@@ -4,6 +4,17 @@
     <libinput>
         <device category="non-touch" accelProfile="flat"/>
     </libinput>
+    <mouse>
+        <default/>
+        <context name="Desktop">
+            <mousebind button="Left" action="Press">
+                <action name="None"/>
+            </mousebind>
+            <mousebind button="Right" action="Press">
+                <action name="None"/>
+            </mousebind>
+        </context>
+    </mouse>
     <keyboard numlock="off">
         <keybind key="W-c"><action name="Close"/></keybind>
         <keybind key="W-S-q"><action name="Exit"/></keybind>
