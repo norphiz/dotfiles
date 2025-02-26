@@ -68,7 +68,7 @@ KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 
 echo '%wheel ALL=(ALL:ALL) ALL' > /mnt/etc/sudoers.d/sudoers
 
-bootctl install --esp-path=/mnt/efi --boot-path=/mnt/boot > /dev/null
+bootctl install --esp-path=/mnt/efi --boot-path=/mnt/boot > /dev/null 2>&1
 
 echo 'editor no
 timeout 10' > /mnt/efi/loader/loader.conf
