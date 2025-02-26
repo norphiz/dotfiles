@@ -55,8 +55,6 @@ mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-sed 's/rel/no/' -i /mnt/etc/fstab
-
 read -r -p 'Enter hostname: ' ANSWER
 
 clear
