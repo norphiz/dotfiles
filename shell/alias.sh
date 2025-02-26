@@ -6,6 +6,7 @@ alias ls='eza -a'
 alias cat='bat -pp'
 alias sdnv='sudo -e'
 alias sdmv='sudo mv'
+alias unzip='bsdunzip'
 alias psi='pacman -Si'
 alias pss='pacman -Ss'
 alias pqe='pacman -Qe'
@@ -14,13 +15,16 @@ alias pqs='pacman -Qs'
 alias pql='pacman -Qlq'
 alias sdcp='sudo cp -r'
 alias sdls='sudo eza -a'
+alias sdrm='sudo rm -fr'
 alias pqdt='pacman -Qdtq'
 alias inst='sudo pacman -S'
 alias pscc='sudo pacman -Scc'
 alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
 alias gc='git clone -q --depth 1'
+alias img='qemu-img create -f qcow2 disk.img'
 alias start-labwc='pidof -q labwc && clear || exec labwc > /tmp/labwc.log 2>&1'
+alias vm='qemu-system-x86_64 -enable-kvm -cpu max -m 2G -smp 2 -vga qxl -bios /usr/share/edk2/x64/OVMF.4m.fd disk.img'
 
 updt-plugins()
 {
@@ -59,7 +63,6 @@ setup-stuff()
     local STUFF
 
     STUFF=(
-        git
         eza
         bat
         foot
