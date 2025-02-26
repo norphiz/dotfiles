@@ -14,9 +14,9 @@ read -r -p 'Enter the root partition: ' ROOT
 
 clear
 
-mkfs.fat -F 32 -n BOOT "$BOOT" > /dev/null
+mkfs.fat -F 32 "$BOOT" > /dev/null
 
-mkswap -q -L SWAP "$SWAP"
+mkswap -q "$SWAP"
 
 swapon "$SWAP"
 
@@ -47,7 +47,7 @@ done
 mount "$ROOT" /mnt
 
 pacstrap -K /mnt base sudo dhcpcd booster glibc-locales \
-    linux-firmware > /dev/null 2>&1
+    linux-firmware terminus-font > /dev/null 2>&1
 
 mount -m "$BOOT" /mnt/boot
 
@@ -65,6 +65,8 @@ echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 
 echo 'FONT=ter-128b
 KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
+
+echo '%wheel ALL=(ALL:ALL) ALL' > /mnt/etc/sudoers.d/sudoers
 
 bootctl install --esp-path=/mnt/efi --boot-path=/mnt/boot > /dev/null
 
@@ -96,11 +98,11 @@ echo "Packages to be installed: ${PACKAGES[*]}"
 
 read -r -p 'Enter extra packages to be installed: ' -a EXTRA
 
+clear
+
 PACKAGES+=("${EXTRA[@]}")
 
 pacman -S --noconfirm "${PACKAGES[@]}" > /dev/null
-
-clear
 
 read -r -p 'Enter username: ' NAME
 
@@ -111,8 +113,6 @@ useradd -m -G wheel,audio,video "$NAME"
 passwd "$NAME"
 
 clear
-
-echo '%wheel ALL=(ALL:ALL) ALL' > /etc/sudoers.d/sudoers
 
 if test "$(command -v iwctl)"
 then
