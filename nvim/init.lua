@@ -23,16 +23,16 @@ vim.api.nvim_set_keymap("n", "<C-x>", ":x<CR>", { silent = true })
 
 vim.api.nvim_set_keymap("n", "<C-q>", ":q!<CR>", { silent = true })
 
+vim.api.nvim_set_keymap("n", "<C-t>", ":tabnew<CR>", { silent = true })
+
 vim.api.nvim_create_autocmd("BufWinEnter", {
-    pattern = "*.txt",
-    callback = function()
+    pattern = "*.txt", callback = function()
         vim.cmd.winc("L")
     end
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "*",
-    callback = function()
+    pattern = "*", callback = function()
         vim.opt.fo:remove { "c", "r", "o" }
     end
 })
@@ -43,7 +43,6 @@ end
 
 if os.execute("test -d ~/.config/nvim/pack/plugins/start/vim") == 0 then
     vim.cmd.colo("nord")
-    vim.api.nvim_set_hl(0, "Normal", { fg = "#d8dee9", bg = "NONE" })
 end
 
 if os.execute("test -d ~/.config/nvim/pack/plugins/start/nvim-autopairs") == 0 then
