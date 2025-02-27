@@ -1,15 +1,11 @@
 export LESS='-R'
 export EDITOR='nvim'
-export WLR_XWAYLAND=''
 export BAT_THEME='Nord'
 export LESSHISTFILE='-'
 export MANPAGER='nvim +Man!'
 export XDG_CACHE_HOME='/tmp'
 export SUDO_PROMPT='Password:'
 export NVIM_LOG_FILE='/dev/null'
-export QT_QPA_PLATFORM='wayland'
-export XCURSOR_THEME='Vanilla-DMZ'
 export ZDOTDIR="$HOME/.config/zsh"
-export XKB_DEFAULT_LAYOUT='br,br(nodeadkeys)'
-export XKB_DEFAULT_OPTIONS='grp:win_space_toggle'
+export XAUTHORITY="$HOME/.local/Xauthority"
 export FREETYPE_PROPERTIES='cff:no-stem-darkening=0 autofitter:no-stem-darkening=0'
