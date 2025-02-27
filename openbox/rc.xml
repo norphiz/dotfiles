@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<openbox_config>
+    <theme>
+        <icon>Arc</icon>
+        <name>Arc-Clone</name>
+        <animateIconify>no</animateIconify>
+        <font place="ActiveWindow">
+            <size>10</size>
+        </font>
+        <font place="InactiveWindow">
+            <size>10</size>
+        </font>
+    </theme>
+    <placement>
+        <center>yes</center>
+        <policy>Smart</policy>
+    </placement>
+    <keyboard>
+        <keybind key="W-S-q">
+            <action name="Exit"/>
+        </keybind>
+        <keybind key="W-c">
+            <action name="Close"/>
+        </keybind>
+        <keybind key="W-d">
+            <action name="Iconify"/>
+        </keybind>
+        <keybind key="A-Tab">
+            <action name="NextWindow">
+                <bar>no</bar>
+                <raise>yes</raise>
+            </action>
+        </keybind>
+        <keybind key="W-Down">
+            <action name="Unmaximize"/>
+        </keybind>
+        <keybind key="W-S-r">
+            <action name="Reconfigure"/>
+        </keybind>
+        <keybind key="W-Up">
+            <action name="ToggleMaximize"/>
+        </keybind>
+        <keybind key="W-F11">
+            <action name="ToggleFullscreen"/>
+        </keybind>
+        <keybind key="W-Right">
+            <action name="Unmaximize"/>
+            <action name="MoveToEdge">
+                <direction>east</direction>
+            </action>
+            <action name="MoveResizeTo">
+                <width>50%</width>
+                <height>100%</height>
+            </action>
+        </keybind>
+        <keybind key="W-Left">
+            <action name="Unmaximize"/>
+            <action name="MoveToEdge">
+                <direction>west</direction>
+            </action>
+            <action name="MoveResizeTo">
+                <width>50%</width>
+                <height>100%</height>
+            </action>
+        </keybind>
+        <keybind key="W-Return">
+            <action name="Execute">
+                <command>alacritty</command>
+            </action>
+        </keybind>
+        <keybind key="XF86HomePage">
+            <action name="Execute">
+                <command>brave</command>
+            </action>
+        </keybind>
+        <keybind key="W-l">
+            <action name="Execute">
+                <command>rofi -show drun</command>
+            </action>
+        </keybind>
+    </keyboard>
+</openbox_config>
