@@ -38,8 +38,6 @@ do
             mount -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
             bootctl --esp-path=/mnt/efi --boot-path=/mnt/boot install
-
-            clear
             
             echo 'editor no
             timeout 10' > /mnt/efi/loader/loader.conf
@@ -49,6 +47,8 @@ do
             initrd intel-ucode.img
             initrd booster-linux.img
             options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
+
+            clear
 
             ;;
         [nN])
