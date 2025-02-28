@@ -2,7 +2,7 @@
 
 set -eu
 
-lsblk -f
+fdisk -l
 
 read -r -p 'Enter the uefi partition: ' UEFI
 
@@ -27,7 +27,7 @@ do
 
     case "$DUAL" in
         [yY])
-            lsblk -f
+            fdisk -l
 
             read -r -p 'Enter boot partition: ' BOOT
 
