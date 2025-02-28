@@ -35,9 +35,9 @@ do
 
             mkfs.fat -F 32 "$BOOT"
 
-            mount -m "$BOOT" /mnt/boot
+            mount "$BOOT" /mnt/boot
 
-            mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
+            mount -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
             bootctl --esp-path=/mnt/efi --boot-path=/mnt/boot install
             
@@ -54,7 +54,7 @@ do
         [nN])
             mkfs.fat -F 32 "$UEFI"
 
-            mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/boot
+            mount -o fmask=0077,dmask=0077 "$UEFI" /mnt/boot
 
             bootctl --esp-path=/mnt/boot install
 
@@ -77,18 +77,14 @@ done
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-read -r -p 'Enter hostname: ' ANSWER
-
-clear
-
-echo "$ANSWER" > /mnt/etc/hostname
+echo 'arch' > /mnt/etc/hostname
 
 echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 
 echo 'FONT=ter-128b
 KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 
-sed -n '97,$p' "$0" > /mnt/chroot.sh
+sed -n '93,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash chroot.sh
 
