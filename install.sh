@@ -6,36 +6,45 @@ lsblk -f
 
 read -r -p 'Enter the uefi partition: ' UEFI
 
-read -r -p 'Enter the boot partition: ' BOOT
-
 read -r -p 'Enter the swap partition: ' SWAP
 
 read -r -p 'Enter the root partition: ' ROOT
 
-clear
-
-mkfs.fat -F 32 "$BOOT" > /dev/null
+mkfs.ext4 -q -L ROOT "$ROOT"
 
 mkswap -q "$SWAP"
 
 swapon "$SWAP"
 
-mkfs.ext4 -q -L ROOT "$ROOT"
+mount "$ROOT" /mnt
+
+pacstrap -K /mnt base sudo dhcpcd booster glibc-locales \
+    linux-firmware terminus-font
 
 while true
 do
-    read -r -p 'Format the uefi partition? [N/y]: ' ANSWER
+    read -r -p 'Are you dual booting? [N/y]: ' DUAL
 
-    case "$ANSWER" in
+    case "$DUAL" in
         [yY])
-            mkfs.fat -F 32 -n UEFI "$UEFI" > /dev/null
+            lsblk -f
+
+            read -r -p 'Enter boot partition: ' BOOT
 
             clear
 
-            break
+            mount -m "$BOOT" /mnt/boot
+
+            mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
+
+            bootctl --esp-path=/mnt/efi --boot-path=/mnt/boot install
 
             ;;
         [nN])
+            mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/boot
+
+            bootctl --esp-path=/mnt/boot install
+
             clear
 
             break
@@ -43,15 +52,6 @@ do
             ;;
     esac
 done
-
-mount "$ROOT" /mnt
-
-pacstrap -K /mnt base sudo dhcpcd booster glibc-locales \
-    linux-firmware terminus-font > /dev/null 2>&1
-
-mount -m "$BOOT" /mnt/boot
-
-mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
@@ -66,10 +66,6 @@ echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 echo 'FONT=ter-128b
 KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 
-echo '%wheel ALL=(ALL:ALL) ALL' > /mnt/etc/sudoers.d/sudoers
-
-bootctl install --esp-path=/mnt/efi --boot-path=/mnt/boot > /dev/null 2>&1
-
 echo 'editor no
 timeout 10' > /mnt/efi/loader/loader.conf
 
@@ -79,9 +75,11 @@ initrd intel-ucode.img
 initrd booster-linux.img
 options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
 
-sed -n '86,$p' "$0" > /mnt/chroot.sh
+sed -n '84,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash chroot.sh
+
+exit
 
 #!/bin/bash
 
@@ -100,15 +98,19 @@ clear
 
 PACKAGES+=("${EXTRA[@]}")
 
-pacman -S --noconfirm "${PACKAGES[@]}" > /dev/null
+pacman -S --noconfirm "${PACKAGES[@]}"
+
+clear
 
 read -r -p 'Enter username: ' NAME
 
 clear
 
-useradd -m -G wheel,audio,video "$NAME"
+useradd -m "$NAME"
 
 passwd "$NAME"
+
+echo "$NAME ALL=(ALL:ALL) ALL" > /etc/sudoers.d/sudoers
 
 clear
 
