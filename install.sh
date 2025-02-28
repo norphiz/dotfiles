@@ -10,11 +10,11 @@ read -r -p 'Enter the swap partition: ' SWAP
 
 read -r -p 'Enter the root partition: ' ROOT
 
-mkfs.ext4 -q -L ROOT "$ROOT"
-
 mkswap -q "$SWAP"
 
 swapon "$SWAP"
+
+mkfs.ext4 -q -L ROOT "$ROOT"
 
 mount "$ROOT" /mnt
 
@@ -33,17 +33,39 @@ do
 
             clear
 
+            mkfs.fat -F 32 "$BOOT"
+
             mount -m "$BOOT" /mnt/boot
 
             mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
             bootctl --esp-path=/mnt/efi --boot-path=/mnt/boot install
+            
+            echo 'editor no
+            timeout 10' > /mnt/efi/loader/loader.conf
+
+            echo 'title Arch Linux
+            linux vmlinuz-linux
+            initrd intel-ucode.img
+            initrd booster-linux.img
+            options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
 
             ;;
         [nN])
+            mkfs.fat -F 32 "$UEFI"
+
             mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/boot
 
             bootctl --esp-path=/mnt/boot install
+
+            echo 'editor no
+            timeout 0' > /mnt/boot/loader/loader.conf
+
+            echo 'title Arch Linux
+            linux vmlinuz-linux
+            initrd intel-ucode.img
+            initrd booster-linux.img
+            options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
 
             clear
 
@@ -66,16 +88,7 @@ echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 echo 'FONT=ter-128b
 KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 
-echo 'editor no
-timeout 10' > /mnt/efi/loader/loader.conf
-
-echo 'title Arch Linux
-linux vmlinuz-linux
-initrd intel-ucode.img
-initrd booster-linux.img
-options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
-
-sed -n '84,$p' "$0" > /mnt/chroot.sh
+sed -n '97,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash chroot.sh
 
