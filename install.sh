@@ -31,8 +31,6 @@ do
 
             read -r -p 'Enter boot partition: ' BOOT
 
-            clear
-
             mkfs.fat -F 32 "$BOOT"
 
             mount "$BOOT" /mnt/boot
@@ -40,6 +38,8 @@ do
             mount -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
             bootctl --esp-path=/mnt/efi --boot-path=/mnt/boot install
+
+            clear
             
             echo 'editor no
             timeout 10' > /mnt/efi/loader/loader.conf
