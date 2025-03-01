@@ -23,8 +23,8 @@ alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
 alias gc='git clone -q --depth 1'
 alias img='qemu-img create -f qcow2 disk.img'
-alias start-labwc='pidof -q labwc && clear || exec labwc > /tmp/labwc.log 2>&1'
-alias vm='qemu-system-x86_64 -enable-kvm -cpu max -m 2G -smp 2 -vga qxl -bios /usr/share/edk2/x64/OVMF.4m.fd disk.img'
+alias start-openbox='pidof -q openbox && clear || exec startx /usr/bin/openbox-session > /dev/null 2>&1'
+alias virt='qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio -hda disk.img -bios /usr/share/edk2/x64/OVMF.4m.fd'
 
 updt-plugins()
 {
@@ -56,6 +56,9 @@ setup-plugins()
         "$ZDOTDIR/fast-syntax-highlighting"
     
     gc "$GH/nordtheme/dircolors" "$HOME/.local/share/dircolors"
+
+    gc "$GH/addy-dclxvi/openbox-theme-collections" \
+        "$HOME/.local/share/themes"
 }
 
 setup-stuff()
@@ -65,23 +68,26 @@ setup-stuff()
     STUFF=(
         eza
         bat
-        foot
-        wofi
-        labwc
+        feh
+        htop
+        xclip
         neovim
         man-db
-        swaybg
-        firefox
+        openbox
+        redshift
+        alacritty
         man-pages
-        gammastep
-        wl-clipboard
+        noto-fonts
+        alsa-utils
+        xorg-xinit
+        xorg-server
+        xorg-xinput
         arc-gtk-theme
         arc-icon-theme
         zsh-completions
         bash-completions
         archlinux-wallpaper
         xcursor-vanilla-dmz
-        firefox-ublock-origin
     )
 
     sudo pacman -S --needed "${STUFF[@]}"
