@@ -1,52 +1,52 @@
 [general]
 live_config_reload = true 
 
-[window]
-padding.x = 5
-padding.y = 5
+[window.padding]
+x = 5
+y = 5
 
 [font]
-size = 14.5
+size = 14
 builtin_box_drawing = false
 
 [colors.bright]
-black = "#4c566a"
+red = "#bf616a"
 blue = "#81a1c1"
 cyan = "#8fbcbb"
+black = "#4c566a"
 green = "#a3be8c"
-magenta = "#b48ead"
-red = "#bf616a"
 white = "#eceff4"
 yellow = "#ebcb8b"
+magenta = "#b48ead"
 
 [colors.cursor]
-cursor = "#d8dee9"
 text = "#2e3440"
+cursor = "#d8dee9"
 
 [colors.dim]
-black = "#373e4d"
+red = "#94545d"
 blue = "#68809a"
 cyan = "#6d96a5"
+black = "#373e4d"
 green = "#809575"
-magenta = "#8c738c"
-red = "#94545d"
 white = "#aeb3bb"
 yellow = "#b29e75"
+magenta = "#8c738c"
 
 [colors.normal]
-black = "#3b4252"
+red = "#bf616a"
 blue = "#81a1c1"
 cyan = "#88c0d0"
+black = "#3b4252"
 green = "#a3be8c"
-magenta = "#b48ead"
-red = "#bf616a"
 white = "#e5e9f0"
 yellow = "#ebcb8b"
+magenta = "#b48ead"
 
 [colors.primary]
 background = "#2e3440"
-dim_foreground = "#a5abb6"
 foreground = "#d8dee9"
+dim_foreground = "#a5abb6"
 
 [colors.footer_bar]
 background = "#434c5e"
@@ -61,8 +61,8 @@ background = "#4c566a"
 text = "CellForeground"
 
 [colors.vi_mode_cursor]
-cursor = "#d8dee9"
 text = "#2e3440"
+cursor = "#d8dee9"
 
 [terminal]
 shell = "zsh"
