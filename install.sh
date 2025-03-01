@@ -20,6 +20,8 @@ mount "$ROOT" /mnt
 
 pacstrap -K /mnt base
 
+clear
+
 while true
 do
     read -r -p 'Are you dual booting? [N/y]: ' DUAL
@@ -34,7 +36,7 @@ do
 
             mount "$BOOT" /mnt/boot
 
-            mount -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
+            mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
             bootctl --esp-path=/mnt/efi --boot-path=/mnt/boot install
             
@@ -84,7 +86,7 @@ echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 echo 'FONT=ter-128b
 KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 
-sed -n '91,$p' "$0" > /mnt/chroot.sh
+sed -n '93,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash chroot.sh
 
@@ -123,9 +125,9 @@ useradd -m "$NAME"
 
 passwd "$NAME"
 
-echo "$NAME ALL=(ALL:ALL) ALL" > /etc/sudoers.d/sudoers
-
 clear
+
+echo "$NAME ALL=(ALL:ALL) ALL" > /etc/sudoers.d/sudoers
 
 if test -e /usr/bin/iwctl
 then
