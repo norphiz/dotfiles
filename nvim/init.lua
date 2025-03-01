@@ -18,11 +18,8 @@ vim.o.fcs = "eob: "
 vim.o.cb = "unnamedplus"
 
 vim.api.nvim_set_keymap("n", ";", ":", {})
-
-vim.api.nvim_set_keymap("n", "<C-x>", ":x<CR>", { silent = true })
-
+vim.api.nvim_set_keymap("n", "<C-s>", ":x<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<C-q>", ":q!<CR>", { silent = true })
-
 vim.api.nvim_set_keymap("n", "<C-t>", ":tabnew<CR>", { silent = true })
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
