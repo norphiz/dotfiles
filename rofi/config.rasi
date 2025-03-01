@@ -1,0 +1,8 @@
+configuration {
+    show-icons: true;
+    icon-theme: "Arc";
+    disable-history: true;
+    display-drun: "Search";
+}
+
+@theme "Arc-Dark"
