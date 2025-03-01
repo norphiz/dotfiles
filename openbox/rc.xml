@@ -30,9 +30,11 @@
         <context name="Client">
             <mousebind button="Left" action="Press">
                 <action name="Focus"/>
+                <action name="Raise"/>
             </mousebind>
             <mousebind button="Right" action="Press">
                 <action name="Focus"/>
+                <action name="Raise"/>
             </mousebind>
             <mousebind button="W-Left" action="Press">
                 <action name="Move"/>
