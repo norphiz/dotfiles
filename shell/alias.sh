@@ -24,7 +24,7 @@ alias unst='sudo pacman -Rns'
 alias gc='git clone -q --depth 1'
 alias img='qemu-img create -f qcow2 disk.img'
 alias start-openbox='pidof -q openbox && clear || exec startx /usr/bin/openbox-session > /dev/null 2>&1'
-alias virt='qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio -hda disk.img -bios /usr/share/edk2/x64/OVMF.4m.fd'
+alias vm='qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio -hda disk.img -bios /usr/share/edk2/x64/OVMF.4m.fd'
 
 updt-plugins()
 {
