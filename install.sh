@@ -18,8 +18,7 @@ mkfs.ext4 -q -L ROOT "$ROOT"
 
 mount "$ROOT" /mnt
 
-pacstrap -K /mnt base sudo dhcpcd booster glibc-locales \
-    linux-firmware terminus-font
+pacstrap -K /mnt base
 
 while true
 do
@@ -50,6 +49,8 @@ do
 
             clear
 
+            break
+
             ;;
         [nN])
             mkfs.fat -F 32 "$UEFI"
@@ -58,8 +59,7 @@ do
 
             bootctl --esp-path=/mnt/boot install
 
-            echo 'editor no
-            timeout 0' > /mnt/boot/loader/loader.conf
+            echo 'timeout 0' > /mnt/boot/loader/loader.conf
 
             echo 'title Arch Linux
             linux vmlinuz-linux
@@ -84,19 +84,23 @@ echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 echo 'FONT=ter-128b
 KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 
-sed -n '93,$p' "$0" > /mnt/chroot.sh
+sed -n '91,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash chroot.sh
-
-exit
 
 #!/bin/bash
 
 set -eu
 
 PACKAGES=(
+    sudo
     linux
+    dhcpcd
+    booster
     intel-ucode
+    glibc-locales
+    terminus-font
+    linux-firmware
 )
 
 echo "Packages to be installed: ${PACKAGES[*]}"
@@ -123,7 +127,7 @@ echo "$NAME ALL=(ALL:ALL) ALL" > /etc/sudoers.d/sudoers
 
 clear
 
-if test "$(command -v iwctl)"
+if test -e /usr/bin/iwctl
 then
     mkdir /etc/iwd
 
