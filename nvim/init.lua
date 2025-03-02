@@ -17,6 +17,9 @@ vim.o.sdf = "NONE"
 vim.o.fcs = "eob: "
 vim.o.cb = "unnamedplus"
 
+vim.g.netrw_banner = 0
+vim.g.netrw_dirhistmax = 0
+
 vim.api.nvim_set_keymap("n", ";", ":", {})
 vim.api.nvim_set_keymap("n", "<C-s>", ":x<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<C-q>", ":q!<CR>", { silent = true })
