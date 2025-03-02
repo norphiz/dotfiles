@@ -93,15 +93,14 @@ setup-stuff()
         xarchiver
         alsa-utils
         xorg-xinit
+        noto-fonts
         xorg-server
         xorg-xinput
         pcmanfm-gtk3
         arc-gtk-theme
-        ttf-liberation
         arc-icon-theme
         zsh-completions
         bash-completions
-        ttf-jetbrains-mono
         archlinux-wallpaper
         xcursor-vanilla-dmz
     )
