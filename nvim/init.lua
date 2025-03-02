@@ -38,10 +38,8 @@ if os.getenv("TERM") ~= "linux" then
     vim.o.tgc = true
 end
 
-if os.execute("test -d ~/.config/nvim/pack/plugins/start/vim") == 0 then
+if os.execute("test -d ~/.config/nvim/pack") == 0 then
     vim.cmd.colo("nord")
-end
-
-if os.execute("test -d ~/.config/nvim/pack/plugins/start/nvim-autopairs") == 0 then
+    require("colorizer").setup()
     require("nvim-autopairs").setup()
-end 
+end
