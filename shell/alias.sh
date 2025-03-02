@@ -33,6 +33,7 @@ updt-plugins()
     PLUGINS=(
         "$BASE/vim"
         "$BASE/nvim-autopairs"
+        "$BASE/nvim-colorizer.lua"
         "$HOME/.local/share/dircolors"
         "$ZDOTDIR/fast-syntax-highlighting"
     )
@@ -52,13 +53,13 @@ setup-plugins()
 
     gc "$GH/windwp/nvim-autopairs" "$PACK/nvim-autopairs"
 
+    gc "$GH/norcalli/nvim-colorizer.lua" \
+        "$PACK/nvim-colorizer.lua"
+
     gc "$GH/zdharma-continuum/fast-syntax-highlighting" \
         "$ZDOTDIR/fast-syntax-highlighting"
     
     gc "$GH/nordtheme/dircolors" "$HOME/.local/share/dircolors"
-
-    gc "$GH/addy-dclxvi/openbox-theme-collections" \
-        "$HOME/.local/share/themes"
 }
 
 setup-stuff()
@@ -69,6 +70,8 @@ setup-stuff()
         eza
         bat
         feh
+        gvfs
+        rofi
         htop
         xclip
         neovim
@@ -77,15 +80,18 @@ setup-stuff()
         redshift
         alacritty
         man-pages
-        noto-fonts
+        xarchiver
         alsa-utils
         xorg-xinit
         xorg-server
         xorg-xinput
+        pcmanfm-gtk3
         arc-gtk-theme
+        ttf-liberation
         arc-icon-theme
         zsh-completions
         bash-completions
+        ttf-jetbrains-mono
         archlinux-wallpaper
         xcursor-vanilla-dmz
     )
