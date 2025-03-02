@@ -1,0 +1,33 @@
+border.width: 1
+padding.width: 10
+padding.height: 0
+window.handle.width: 0
+window.client.padding.width: 0
+
+osd.bg: Solid Flat
+osd.border.width: 1
+osd.bg.color: #2e3440
+osd.label.bg: Solid Flat
+osd.border.color: #000000
+osd.label.bg.color: #4c566a
+osd.label.text.color: #d8dee9
+
+menu.items.bg: Solid Flat
+menu.title.bg: Solid Flat
+menu.border.color: #000000
+menu.items.bg.color: #2e3440
+menu.items.text.color: #d8dee9
+menu.items.active.bg: Solid Flat
+menu.items.active.bg.color: #4c566a
+menu.items.active.text.color: #d8dee9
+menu.items.disabled.text.color: #bf616a
+
+window.*.*.bg: Solid Flat
+window.*.border.color: #000000
+window.*.button.*.bg: Solid Flat
+window.*.label.bg.color: #2e3440
+window.*.title.bg.color: #2e3440
+window.label.text.justify: Center
+window.*.label.text.color: #d8dee9
+window.*.button.*.bg.color: #2e3440
+window.*.button.*.image.color: #d8dee9
