@@ -1,13 +1,17 @@
-[general]
-live_config_reload = true 
+[terminal]
+shell = "zsh"
 
 [window.padding]
 x = 5
 y = 5
 
+[general]
+live_config_reload = true
+
 [font]
 size = 14
 builtin_box_drawing = false
+normal.family = "JetBrains Mono"
 
 [colors.bright]
 red = "#bf616a"
@@ -18,10 +22,6 @@ green = "#a3be8c"
 white = "#eceff4"
 yellow = "#ebcb8b"
 magenta = "#b48ead"
-
-[colors.cursor]
-text = "#2e3440"
-cursor = "#d8dee9"
 
 [colors.dim]
 red = "#94545d"
@@ -43,6 +43,14 @@ white = "#e5e9f0"
 yellow = "#ebcb8b"
 magenta = "#b48ead"
 
+[colors.cursor]
+text = "#2e3440"
+cursor = "#d8dee9"
+
+[colors.vi_mode_cursor]
+text = "#2e3440"
+cursor = "#d8dee9"
+
 [colors.primary]
 background = "#2e3440"
 foreground = "#d8dee9"
@@ -59,10 +67,3 @@ foreground = "CellBackground"
 [colors.selection]
 background = "#4c566a"
 text = "CellForeground"
-
-[colors.vi_mode_cursor]
-text = "#2e3440"
-cursor = "#d8dee9"
-
-[terminal]
-shell = "zsh"
