@@ -33,6 +33,7 @@ updt-plugins()
     PLUGINS=(
         "$BASE/vim"
         "$BASE/nvim-autopairs"
+        "$HOME/.local/brave-bin"
         "$BASE/nvim-colorizer.lua"
         "$HOME/.local/share/dircolors"
         "$ZDOTDIR/fast-syntax-highlighting"
@@ -60,6 +61,15 @@ setup-plugins()
         "$ZDOTDIR/fast-syntax-highlighting"
     
     gc "$GH/nordtheme/dircolors" "$HOME/.local/share/dircolors"
+
+    mkdir -p "$HOME/.local/share/icons/default"
+
+    echo '[Icon Theme]
+    Inherits=Vanilla-DMZ' > "$HOME/.local/share/icons/default/index.theme"
+
+    mkdir -p "$HOME/.local/share/themes/Custom/openbox-3"
+
+    mv "$HOME/.config/openbox/themerc" "$HOME/.local/share/themes/Custom/openbox-3"
 }
 
 setup-stuff()
