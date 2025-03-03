@@ -1,13 +1,5 @@
 @theme "/dev/null"
 
-configuration {
-    dpi: 96;
-    font: "Sans 12";
-    show-icons: true;
-    icon-theme: "Arc";
-    disable-history: true;
-}
-
 * {
     bg: #2e3440;
     fg: #d8dee9;
@@ -15,6 +7,14 @@ configuration {
     blue: #81a1c1;
     black: #4c566a;
     text-color: @fg;
+}
+
+configuration {
+    dpi: 96;
+    font: "Sans 12";
+    show-icons: true;
+    icon-theme: "Arc";
+    disable-history: true;
 }
 
 window {
