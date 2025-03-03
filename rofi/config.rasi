@@ -17,6 +17,7 @@ configuration {
     display-drun: "";
     icon-theme: "Arc";
     disable-history: true;
+    drun-display-format: "{name}";
 }
 
 window {
