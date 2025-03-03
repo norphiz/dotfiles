@@ -12,7 +12,9 @@
 configuration {
     dpi: 96;
     font: "Sans 12";
+    display-run: "";
     show-icons: true;
+    display-drun: "";
     icon-theme: "Arc";
     disable-history: true;
 }
