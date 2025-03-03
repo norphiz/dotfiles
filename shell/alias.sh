@@ -23,7 +23,7 @@ alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
 alias gc='git clone -q --depth 1'
 alias img='qemu-img create -f qcow2 disk.img'
-alias start-openbox='pidof -q openbox && clear || exec startx /usr/bin/openbox-session > /dev/null 2>&1'
+alias start-openbox='pidof -q openbox && clear || exec startx /usr/bin/openbox-session > /dev/null 2>&1 -- -nolisten local -dpi 96'
 alias vm='qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio -hda disk.img -bios /usr/share/edk2/x64/OVMF.4m.fd'
 
 updt-plugins()
@@ -33,9 +33,8 @@ updt-plugins()
     PLUGINS=(
         "$BASE/vim"
         "$BASE/nvim-autopairs"
-        "$HOME/.local/brave-bin"
+        "$HOME/.local/dircolors"
         "$BASE/nvim-colorizer.lua"
-        "$HOME/.local/share/dircolors"
         "$ZDOTDIR/fast-syntax-highlighting"
     )
 
