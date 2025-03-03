@@ -2,4 +2,4 @@ unset HISTFILE
 PS1='\[\e[1;34m\]\W\[\e[m\] $ '
 source "$HOME/.config/shell/env.sh"
 source "$HOME/.config/shell/alias.sh"
-eval "$(dircolors "$HOME/.local/share/dircolors/src/dir_colors")"
+eval "$(dircolors "$HOME/.local/dircolors/src/dir_colors")"
