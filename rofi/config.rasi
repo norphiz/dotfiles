@@ -1,8 +1,43 @@
+@theme "/dev/null"
+
 configuration {
+    dpi: 96;
+    font: "Sans 12";
     show-icons: true;
     icon-theme: "Arc";
     disable-history: true;
-    display-drun: "Search";
 }
 
-@theme "Arc-Dark"
+* {
+    bg: #2e3440;
+    fg: #d8dee9;
+    padding: 1px;
+    blue: #81a1c1;
+    black: #4c566a;
+    text-color: @fg;
+}
+
+window {
+    border: 1px;
+    width: 500px;
+    border-color: Black;
+    background-color: @bg;
+}
+
+element selected {
+    background-color: @black;
+}
+
+element-text, element-icon {
+    size: 32px;
+    background-color: inherit;
+}
+
+element, mainbox, prompt, entry {
+    background-color: @bg;
+}
+
+listview, inputbar, case-indicator {
+    lines: 10;
+    background-color: @bg;
+}
