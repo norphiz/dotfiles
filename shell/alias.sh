@@ -22,8 +22,10 @@ alias pscc='sudo pacman -Scc'
 alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
 alias gc='git clone -q --depth 1'
+alias on='iwctl station wlan0 connect'
+alias off='iwctl station wlan0 disconnect'
 alias img='qemu-img create -f qcow2 disk.img'
-alias start-openbox='pidof -q openbox && clear || exec startx /usr/bin/openbox-session > /dev/null 2>&1 -- -nolisten local -dpi 96'
+alias startx='pidof -q Xorg && clear || exec startx -- -nolisten local -nolisten tcp > /tmp/startx.log 2>&1'
 alias vm='qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio -hda disk.img -bios /usr/share/edk2/x64/OVMF.4m.fd'
 
 updt-plugins()
@@ -65,10 +67,6 @@ setup-plugins()
 
     echo '[Icon Theme]
     Inherits=Vanilla-DMZ' > "$HOME/.local/share/icons/default/index.theme"
-
-    mkdir -p "$HOME/.local/share/themes/Custom/openbox-3"
-
-    mv "$HOME/.config/openbox/themerc" "$HOME/.local/share/themes/Custom/openbox-3"
 }
 
 setup-stuff()
@@ -83,9 +81,10 @@ setup-stuff()
         rofi
         htop
         xclip
+        bspwm
+        sxhkd
         neovim
         man-db
-        openbox
         redshift
         alacritty
         man-pages
@@ -96,6 +95,7 @@ setup-stuff()
         xorg-server
         xorg-xinput
         pcmanfm-gtk3
+        xorg-xsetroot
         arc-gtk-theme
         arc-icon-theme
         zsh-completions
