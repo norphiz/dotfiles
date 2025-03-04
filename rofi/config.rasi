@@ -35,7 +35,6 @@ inputbar {
 
 listview {
     lines: 10;
-    columns: 2;
 }
 
 element {
