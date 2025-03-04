@@ -14,15 +14,17 @@ configuration {
 }
 
 * {
+    bg:#2e3440;
     text-color: #d8dee9;
+    accent-color: #81a1c1;
     background-color: transparent;
 }
 
 window {
     border: 1;
     padding: 10;
-    border-color: Black;
-    background-color: #2e3440;
+    background-color: @bg;
+    border-color: @accent-color;
 }
 
 inputbar {
@@ -41,8 +43,9 @@ element {
 }
 
 element selected {
+    text-color: @bg;
     border-radius: 5;
-    background-color: #4c566a;
+    background-color: @accent-color;
 }
 
 element-text, element-icon {
