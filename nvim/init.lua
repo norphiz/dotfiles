@@ -25,11 +25,10 @@ vim.api.nvim_set_keymap("n", "<C-s>", ":x<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<C-q>", ":q!<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<C-t>", ":tabnew<CR>", { silent = true })
 
-vim.api.nvim_create_autocmd("BufWinEnter", {
-    pattern = "*.txt", callback = function()
-        vim.cmd.winc("L")
-    end
-})
+if os.getenv("TERM") ~= "linux" then
+    vim.o.tgc = true
+    require("colorizer").setup()
+end
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "*", callback = function()
@@ -37,12 +36,11 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
-if os.getenv("TERM") ~= "linux" then
-    vim.o.tgc = true
-end
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    pattern = "*.txt", callback = function()
+        vim.cmd.winc("L")
+    end
+})
 
-if os.execute("test -d ~/.config/nvim/pack") == 0 then
-    vim.cmd.colo("nord")
-    require("colorizer").setup()
-    require("nvim-autopairs").setup()
-end
+vim.cmd.colo("nord")
+require("nvim-autopairs").setup()
