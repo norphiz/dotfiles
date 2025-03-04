@@ -2,14 +2,14 @@
 
 configuration {
     dpi: 96;
-    font: "Sans 12";
+    display-ssh: "";
     display-run: "";
     show-icons: true;
     display-drun: "";
-    display-ssh: "";
-    display-window: "";
     icon-theme: "Arc";
+    display-window: "";
     disable-history: true;
+    font: "DejaVu Sans 12";
     drun-display-format: "{name}";
 }
 
