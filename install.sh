@@ -121,7 +121,7 @@ read -r -p 'Enter username: ' NAME
 
 clear
 
-useradd -m "$NAME"
+useradd -m -G wheel "$NAME"
 
 passwd "$NAME"
 
