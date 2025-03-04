@@ -1,46 +1,52 @@
 @theme "/dev/null"
 
-* {
-    bg: #2e3440;
-    fg: #d8dee9;
-    padding: 1px;
-    blue: #81a1c1;
-    black: #4c566a;
-    text-color: @fg;
-}
-
 configuration {
     dpi: 96;
     font: "Sans 12";
     display-run: "";
     show-icons: true;
     display-drun: "";
+    display-ssh: "";
+    display-window: "";
     icon-theme: "Arc";
     disable-history: true;
     drun-display-format: "{name}";
 }
 
+* {
+    text-color: #d8dee9;
+    background-color: transparent;
+}
+
 window {
-    border: 1px;
-    width: 500px;
+    border: 1;
+    padding: 10;
     border-color: Black;
-    background-color: @bg;
+    background-color: #2e3440;
+}
+
+inputbar {
+    padding: 10;
+    border-radius: 5;
+    background-color: #373e4d;
+}
+
+listview {
+    lines: 10;
+    columns: 2;
+}
+
+element {
+    padding: 10;
 }
 
 element selected {
-    background-color: @black;
+    border-radius: 5;
+    background-color: #4c566a;
 }
 
 element-text, element-icon {
-    size: 32px;
+    size: 32;
+    text-color: inherit;
     background-color: inherit;
-}
-
-element, mainbox, prompt, entry {
-    background-color: @bg;
-}
-
-listview, inputbar, case-indicator {
-    lines: 10;
-    background-color: @bg;
 }
