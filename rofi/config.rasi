@@ -9,7 +9,7 @@ configuration {
     icon-theme: "Arc";
     display-window: "";
     disable-history: true;
-    font: "Liberation Sans 12";
+    font: "Liberation Sans 11";
     drun-display-format: "{name}";
 }
 
