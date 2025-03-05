@@ -23,28 +23,12 @@ alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
 alias gc='git clone -q --depth 1'
 alias on='iwctl station wlan0 connect'
+alias yy='xclip -selection clipboard -i'
 alias off='iwctl station wlan0 disconnect'
 alias img='qemu-img create -f qcow2 disk.img'
+alias updt-repos='find "$HOME" -name ".git" -type d | sed "s/.git//" | xargs -I{} git -C {} pull'
 alias startx='pidof -q Xorg && clear || exec startx -- -nolisten local -nolisten tcp > /tmp/startx.log 2>&1'
 alias vm='qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio -hda disk.img -bios /usr/share/edk2/x64/OVMF.4m.fd'
-
-updt-plugins()
-{
-    local INDEX PLUGINS BASE="$HOME/.config/nvim/pack/plugins/start"
-    
-    PLUGINS=(
-        "$BASE/vim"
-        "$BASE/nvim-autopairs"
-        "$HOME/.local/dircolors"
-        "$BASE/nvim-colorizer.lua"
-        "$ZDOTDIR/fast-syntax-highlighting"
-    )
-
-    for INDEX in "${PLUGINS[@]}"
-    do
-        git -C "$INDEX" pull
-    done
-}
 
 setup-plugins()
 {
@@ -87,20 +71,16 @@ setup-stuff()
         man-db
         redshift
         alacritty
-        man-pages
         xarchiver
         alsa-utils
         xorg-xinit
-        noto-fonts
         xorg-server
         xorg-xinput
         pcmanfm-gtk3
         xorg-xsetroot
-        arc-gtk-theme
-        arc-icon-theme
+        ttf-liberation
         zsh-completions
         bash-completions
-        archlinux-wallpaper
         xcursor-vanilla-dmz
     )
 
