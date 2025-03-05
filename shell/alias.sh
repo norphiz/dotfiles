@@ -45,7 +45,7 @@ setup-plugins()
     gc "$GH/zdharma-continuum/fast-syntax-highlighting" \
         "$ZDOTDIR/fast-syntax-highlighting"
     
-    gc "$GH/nordtheme/dircolors" "$HOME/.local/share/dircolors"
+    gc "$GH/nordtheme/dircolors" "$XDG_DATA_HOME/dircolors"
 
     mkdir -p "$HOME/.local/share/icons/default"
 
