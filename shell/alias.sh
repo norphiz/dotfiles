@@ -33,7 +33,7 @@ alias vm='qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio
 setup-plugins()
 {
     local GH="https://github.com" \
-        PACK="$HOME/.config/nvim/pack/plugins/start"
+        PACK="$XDG_CONFIG_HOME/nvim/pack/plugins/start"
 
     gc "$GH/nordtheme/vim" "$PACK/vim"
 
@@ -50,7 +50,7 @@ setup-plugins()
     mkdir -p "$HOME/.local/share/icons/default"
 
     echo '[Icon Theme]
-    Inherits=Vanilla-DMZ' > "$HOME/.local/share/icons/default/index.theme"
+    Inherits=Vanilla-DMZ' > "$XDG_DATA_HOME/icons/default/index.theme"
 }
 
 setup-stuff()
