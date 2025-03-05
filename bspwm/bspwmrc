@@ -10,6 +10,6 @@ pidof -q sxhkd || sxhkd &
 xsetroot -cursor_name left_ptr &
 pidof -q polybar || polybar -r &
 setxkbmap -layout br -model abnt2 &
-xrdb "$HOME/.config/xorg/Xresources" &
+xrdb "$XDG_CONFIG_HOME/xorg/Xresources" &
 xinput set-prop 9 'libinput Accel Profile Enabled' 0 1 0 &
 feh --no-fehbg --bg-scale /usr/share/backgrounds/archlinux/small.png &
