@@ -9,9 +9,9 @@ x = 5
 y = 5
 
 [font]
-size = 14
+size = 13
 builtin_box_drawing = false
-normal.family = "JetBrains Mono"
+normal.family = "Liberation Mono"
 
 [colors.bright]
 black = "#4c566a"
