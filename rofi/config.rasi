@@ -4,12 +4,12 @@ configuration {
     dpi: 96;
     display-ssh: "";
     display-run: "";
+    font: "Sans 11";
     show-icons: true;
     display-drun: "";
     icon-theme: "Arc";
     display-window: "";
     disable-history: true;
-    font: "Liberation Sans 11";
     drun-display-format: "{name}";
 }
 
