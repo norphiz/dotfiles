@@ -2,11 +2,11 @@
 
 configuration {
     dpi: 96;
+    font: "Sans 11";
     display-ssh: "";
     display-run: "";
-    font: "Sans 11";
-    show-icons: true;
     display-drun: "";
+    show-icons: true;
     icon-theme: "Arc";
     display-window: "";
     disable-history: true;
