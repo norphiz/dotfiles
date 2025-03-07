@@ -59,7 +59,7 @@ do
 
             mount -o fmask=0077,dmask=0077 "$UEFI" /mnt/boot
 
-            bootctl --esp-path=/mnt/boot install
+            bootctl -q --esp-path=/mnt/boot install
 
             echo 'timeout 0' > /mnt/boot/loader/loader.conf
 
