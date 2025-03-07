@@ -10,7 +10,6 @@ y = 5
 
 [font]
 size = 13
-builtin_box_drawing = false
 
 [colors.bright]
 black = "#4c566a"
