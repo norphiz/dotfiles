@@ -1,3 +1,5 @@
+// vi: ft=css
+
 @theme "/dev/null"
 
 configuration {
@@ -28,9 +30,11 @@ window {
 }
 
 inputbar {
+    border: 1;
     padding: 10;
     border-radius: 5;
     background-color: #373e4d;
+    border-color: @accent-color;
     children: [icon-search, entry];
 }
 
