@@ -38,7 +38,7 @@ do
 
             mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
-            bootctl --esp-path=/mnt/efi --boot-path=/mnt/boot install
+            bootctl -q --esp-path=/mnt/efi --boot-path=/mnt/boot install
             
             echo 'editor no
             timeout 10' > /mnt/efi/loader/loader.conf
@@ -140,6 +140,8 @@ then
 fi
 
 systemctl -q enable dhcpcd systemd-boot-update
+
+systemctl -q disable systemd-userdbd.socket
 
 rm "$0"
 
