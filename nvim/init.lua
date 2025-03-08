@@ -18,7 +18,7 @@ vim.o.fcs = "eob: "
 vim.o.cb = "unnamedplus"
 
 vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 10
+vim.g.netrw_winsize = 20
 vim.g.netrw_dirhistmax = 0
 
 vim.api.nvim_set_keymap("n", ";", ":", {})
