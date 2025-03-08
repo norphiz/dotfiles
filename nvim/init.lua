@@ -18,12 +18,14 @@ vim.o.fcs = "eob: "
 vim.o.cb = "unnamedplus"
 
 vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 10
 vim.g.netrw_dirhistmax = 0
 
 vim.api.nvim_set_keymap("n", ";", ":", {})
 vim.api.nvim_set_keymap("n", "<C-s>", ":x<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<C-q>", ":q!<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<C-t>", ":tabnew<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<Space>e", ":Lexplore<CR>", { silent = true })
 
 if os.getenv("TERM") ~= "linux" then
     vim.o.tgc = true
