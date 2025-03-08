@@ -2,10 +2,10 @@ XF86HomePage
     brave
 
 XF86AudioRaiseVolume
-    amixer set Master 5%+
+    amixer set Master 10%+
 
 XF86AudioLowerVolume
-    amixer set Master 5%-
+    amixer set Master 10%-
 
 XF86AudioMute
     amixer set Master toggle
