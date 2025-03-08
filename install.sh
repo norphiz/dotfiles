@@ -83,10 +83,9 @@ echo 'arch' > /mnt/etc/hostname
 
 echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
 
-echo 'FONT=ter-128b
-KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
+echo 'KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 
-sed -n '93,$p' "$0" > /mnt/chroot.sh
+sed -n '92,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash chroot.sh
 
