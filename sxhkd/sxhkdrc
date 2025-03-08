@@ -19,9 +19,6 @@ mod4 + Return
 mod4 + l
     rofi -show drun
 
-mod4 + @space
-    pkill -USR1 -x sxhkd
-
 mod4 + c
     bspc node -c
 
@@ -33,6 +30,9 @@ alt + Tab
 
 mod4 + m
     bspc desktop -l next
+
+mod4 + @space
+    pkill -USR1 -x sxhkd
 
 mod4 + f
     bspc node -t {floating,tiled}
