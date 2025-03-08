@@ -129,19 +129,26 @@ clear
 
 echo "$NAME ALL=(ALL:ALL) ALL" > /etc/sudoers.d/sudoers
 
-if test -e /usr/bin/iwctl
-then
-    mkdir /etc/iwd
-
-    echo '[Network]
-    NameResolvingService=resolvconf' >> /etc/iwd/main.conf
-
-    systemctl -q enable iwd
-fi
-
 systemctl -q enable dhcpcd systemd-boot-update
 
 systemctl -q disable systemd-userdbd.socket
+
+if test -e /usr/bin/iwctl
+then
+    systemctl -q enable iwd
+
+    mkdir /etc/iwd
+
+    echo '[Scan]
+DisableRoamingScan=true
+DisablePeriodicScan=true
+
+[General]
+AlwaysRandomizeAddress=true
+
+[Network]
+NameResolvingService=resolvconf' > /etc/iwd/main.conf
+fi
 
 rm "$0"
 
