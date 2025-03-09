@@ -25,7 +25,7 @@ vim.api.nvim_set_keymap("n", ";", ":", {})
 vim.api.nvim_set_keymap("n", "<C-s>", ":x<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<C-q>", ":q!<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<C-t>", ":tabnew<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<Space>e", ":Lexplore<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<C-e>", ":Lexplore<CR>", { silent = true })
 
 if os.getenv("TERM") ~= "linux" then
     vim.o.tgc = true
