@@ -87,9 +87,11 @@ setup-stuff()
         xorg-xinput
         pcmanfm-gtk3
         xorg-xsetroot
+        arc-icon-theme
         zsh-completions
         bash-completions
         xcursor-vanilla-dmz
+        arc-solid-gtk-theme
     )
 
     sudo pacman -S --needed "${STUFF[@]}"
