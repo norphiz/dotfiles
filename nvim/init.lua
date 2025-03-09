@@ -22,10 +22,10 @@ vim.g.netrw_winsize = 20
 vim.g.netrw_dirhistmax = 0
 
 vim.api.nvim_set_keymap("n", ";", ":", {})
-vim.api.nvim_set_keymap("n", "<C-s>", ":x<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<C-q>", ":q!<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<C-t>", ":tabnew<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<C-e>", ":Lexplore<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<A-s>", ":x<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<A-q>", ":q!<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<A-t>", ":tabnew<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<A-e>", ":Lexplore<CR>", { silent = true })
 
 if os.getenv("TERM") ~= "linux" then
     vim.o.tgc = true
