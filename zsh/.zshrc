@@ -13,4 +13,4 @@ bindkey "^[[H" beginning-of-line
 source "$HOME/.config/shell/env.sh"
 source "$HOME/.config/shell/alias.sh"
 eval "$(dircolors "$XDG_DATA_HOME/dircolors/src/dir_colors")"
-source "$ZDOTDIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
