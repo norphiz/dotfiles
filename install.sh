@@ -59,6 +59,8 @@ do
             initrd booster-linux.img
             options root=$(blkid "$ROOT" | awk '{print $2}') rw" > /mnt/boot/loader/entries/arch.conf
 
+            ln -s /mnt/usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
+
             clear
 
             break ;;
@@ -76,9 +78,13 @@ echo 'KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 echo '[zram0]
 compression-algorithm = zstd' > /mnt/etc/systemd/zram-generator.conf
 
-sed -n '83,$p' "$0" > /mnt/chroot.sh
+sed -n '89,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash chroot.sh
+
+umount -R /mnt
+
+reboot
 
 #!/bin/bash
 
