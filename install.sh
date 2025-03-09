@@ -94,7 +94,6 @@ PACKAGES=(
     sudo
     linux
     dhcpcd
-    booster
     intel-ucode
     glibc-locales
     linux-firmware
@@ -109,7 +108,7 @@ clear
 
 PACKAGES+=("${EXTRA[@]}")
 
-pacman -S --noconfirm "${PACKAGES[@]}"
+pacman -S "${PACKAGES[@]}"
 
 clear
 
