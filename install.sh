@@ -8,7 +8,7 @@ read -r -p 'Enter the uefi partition: ' UEFI
 
 read -r -p 'Enter the root partition: ' ROOT
 
-mkfs.ext4 -q -L ROOT "$ROOT"
+mkfs.ext4 -q "$ROOT"
 
 mount "$ROOT" /mnt
 
@@ -37,11 +37,11 @@ do
             echo 'editor no
             timeout 10' > /mnt/efi/loader/loader.conf
 
-            echo 'title Arch Linux
+            echo "title Arch Linux
             linux vmlinuz-linux
             initrd intel-ucode.img
             initrd booster-linux.img
-            options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
+            options root=$(blkid "$ROOT" | awk '{print $2}') rw" > /mnt/boot/loader/entries/arch.conf
 
             clear
 
@@ -53,11 +53,11 @@ do
 
             bootctl -q --esp-path=/mnt/boot install
 
-            echo 'title Arch Linux
+            echo "title Arch Linux
             linux vmlinuz-linux
             initrd intel-ucode.img
             initrd booster-linux.img
-            options root=LABEL=ROOT rw' > /mnt/boot/loader/entries/arch.conf
+            options root=$(blkid "$ROOT" | awk '{print $2}') rw" > /mnt/boot/loader/entries/arch.conf
 
             clear
 
@@ -91,7 +91,6 @@ PACKAGES=(
     booster
     intel-ucode
     glibc-locales
-    terminus-font
     linux-firmware
     zram-generator
 )
@@ -130,11 +129,7 @@ then
 
     mkdir /etc/iwd
 
-    echo '[Scan]
-DisableRoamingScan=true
-DisablePeriodicScan=true
-
-[General]
+    echo '[General]
 AlwaysRandomizeAddress=true
 
 [Network]
