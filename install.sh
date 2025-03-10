@@ -2,7 +2,7 @@
 
 set -eu
 
-fdisk -l
+lsblk
 
 read -r -p 'Enter the uefi partition: ' UEFI
 
@@ -22,7 +22,7 @@ do
 
     case "$DUAL" in
         [yY])
-            fdisk -l
+            lsblk
 
             read -r -p 'Enter boot partition: ' BOOT
 
@@ -81,6 +81,8 @@ compression-algorithm = zstd' > /mnt/etc/systemd/zram-generator.conf
 sed -n '89,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash chroot.sh
+
+exit
 
 umount -R /mnt
 
