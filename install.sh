@@ -59,8 +59,6 @@ do
             initrd booster-linux.img
             options root=$(blkid "$ROOT" | awk '{print $2}') rw" > /mnt/boot/loader/entries/arch.conf
 
-            ln -s /mnt/usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
-
             clear
 
             break ;;
@@ -78,7 +76,7 @@ echo 'KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 echo '[zram0]
 compression-algorithm = zstd' > /mnt/etc/systemd/zram-generator.conf
 
-sed -n '87,$p' "$0" > /mnt/chroot.sh
+sed -n '85,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash chroot.sh
 
@@ -97,6 +95,8 @@ PACKAGES=(
     linux-firmware
     zram-generator
 )
+
+ln -s /usr/share/zoneinfo/America/Fortaleza /etc/localtime
 
 echo "Packages to be installed: ${PACKAGES[*]}"
 
