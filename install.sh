@@ -59,6 +59,8 @@ do
             initrd booster-linux.img
             options root=$(blkid "$ROOT" | awk '{print $2}') rw" > /mnt/boot/loader/entries/arch.conf
 
+            ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
+
             clear
 
             break ;;
@@ -76,7 +78,7 @@ echo 'KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
 echo '[zram0]
 compression-algorithm = zstd' > /mnt/etc/systemd/zram-generator.conf
 
-sed -n '85,$p' "$0" > /mnt/chroot.sh
+sed -n '87,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash chroot.sh
 
@@ -96,9 +98,9 @@ PACKAGES=(
     xdg-user-dirs
     linux-firmware
     zram-generator
+    zsh-completions
+    zsh-syntax-highlighting
 )
-
-ln -s /usr/share/zoneinfo/America/Fortaleza /etc/localtime
 
 echo "Packages to be installed: ${PACKAGES[*]}"
 
@@ -116,13 +118,15 @@ read -r -p 'Enter username: ' NAME
 
 clear
 
-useradd -m -G wheel "$NAME"
+useradd -m -G wheel -s /usr/bin/zsh "$NAME"
 
 passwd "$NAME"
 
 clear
 
 echo "$NAME ALL=(ALL:ALL) ALL" > /etc/sudoers.d/sudoers
+
+echo 'export ZDOTDIR="$HOME/.config/zsh"' > /etc/zsh/zshenv
 
 systemctl -q enable dhcpcd systemd-boot-update
 
