@@ -90,7 +90,6 @@ PACKAGES=(
     sudo
     linux
     dhcpcd
-    xdg-utils
     intel-ucode
     glibc-locales
     xdg-user-dirs
