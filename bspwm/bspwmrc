@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 bspc monitor -d {0..9}
 bspc config window_gap 5
