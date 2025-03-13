@@ -133,6 +133,8 @@ systemctl -q disable systemd-userdbd.socket
 
 if test -e /usr/bin/iwctl; then
 
+    pacman -S wireless-regdb
+
     systemctl -q enable iwd
 
     mkdir /etc/iwd
