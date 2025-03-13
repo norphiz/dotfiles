@@ -12,7 +12,7 @@ mkfs.ext4 -q "$ROOT"
 
 mount "$ROOT" /mnt
 
-pacstrap -K /mnt base
+pacstrap -K -M /mnt base
 
 clear
 
