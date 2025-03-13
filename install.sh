@@ -39,7 +39,8 @@ do
 
             echo "title Arch Linux
             linux vmlinuz-linux
-            initrd intel-ucode.img booster-linux.img
+            initrd intel-ucode.img
+            initrd booster-linux.img
             options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
 
             clear
@@ -54,7 +55,8 @@ do
 
             echo "title Arch Linux
             linux vmlinuz-linux
-            initrd intel-ucode.img booster-linux.img
+            initrd intel-ucode.img
+            initrd booster-linux.img
             options root=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
 
             ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
