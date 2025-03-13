@@ -16,6 +16,8 @@ curl -s https://archlinux.org/mirrorlist/all/ | sed 's/#S/S/' -i /etc/pacman.d/m
 
 pacstrap -K /mnt base
 
+cat /etc/pacman.d/mirrorlist > /mnt/etc/pacman.d/mirrorlist
+
 clear
 
 while true; do
@@ -80,7 +82,7 @@ echo "KEYMAP=br-abnt2" > /mnt/etc/vconsole.conf
 echo "[zram0]
 compression-algorithm = zstd" > /mnt/etc/systemd/zram-generator.conf
 
-sed -n '91,$p' "$0" > /mnt/chroot.sh
+sed -n '93,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash chroot.sh
 
