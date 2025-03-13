@@ -12,11 +12,9 @@ mkfs.ext4 -q "$ROOT"
 
 mount "$ROOT" /mnt
 
-curl -s https://archlinux.org/mirrorlist/all/ | sed 's/#S/S/' -i /etc/pacman.d/mirrorlist
+curl -s https://archlinux.org/mirrorlist/all/ | sed 's/#S/S/' > /etc/pacman.d/mirrorlist
 
 pacstrap -K /mnt base
-
-cat /etc/pacman.d/mirrorlist > /mnt/etc/pacman.d/mirrorlist
 
 clear
 
