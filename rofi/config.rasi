@@ -35,13 +35,6 @@ inputbar {
     border-radius: 5;
     background-color: #373e4d;
     border-color: @accent-color;
-    children: [icon-search, entry];
-}
-
-icon-search {
-    size: 24;
-    expand: false;
-    filename: "search-symbolic";
 }
 
 listview {
