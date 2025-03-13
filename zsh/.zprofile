@@ -1,2 +1,1 @@
-source "$ZDOTDIR/.zshrc"
 startx
