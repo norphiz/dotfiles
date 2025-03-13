@@ -4,9 +4,9 @@ set -eu
 
 lsblk
 
-read -r -p 'Enter the uefi partition: ' UEFI
+read -r -p "Enter the uefi partition: " UEFI
 
-read -r -p 'Enter the root partition: ' ROOT
+read -r -p "Enter the root partition: " ROOT
 
 mkfs.ext4 -q "$ROOT"
 
@@ -16,15 +16,15 @@ pacstrap -K /mnt base
 
 clear
 
-while true
-do
-    read -r -p 'Are you dual booting? [N/y]: ' DUAL
+while true; do
+
+    read -r -p "Are you dual booting? [N/y]: " DUAL
 
     case "$DUAL" in
         [yY])
             lsblk
 
-            read -r -p 'Enter boot partition: ' BOOT
+            read -r -p "Enter boot partition: " BOOT
 
             mkfs.fat -F 32 "$BOOT"
 
@@ -34,8 +34,8 @@ do
 
             bootctl -q --esp-path=/mnt/efi --boot-path=/mnt/boot install
             
-            echo 'editor no
-            timeout 10' > /mnt/efi/loader/loader.conf
+            echo "editor no
+            timeout 10" > /mnt/efi/loader/loader.conf
 
             echo "title Arch Linux
             linux vmlinuz-linux
@@ -57,7 +57,7 @@ do
             linux vmlinuz-linux
             initrd intel-ucode.img
             initrd booster-linux.img
-            options root=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
+            options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
 
             ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
 
@@ -69,20 +69,20 @@ done
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-echo 'arch' > /mnt/etc/hostname
+echo "arch" > /mnt/etc/hostname
 
-echo 'LANG=en_US.UTF-8' > /mnt/etc/locale.conf
+echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 
-echo 'KEYMAP=br-abnt2' > /mnt/etc/vconsole.conf
+echo "KEYMAP=br-abnt2" > /mnt/etc/vconsole.conf
 
-echo '[zram0]
-compression-algorithm = zstd' > /mnt/etc/systemd/zram-generator.conf
+echo "[zram0]
+compression-algorithm = zstd" > /mnt/etc/systemd/zram-generator.conf
 
 sed -n '87,$p' "$0" > /mnt/chroot.sh
 
 arch-chroot /mnt bash chroot.sh
 
-exit
+reboot
 
 #!/bin/bash
 
@@ -103,7 +103,7 @@ PACKAGES=(
 
 echo "Packages to be installed: ${PACKAGES[*]}"
 
-read -r -p 'Enter extra packages to be installed: ' -a EXTRA
+read -r -p "Enter extra packages to be installed: " -a EXTRA
 
 clear
 
@@ -113,7 +113,7 @@ pacman -S "${PACKAGES[@]}"
 
 clear
 
-read -r -p 'Enter username: ' NAME
+read -r -p "Enter username: " NAME
 
 clear
 
@@ -131,17 +131,17 @@ systemctl -q enable dhcpcd systemd-boot-update
 
 systemctl -q disable systemd-userdbd.socket
 
-if test -e /usr/bin/iwctl
-then
+if test -e /usr/bin/iwctl; then
+
     systemctl -q enable iwd
 
     mkdir /etc/iwd
 
-    echo '[General]
+    echo "[General]
 AlwaysRandomizeAddress=true
 
 [Network]
-NameResolvingService=resolvconf' > /etc/iwd/main.conf
+NameResolvingService=resolvconf" > /etc/iwd/main.conf
 fi
 
 rm "$0"
