@@ -33,16 +33,6 @@ pacstrap -K /mnt
 
 clear
 
-read -r -p "Enter username: " NAME
-
-clear
-
-useradd -m -R /mnt -G wheel -k /dev/null -s /usr/bin/zsh "$NAME"
-
-passwd -R /mnt "$NAME"
-
-clear
-
 genfstab -U /mnt >> /mnt/etc/fstab
 
 echo "arch" > /mnt/etc/hostname
@@ -62,7 +52,17 @@ clear
 
 PACKAGES+=("${EXTRA[@]}")
 
-pacstrap /mnt "${PACKAGES[@]}"
+pacstrap -i /mnt "${PACKAGES[@]}"
+
+clear
+
+read -r -p "Enter username: " NAME
+
+clear
+
+useradd -m -R /mnt -G wheel -k /dev/null -s /usr/bin/zsh "$NAME"
+
+passwd -R /mnt "$NAME"
 
 clear
 
