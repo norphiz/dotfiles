@@ -27,7 +27,7 @@ mount "$ROOT" /mnt
 
 curl -s https://archlinux.org/mirrorlist/all/ -o /etc/pacman.d/mirrorlist
 
-sed 's/#S/S' -i /etc/pacman.d/mirrorlist
+sed 's/#S/S/' -i /etc/pacman.d/mirrorlist
 
 pacstrap -K /mnt
 
@@ -105,7 +105,7 @@ clear
 
 PACKAGES+=("${EXTRA[@]}")
 
-pacman --sysroot /mnt -S "${PACKAGES[@]}"
+pacstrap /mnt "${PACKAGES[@]}"
 
 clear
 
