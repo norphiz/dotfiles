@@ -112,7 +112,9 @@ while true; do
             linux vmlinuz-linux
             initrd intel-ucode.img
             initrd booster-linux.img
-            options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf ;;
+            options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
+            
+            break ;;
         [nN])
             mkfs.fat -F 32 "$UEFI" > /dev/null 2>&1
 
@@ -126,7 +128,9 @@ while true; do
             linux vmlinuz-linux
             initrd intel-ucode.img
             initrd booster-linux.img
-            options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf ;;
+            options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
+            
+            break ;;
     esac
 done
 
