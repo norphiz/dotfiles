@@ -20,9 +20,9 @@ PACKAGES=(
 
 lsblk
 
-read -r -p "Enter the uefi partition: " UEFI
+read -r -p "Enter uefi partition: " UEFI
 
-read -r -p "Enter the root partition: " ROOT
+read -r -p "Enter root partition: " ROOT
 
 mkfs.ext4 -q "$ROOT"
 
