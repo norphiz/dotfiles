@@ -43,14 +43,6 @@ echo "KEYMAP=br-abnt2" > /mnt/etc/vconsole.conf
 echo "[zram0]
 compression-algorithm = zstd" > /mnt/etc/systemd/zram-generator.conf
 
-read -r -p "Enter username: " NAME
-
-useradd -m -R /mnt -G wheel -k /dev/null -s /usr/bin/zsh "$NAME"
-
-passwd -R /mnt "$NAME"
-
-clear
-
 while true; do
 
     read -r -p "Are you dual booting? [N/y]: " ANSWER
@@ -107,6 +99,14 @@ read -r -p "Enter extra packages to be installed: " -a EXTRA
 PACKAGES+=("${EXTRA[@]}")
 
 pacstrap /mnt "${PACKAGES[@]}"
+
+clear
+
+read -r -p "Enter username: " NAME
+
+useradd -m -R /mnt -G wheel -k /dev/null -s /usr/bin/zsh "$NAME"
+
+passwd -R /mnt "$NAME"
 
 clear
 
