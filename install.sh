@@ -2,6 +2,8 @@
 
 set -eu
 
+clear
+
 PACKAGES=(
     sudo
     linux
@@ -31,56 +33,15 @@ pacstrap -K /mnt
 
 clear
 
-while true; do
+read -r -p "Enter username: " NAME
 
-    read -r -p "Are you dual booting? [N/y]: " DUAL
+clear
 
-    case "$DUAL" in
-        [yY])
-            lsblk
+useradd -m -R /mnt -G wheel -k /dev/null -s /usr/bin/zsh "$NAME"
 
-            read -r -p "Enter boot partition: " BOOT
+passwd -R /mnt "$NAME"
 
-            mkfs.fat -F 32 "$BOOT"
-
-            mount "$BOOT" /mnt/boot
-
-            mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
-
-            bootctl -q --esp-path=/mnt/efi --boot-path=/mnt/boot install
-            
-            echo "editor no
-            timeout 10" > /mnt/efi/loader/loader.conf
-
-            echo "title Arch Linux
-            linux vmlinuz-linux
-            initrd intel-ucode.img
-            initrd booster-linux.img
-            options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
-
-            clear
-
-            break ;;
-        [nN])
-            mkfs.fat -F 32 "$UEFI"
-
-            mount -o fmask=0077,dmask=0077 "$UEFI" /mnt/boot
-
-            bootctl -q --esp-path=/mnt/boot install
-
-            echo "title Arch Linux
-            linux vmlinuz-linux
-            initrd intel-ucode.img
-            initrd booster-linux.img
-            options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
-
-            ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
-
-            clear
-
-            break ;;
-    esac
-done
+clear
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
@@ -109,18 +70,6 @@ echo "$NAME ALL=(ALL:ALL) ALL" > /mnt/etc/sudoers.d/sudoers
 
 echo 'export ZDOTDIR="$HOME/.config/zsh"' > /mnt/etc/zsh/zshenv
 
-clear
-
-read -r -p "Enter username: " NAME
-
-clear
-
-useradd -m -R /mnt -G wheel -k /dev/null -s /usr/bin/zsh "$NAME"
-
-passwd -R /mnt "$NAME"
-
-clear
-
 ln -s /usr/lib/systemd/system/dhcpcd.service /mnt/etc/systemd/system/multi-user.target.wants
 
 rm -fr /mnt/etc/systemd/system/sockets.target.wants
@@ -137,6 +86,49 @@ if test -e /usr/bin/iwctl; then
 AddressRandomization=once
 AddressRandomizationRange=full" > /mnt/etc/iwd/main.conf
 fi
+
+while true; do
+
+    read -r -p "Are you dual booting? [N/y]: " DUAL
+
+    case "$DUAL" in
+        [yY])
+            lsblk
+
+            read -r -p "Enter boot partition: " BOOT
+
+            mkfs.fat -F 32 "$BOOT" > /dev/null 2>&1
+
+            mount "$BOOT" /mnt/boot
+
+            mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
+
+            bootctl -q --esp-path=/mnt/efi --boot-path=/mnt/boot install > /dev/null 2>&1
+
+            echo "editor no
+            timeout 10" > /mnt/efi/loader/loader.conf
+
+            echo "title Arch Linux
+            linux vmlinuz-linux
+            initrd intel-ucode.img
+            initrd booster-linux.img
+            options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf ;;
+        [nN])
+            mkfs.fat -F 32 "$UEFI" > /dev/null 2>&1
+
+            mount -o fmask=0077,dmask=0077 "$UEFI" /mnt/boot
+
+            bootctl -q --esp-path=/mnt/boot install > /dev/null 2>&1
+
+            ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
+
+            echo "title Arch Linux
+            linux vmlinuz-linux
+            initrd intel-ucode.img
+            initrd booster-linux.img
+            options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf ;;
+    esac
+done
 
 umount -R /mnt
 
