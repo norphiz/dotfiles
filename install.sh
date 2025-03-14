@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 set -eu
 
@@ -8,6 +8,7 @@ PACKAGES=(
     sudo
     linux
     dhcpcd
+    booster
     intel-ucode
     glibc-locales
     xdg-user-dirs
@@ -52,9 +53,9 @@ clear
 
 while true; do
 
-    read -r -p "Are you dual booting? [N/y]: " DUAL
+    read -r -p "Are you dual booting? [N/y]: " ANSWER
 
-    case "$DUAL" in
+    case "$ANSWER" in
         [yY])
             lsblk
 
@@ -105,7 +106,7 @@ read -r -p "Enter extra packages to be installed: " -a EXTRA
 
 PACKAGES+=("${EXTRA[@]}")
 
-pacstrap -i /mnt "${PACKAGES[@]}"
+pacstrap /mnt "${PACKAGES[@]}"
 
 clear
 
