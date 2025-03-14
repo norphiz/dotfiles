@@ -144,10 +144,8 @@ if test -e /usr/bin/iwctl; then
     mkdir /etc/iwd
 
     echo "[General]
-AlwaysRandomizeAddress=true
-
-[Network]
-NameResolvingService=resolvconf" > /etc/iwd/main.conf
+AddressRandomization=once
+AddressRandomizationRange=full" > /etc/iwd/main.conf
 fi
 
 rm "$0"
