@@ -2,6 +2,19 @@
 
 set -eu
 
+PACKAGES=(
+    sudo
+    linux
+    dhcpcd
+    intel-ucode
+    glibc-locales
+    xdg-user-dirs
+    linux-firmware
+    zram-generator
+    zsh-completions
+    zsh-syntax-highlighting
+)
+
 lsblk
 
 read -r -p "Enter the uefi partition: " UEFI
@@ -12,13 +25,15 @@ mkfs.ext4 -q "$ROOT"
 
 mount "$ROOT" /mnt
 
-curl -s https://archlinux.org/mirrorlist/all/ | sed -n 's/#S/S/;w /etc/pacman.d/mirrorlist'
+curl -s https://archlinux.org/mirrorlist/all/ -o /etc/pacman.d/mirrorlist
 
-pacstrap -K /mnt base
+sed 's/#S/S' -i /etc/pacman.d/mirrorlist
+
+pacstrap -K /mnt
 
 clear
 
-cat /etc/pacman.d/mirrorlist > /mnt/etc/pacman.d/mirrorlist
+cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 
 while true; do
 
@@ -82,29 +97,6 @@ echo "KEYMAP=br-abnt2" > /mnt/etc/vconsole.conf
 echo "[zram0]
 compression-algorithm = zstd" > /mnt/etc/systemd/zram-generator.conf
 
-sed -n '91,$p' "$0" > /mnt/chroot.sh
-
-arch-chroot /mnt bash chroot.sh
-
-exit
-
-#!/bin/bash
-
-set -eu
-
-PACKAGES=(
-    sudo
-    linux
-    dhcpcd
-    intel-ucode
-    glibc-locales
-    xdg-user-dirs
-    linux-firmware
-    zram-generator
-    zsh-completions
-    zsh-syntax-highlighting
-)
-
 echo "Packages to be installed: ${PACKAGES[*]}"
 
 read -r -p "Enter extra packages to be installed: " -a EXTRA
@@ -113,7 +105,13 @@ clear
 
 PACKAGES+=("${EXTRA[@]}")
 
-pacman -S "${PACKAGES[@]}"
+pacman --sysroot /mnt -S "${PACKAGES[@]}"
+
+clear
+
+echo "$NAME ALL=(ALL:ALL) ALL" > /mnt/etc/sudoers.d/sudoers
+
+echo 'export ZDOTDIR="$HOME/.config/zsh"' > /mnt/etc/zsh/zshenv
 
 clear
 
@@ -121,25 +119,21 @@ read -r -p "Enter username: " NAME
 
 clear
 
-useradd -m -G wheel -k /dev/null -s /usr/bin/zsh "$NAME"
+useradd -m -R /mnt -G wheel -k /dev/null -s /usr/bin/zsh "$NAME"
 
-passwd "$NAME"
+passwd -R /mnt "$NAME"
 
 clear
 
-echo "$NAME ALL=(ALL:ALL) ALL" > /etc/sudoers.d/sudoers
+ln -s /usr/lib/systemd/system/dhcpcd.service /mnt/etc/systemd/system/multi-user.target.wants
 
-echo 'export ZDOTDIR="$HOME/.config/zsh"' > /etc/zsh/zshenv
-
-systemctl -q enable dhcpcd systemd-boot-update
-
-systemctl -q disable systemd-userdbd.socket
+rm -fr /mnt/etc/systemd/system/sockets.target.wants
 
 if test -e /usr/bin/iwctl; then
 
     pacman -S wireless-regdb
-
-    systemctl -q enable iwd
+    
+    ln -s /usr/lib/systemd/system/iwd.service /mnt/etc/systemd/system/multi-user.target.wants
 
     mkdir /etc/iwd
 
@@ -147,7 +141,3 @@ if test -e /usr/bin/iwctl; then
 AddressRandomization=once
 AddressRandomizationRange=full" > /etc/iwd/main.conf
 fi
-
-rm "$0"
-
-exit
