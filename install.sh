@@ -48,8 +48,6 @@ echo "Packages to be installed: ${PACKAGES[*]}"
 
 read -r -p "Enter extra packages to be installed: " -a EXTRA
 
-clear
-
 PACKAGES+=("${EXTRA[@]}")
 
 pacstrap -i /mnt "${PACKAGES[@]}"
@@ -57,8 +55,6 @@ pacstrap -i /mnt "${PACKAGES[@]}"
 clear
 
 read -r -p "Enter username: " NAME
-
-clear
 
 useradd -m -R /mnt -G wheel -k /dev/null -s /usr/bin/zsh "$NAME"
 
