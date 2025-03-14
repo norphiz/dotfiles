@@ -131,7 +131,7 @@ rm -fr /mnt/etc/systemd/system/sockets.target.wants
 
 if test -e /usr/bin/iwctl; then
 
-    pacman --sysroot /mnt -S wireless-regdb
+    pacstrap /mnt wireless-regdb
     
     ln -s /usr/lib/systemd/system/iwd.service /mnt/etc/systemd/system/multi-user.target.wants
 
