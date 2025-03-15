@@ -5,6 +5,7 @@ set -eu
 clear
 
 PACKAGES=(
+    base
     sudo
     linux
     dhcpcd
@@ -28,19 +29,6 @@ mkfs.ext4 -q "$ROOT"
 
 mount "$ROOT" /mnt
 
-pacstrap -K /mnt
-
-clear
-
-echo "arch" > /mnt/etc/hostname
-
-echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
-
-echo "KEYMAP=br-abnt2" > /mnt/etc/vconsole.conf
-
-echo "[zram0]
-compression-algorithm = zstd" > /mnt/etc/systemd/zram-generator.conf
-
 while true; do
 
     read -r -p "Are you dual booting? [N/y]: " ANSWER
@@ -53,7 +41,7 @@ while true; do
 
             mkfs.fat -F 32 "$BOOT" > /dev/null 2>&1
 
-            mount "$BOOT" /mnt/boot
+            mount -m "$BOOT" /mnt/boot
 
             mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
@@ -72,11 +60,9 @@ while true; do
         [nN])
             mkfs.fat -F 32 "$UEFI" > /dev/null 2>&1
 
-            mount -o fmask=0077,dmask=0077 "$UEFI" /mnt/boot
+            mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/boot
 
             bootctl install --esp-path=/mnt/boot > /dev/null 2>&1
-
-            ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
 
             echo "title Arch Linux
             linux vmlinuz-linux
@@ -88,17 +74,28 @@ while true; do
     esac
 done
 
-genfstab -U /mnt >> /mnt/etc/fstab
-
 echo "Packages to be installed: ${PACKAGES[*]}"
 
 read -r -p "Enter extra packages to be installed: " -a EXTRA
 
 PACKAGES+=("${EXTRA[@]}")
 
-pacstrap /mnt "${PACKAGES[@]}"
+pacstrap -K /mnt "${PACKAGES[@]}"
 
 clear
+
+echo "arch" > /mnt/etc/hostname
+
+echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
+
+echo "KEYMAP=br-abnt2" > /mnt/etc/vconsole.conf
+
+echo "[zram0]
+compression-algorithm = zstd" > /mnt/etc/systemd/zram-generator.conf
+
+ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
+
+genfstab -U /mnt >> /mnt/etc/fstab
 
 read -r -p "Enter username: " NAME
 
