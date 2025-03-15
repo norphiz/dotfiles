@@ -28,8 +28,6 @@ mkfs.ext4 -q "$ROOT"
 
 mount "$ROOT" /mnt
 
-reflector -a 1 -c br -p https --sort rate --save /etc/pacman.d/mirrorlist
-
 pacstrap -K /mnt
 
 clear
