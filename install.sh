@@ -114,15 +114,11 @@ echo "$NAME ALL=(ALL:ALL) ALL" > /mnt/etc/sudoers.d/sudoers
 
 echo 'export ZDOTDIR="$HOME/.config/zsh"' > /mnt/etc/zsh/zshenv
 
-ln -s /usr/lib/systemd/system/dhcpcd.service /mnt/etc/systemd/system/multi-user.target.wants
-
-rm -fr /mnt/etc/systemd/system/sockets.target.wants
-
 if test -e /mnt/usr/bin/iwctl; then
 
     pacstrap /mnt wireless-regdb
-    
-    ln -s /usr/lib/systemd/system/iwd.service /mnt/etc/systemd/system/multi-user.target.wants
+
+    arch-chroot /mnt systemctl -q enable iwd
 
     mkdir /mnt/etc/iwd
 
@@ -131,6 +127,8 @@ AddressRandomization=once
 AddressRandomizationRange=full" > /mnt/etc/iwd/main.conf
 fi
 
-umount -R /mnt
+arch-chroot /mnt systemctl -q enable dhcpcd systemd-boot-update
 
-reboot
+arch-chroot /mnt systemctl -q disable systemd-userdbd.socket
+
+umount -R /mnt
