@@ -59,7 +59,7 @@ while true; do
 
             mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
 
-            bootctl --esp-path=/mnt/efi --boot-path=/mnt/boot install > /dev/null 2>&1
+            bootctl install --esp-path=/mnt/efi --boot-path=/mnt/boot > /dev/null 2>&1
 
             echo "editor no
             timeout 10" > /mnt/efi/loader/loader.conf
@@ -76,7 +76,7 @@ while true; do
 
             mount -o fmask=0077,dmask=0077 "$UEFI" /mnt/boot
 
-            bootctl --esp-path=/mnt/boot install > /dev/null 2>&1
+            bootctl install --esp-path=/mnt/boot > /dev/null 2>&1
 
             ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
 
