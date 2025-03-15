@@ -56,14 +56,13 @@ if test "${ANSWER,,}" = 'y'; then
 
     bootctl install --esp-path=/mnt/efi --boot-path=/mnt/boot > /dev/null 2>&1
 
-    echo "editor no
-    timeout 10" > /mnt/efi/loader/loader.conf
+    echo "timeout 10" > /mnt/efi/loader/loader.conf
 
     echo "title Arch Linux
-    linux vmlinuz-linux
-    initrd intel-ucode.img
-    initrd booster-linux.img
-    options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
+linux vmlinuz-linux
+initrd intel-ucode.img
+initrd booster-linux.img
+options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
 elif test "${ANSWER,,}" = 'n'; then
     mkfs.fat -F 32 "$UEFI" > /dev/null 2>&1
 
@@ -74,10 +73,10 @@ elif test "${ANSWER,,}" = 'n'; then
     ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
 
     echo "title Arch Linux
-    linux vmlinuz-linux
-    initrd intel-ucode.img
-    initrd booster-linux.img
-    options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
+linux vmlinuz-linux
+initrd intel-ucode.img
+initrd booster-linux.img
+options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
 else
     return 1
 fi
