@@ -8,6 +8,7 @@ PKGS=(
     "linux"
     "dhcpcd"
     "booster"
+    "intel-ucode"
     "glibc-locales"
     "zram-generator"
     "zsh-completions"
