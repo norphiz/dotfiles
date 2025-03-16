@@ -25,7 +25,7 @@ if test "${DUALBOOT,,}" = "y"; then
 
     mount -m "$BOOT" /mnt/boot
 
-    read -rp "Install linux-firmware? [y/n]: " FIRMWARE
+    read -r -p "Install linux-firmware? [y/n]: " FIRMWARE
 
     if test "${FIRMWARE,,}" = "y"; then
         PKGS+=("iwd" "linux-firmware" "wireless-regdb")
