@@ -24,6 +24,12 @@ read -r -p "Enter esp and root partition: " -a PARTITIONS
 
 read -r -p "Are you dual booting? [y/n]: " DUALBOOT
 
+read -r -p "Install linux-firmware? [y/n]: " FIRMWARE
+
+if test "${FIRMWARE,,}" = "y"; then
+    PKGS+=("iwd" "wireless-regdb" "linux-firmware")
+fi
+
 if test "${DUALBOOT,,}" = "y"; then
     read -r -p "Enter boot partition: " BOOT
 
@@ -36,12 +42,6 @@ if test "${DUALBOOT,,}" = "y"; then
     mount -m -o fmask=0077,dmask=0077 "${PARTITIONS[0]}" /mnt/efi
 
     mount -m "$BOOT" /mnt/boot
-
-    read -r -p "Install linux-firmware? [y/n]: " FIRMWARE
-
-    if test "${FIRMWARE,,}" = "y"; then
-        PKGS+=("iwd" "linux-firmware" "wireless-regdb")
-    fi
 
     pacstrap -K /mnt "${PKGS[@]}" && clear
 
@@ -63,12 +63,6 @@ elif test "${DUALBOOT,,}" = "n"; then
 
     mount -m -o fmask=0077,dmask=0077 "${PARTITIONS[0]}" /mnt/boot
     
-    read -r -p "Install linux-firmware? [y/n]: " FIRMWARE
-
-    if test "${FIRMWARE,,}" = "y"; then
-        PKGS+=("iwd" "wireless-regdb" "linux-firmware")
-    fi
-
     pacstrap -K /mnt "${PKGS[@]}" && clear
 
     ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
