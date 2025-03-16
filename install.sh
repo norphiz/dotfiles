@@ -42,7 +42,7 @@ if test "${DUALBOOT,,}" = "y"; then
 
     pacstrap -K /mnt "${PKGS[@]}" && clear
 
-    bootctl install --esp-path=/mnt/efi --boot-path=/mnt/boot > /dev/null
+    bootctl install --esp-path=/mnt/efi --boot-path=/mnt/boot > /dev/null 2>&1
 
     echo "timeout 10" > /mnt/efi/loader/loader.conf
 
@@ -70,7 +70,7 @@ elif test "${DUALBOOT,,}" = "n"; then
 
     ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
 
-    bootctl install --esp-path=/mnt/boot > /dev/null
+    bootctl install --esp-path=/mnt/boot > /dev/null 2>&1
     
     echo "title Arch Linux
 linux vmlinuz-linux
@@ -87,7 +87,7 @@ useradd -m -R /mnt -G wheel -k /dev/null -s /usr/bin/zsh "$NAME"
 
 passwd -R /mnt "$NAME" && clear
 
-genstab -U /mnt >> /mnt/etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt systemctl -q enable dhcpcd systemd-boot-update
 
