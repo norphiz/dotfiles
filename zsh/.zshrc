@@ -57,7 +57,7 @@ function ex
 
 function setup-stuff
 {
-    local PKGS GH="https://github.com" \
+    local GH="https://github.com" \
         PACK="$XDG_CONFIG_HOME/nvim/pack/plugins/start"
 
     gc "$GH/nordtheme/vim" "$PACK/vim"
@@ -69,41 +69,38 @@ function setup-stuff
 
     gc "$GH/nordtheme/dircolors" "$XDG_DATA_HOME/dircolors"
 
-    mkdir -p "$HOME/.local/share/icons/default"
+    mkdir -p "$XDG_DATA_HOME/icons/default"
 
-    echo '[Icon Theme]
-    Inherits=Vanilla-DMZ' > "$XDG_DATA_HOME/icons/default/index.theme"
+    echo "[Icon Theme]
+Inherits=Vanilla-DMZ" > "$XDG_DATA_HOME/icons/default/index.theme"
 
-    PKGS=(
-        eza
-        bat
-        feh
-        gvfs
-        rofi
-        htop
-        xclip
-        bspwm
-        sxhkd
-        neovim
-        man-db
-        polybar
-        redshift
-        alacritty
-        xarchiver
-        ttf-dejavu
-        alsa-utils
-        xorg-xinit
-        xorg-server
-        xorg-xinput
-        pcmanfm-gtk3
-        xorg-xsetroot
-        arc-icon-theme
-        zsh-completions
-        bash-completions
-        xcursor-vanilla-dmz
-        arc-solid-gtk-theme
-        zsh-syntax-highlighting
-    )
-
-    sudo pacman -S --needed "${STUFF[@]}"
+    sudo pacman -S --needed             \
+        eza                             \
+        bat                             \
+        feh                             \
+        gvfs                            \
+        rofi                            \
+        htop                            \
+        xclip                           \
+        bspwm                           \
+        sxhkd                           \
+        neovim                          \
+        polybar                         \
+        redshift                        \
+        alacritty                       \
+        xarchiver                       \
+        ttf-dejavu                      \
+        noto-fonts                      \
+        alsa-utils                      \
+        xorg-xinit                      \
+        xorg-server                     \
+        xorg-xinput                     \
+        pcmanfm-gtk3                    \
+        polkit-gnome                    \
+        xorg-xsetroot                   \
+        arc-icon-theme                  \
+        arc-solid-gtk-theme             \
+        xcursor-vanilla-dmz             \
+        zsh-syntax-highlighting         \
+        ttf-nerd-fonts-symbols-mono
 }
