@@ -2,59 +2,38 @@
 
 set -eu
 
-clear
+PKGS=("base" "sudo" "linux" "dhcpcd" "booster" "glibc-locales" "zram-generator")
 
-PACKAGES=(
-    sudo
-    linux
-    dhcpcd
-    booster
-    intel-ucode
-    glibc-locales
-    xdg-user-dirs
-    linux-firmware
-    zram-generator
-    zsh-completions
-    zsh-syntax-highlighting
-)
+cfdisk && clear
 
 lsblk
 
-read -r -p "Enter uefi partition: " UEFI
+read -r -p "Enter esp and root partition: " -a PARTITIONS && clear
 
-read -r -p "Enter root partition: " ROOT
+read -r -p "Are you dual booting? [y/n]: " DUALBOOT
 
-mkfs.ext4 -q "$ROOT"
+if test "${DUALBOOT,,}" = "y"; then
+    read -rp "Enter boot partition: " BOOT
 
-mount "$ROOT" /mnt
+    mkfs.fat -F 32 "$BOOT" > /dev/null
 
-pacstrap -K /mnt
+    mkfs.ext4 -q "${PARTITIONS[1]}"
 
-clear
+    mount "${PARTITIONS[1]}" /mnt
 
-echo "arch" > /mnt/etc/hostname
+    mount -m -o fmask=0077,dmask=0077 "${PARTITIONS[0]}" /mnt/efi
 
-echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
+    mount -m "$BOOT" /mnt/boot
 
-echo "KEYMAP=br-abnt2" > /mnt/etc/vconsole.conf
+    read -rp "Install linux-firmware? [y/n]: " FIRMWARE
 
-echo "[zram0]
-compression-algorithm = zstd" > /mnt/etc/systemd/zram-generator.conf
+    if test "${FIRMWARE,,}" = "y"; then
+        PKGS+=("iwd" "linux-firmware" "wireless-regdb")
+    fi
 
-read -r -p 'Are you dual booting? [y/n]: ' ANSWER
+    pacstrap -K /mnt "${PKGS[@]}"
 
-if test "${ANSWER,,}" = 'y'; then 
-    lsblk
-
-    read -r -p "Enter boot partition: " BOOT
-
-    mkfs.fat -F 32 "$BOOT" > /dev/null 2>&1
-
-    mount "$BOOT" /mnt/boot
-
-    mount -m -o fmask=0077,dmask=0077 "$UEFI" /mnt/efi
-
-    bootctl install --esp-path=/mnt/efi --boot-path=/mnt/boot > /dev/null 2>&1
+    bootctl install --esp-path=/mnt/efi --boot-path=/mnt/boot > /dev/null
 
     echo "timeout 10" > /mnt/efi/loader/loader.conf
 
@@ -62,52 +41,50 @@ if test "${ANSWER,,}" = 'y'; then
 linux vmlinuz-linux
 initrd intel-ucode.img
 initrd booster-linux.img
-options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
-elif test "${ANSWER,,}" = 'n'; then
-    mkfs.fat -F 32 "$UEFI" > /dev/null 2>&1
+options root=UUID=$(blkid "${PARTITIONS[1]}" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
+elif test "${DUALBOOT,,}" = "n"; then
+    mkfs.fat -F 32 "${PARTITIONS[0]}" > /dev/null
 
-    mount -o fmask=0077,dmask=0077 "$UEFI" /mnt/boot
+    mkfs.ext4 -q "${PARTITIONS[1]}"
 
-    bootctl install --esp-path=/mnt/boot > /dev/null 2>&1
+    mount "${PARTITIONS[1]}" /mnt
+
+    mount -m -o fmask=0077,dmask=0077 "${PARTITIONS[0]}" /mnt/boot
+    
+    read -r -p "Install linux-firmware? [y/n]: " FIRMWARE
+
+    if test "${FIRMWARE,,}" = "y"; then
+        PKGS+=("iwd" "wireless-regdb" "linux-firmware")
+    fi
+
+    pacstrap -K /mnt "${PKGS[@]}"
 
     ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
 
+    bootctl install --esp-path=/mnt/boot > /dev/null
+    
     echo "title Arch Linux
 linux vmlinuz-linux
 initrd intel-ucode.img
 initrd booster-linux.img
-options root=UUID=$(blkid "$ROOT" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
+options root=UUID=$(blkid "${PARTITIONS[1]}" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
 else
     return 1
 fi
 
-genfstab -U /mnt >> /mnt/etc/fstab
+read -rp "Enter username: " NAME && clear
 
-echo "Packages to be installed: ${PACKAGES[*]}"
+useradd -m -R /mnt -G wheel "$NAME"
 
-read -r -p "Enter extra packages to be installed: " -a EXTRA
+passwd -R /mnt "$NAME" && clear
 
-PACKAGES+=("${EXTRA[@]}")
+genstab -U /mnt >> /mnt/etc/fstab
 
-pacstrap /mnt "${PACKAGES[@]}"
+arch-chroot /mnt systemctl -q enable dhcpcd systemd-boot-update
 
-clear
+arch-chroot /mnt systemctl -q disable systemd-userdbd.socket
 
-read -r -p "Enter username: " NAME
-
-useradd -m -R /mnt -G wheel -k /dev/null -s /usr/bin/zsh "$NAME"
-
-passwd -R /mnt "$NAME"
-
-clear
-
-echo "$NAME ALL=(ALL:ALL) ALL" > /mnt/etc/sudoers.d/sudoers
-
-echo 'export ZDOTDIR="$HOME/.config/zsh"' > /mnt/etc/zsh/zshenv
-
-if test -e /mnt/usr/bin/iwctl; then
-    pacstrap /mnt wireless-regdb
-
+if test "${FIRMWARE,,}" = "y"; then
     arch-chroot /mnt systemctl -q enable iwd
 
     mkdir /mnt/etc/iwd
@@ -117,8 +94,15 @@ AddressRandomization=once
 AddressRandomizationRange=full" > /mnt/etc/iwd/main.conf
 fi
 
-arch-chroot /mnt systemctl -q enable dhcpcd systemd-boot-update
+echo "arch" > /mnt/etc/hostname
 
-arch-chroot /mnt systemctl -q disable systemd-userdbd.socket
+echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
+
+echo "KEYMAP=br-abnt2" > /mnt/etc/vconsole.conf
+
+echo "$NAME ALL=(ALL:ALL) ALL" > /mnt/etc/sudoers.d/sudoers
+
+echo "[zram0]
+compression-algorithm = zstd" > /mnt/etc/systemd/zram-generator.conf
 
 umount -R /mnt
