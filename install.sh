@@ -2,18 +2,27 @@
 
 set -eu
 
-PKGS=("base" "sudo" "linux" "dhcpcd" "booster" "glibc-locales" "zram-generator")
+PKGS=(
+    "base"
+    "sudo"
+    "linux"
+    "dhcpcd"
+    "booster"
+    "glibc-locales"
+    "zram-generator"
+    "zsh-completions"
+)
 
 cfdisk && clear
 
 lsblk
 
-read -r -p "Enter esp and root partition: " -a PARTITIONS && clear
+read -r -p "Enter esp and root partition: " -a PARTITIONS
 
 read -r -p "Are you dual booting? [y/n]: " DUALBOOT
 
 if test "${DUALBOOT,,}" = "y"; then
-    read -rp "Enter boot partition: " BOOT
+    read -r -p "Enter boot partition: " BOOT
 
     mkfs.fat -F 32 "$BOOT" > /dev/null
 
@@ -31,7 +40,7 @@ if test "${DUALBOOT,,}" = "y"; then
         PKGS+=("iwd" "linux-firmware" "wireless-regdb")
     fi
 
-    pacstrap -K /mnt "${PKGS[@]}"
+    pacstrap -K /mnt "${PKGS[@]}" && clear
 
     bootctl install --esp-path=/mnt/efi --boot-path=/mnt/boot > /dev/null
 
@@ -57,7 +66,7 @@ elif test "${DUALBOOT,,}" = "n"; then
         PKGS+=("iwd" "wireless-regdb" "linux-firmware")
     fi
 
-    pacstrap -K /mnt "${PKGS[@]}"
+    pacstrap -K /mnt "${PKGS[@]}" && clear
 
     ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
 
@@ -69,12 +78,12 @@ initrd intel-ucode.img
 initrd booster-linux.img
 options root=UUID=$(blkid "${PARTITIONS[1]}" -s UUID -o value) rw quiet" > /mnt/boot/loader/entries/arch.conf
 else
-    return 1
+    exit 1
 fi
 
-read -rp "Enter username: " NAME && clear
+read -r -p "Enter username: " NAME
 
-useradd -m -R /mnt -G wheel "$NAME"
+useradd -m -R /mnt -G wheel -k /dev/null -s /usr/bin/zsh "$NAME"
 
 passwd -R /mnt "$NAME" && clear
 
@@ -101,6 +110,8 @@ echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 echo "KEYMAP=br-abnt2" > /mnt/etc/vconsole.conf
 
 echo "$NAME ALL=(ALL:ALL) ALL" > /mnt/etc/sudoers.d/sudoers
+
+echo 'export ZDOTDIR="$HOME/.config/zsh"' > /mnt/etc/zsh/zshenv
 
 echo "[zram0]
 compression-algorithm = zstd" > /mnt/etc/systemd/zram-generator.conf
