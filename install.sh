@@ -30,9 +30,7 @@ mkfs.ext4 -q "${PARTITIONS[1]}"
 
 mount "${PARTITIONS[1]}" /mnt
 
-if test "${FIRMWARE,,}" = "y"; then
-    PKGS+=("iwd" "wireless-regdb" "linux-firmware")
-fi
+test "${FIRMWARE,,}" = "y" && PKGS+=("iwd" "wireless-regdb" "linux-firmware")
 
 if test "${DUALBOOT,,}" = "y"; then
     read -r -p "Enter boot partition: " BOOT
