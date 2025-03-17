@@ -26,9 +26,7 @@ read -r -p "Are you dual booting? [y/n]: " DUALBOOT
 
 read -r -p "Install linux-firmware? [y/n]: " FIRMWARE
 
-mkfs.ext4 -q "${PARTITIONS[1]}"
-
-mount "${PARTITIONS[1]}" /mnt
+mkfs.ext4 -q "${PARTITIONS[1]}" && mount "${PARTITIONS[1]}" /mnt
 
 test "${FIRMWARE,,}" = "y" && PKGS+=("iwd" "wireless-regdb" "linux-firmware")
 
