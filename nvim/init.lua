@@ -29,7 +29,6 @@ vim.api.nvim_set_keymap("n", "<A-e>", ":Lexplore<CR>", { silent = true })
 
 if os.getenv("TERM") ~= "linux" then
     vim.o.tgc = true
-    require("colorizer").setup()
 end
 
 vim.api.nvim_create_autocmd("FileType", {
