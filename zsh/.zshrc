@@ -62,9 +62,6 @@ function setup-stuff
 
     gc "$GH/nordtheme/vim" "$PACK/vim"
 
-    gc "$GH/norcalli/nvim-colorizer.lua" \
-        "$PACK/nvim-colorizer.lua"
-
     gc "$GH/windwp/nvim-autopairs" "$PACK/nvim-autopairs"
 
     gc "$GH/nordtheme/dircolors" "$XDG_DATA_HOME/dircolors"
