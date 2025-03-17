@@ -69,38 +69,34 @@ function setup-stuff
 
     gc "$GH/nordtheme/dircolors" "$XDG_DATA_HOME/dircolors"
 
-    mkdir -p "$XDG_DATA_HOME/icons/default"
+    mkdir -p "$XDG_DATA_HOME/icons"
 
-    echo "[Icon Theme]
-Inherits=Vanilla-DMZ" > "$XDG_DATA_HOME/icons/default/index.theme"
+    ln -s /usr/share/icons/Vanilla-DMZ "$XDG_DATA_HOME/icons/default"
 
-    sudo pacman -S --needed             \
-        eza                             \
-        bat                             \
-        feh                             \
-        gvfs                            \
-        rofi                            \
-        htop                            \
-        xclip                           \
-        bspwm                           \
-        sxhkd                           \
-        neovim                          \
-        polybar                         \
-        redshift                        \
-        alacritty                       \
-        xarchiver                       \
-        ttf-dejavu                      \
-        noto-fonts                      \
-        alsa-utils                      \
-        xorg-xinit                      \
-        xorg-server                     \
-        xorg-xinput                     \
-        pcmanfm-gtk3                    \
-        polkit-gnome                    \
-        xorg-xsetroot                   \
-        arc-icon-theme                  \
-        arc-solid-gtk-theme             \
-        xcursor-vanilla-dmz             \
-        zsh-syntax-highlighting         \
+    sudo pacman -S --needed     \
+        eza                     \
+        bat                     \
+        feh                     \
+        gvfs                    \
+        rofi                    \
+        htop                    \
+        xclip                   \
+        bspwm                   \
+        sxhkd                   \
+        neovim                  \
+        man-db                  \
+        polybar                 \
+        redshift                \
+        alacritty               \
+        ttf-dejavu              \
+        noto-fonts              \
+        alsa-utils              \
+        xorg-xinit              \
+        xorg-server             \
+        xorg-xinput             \
+        pcmanfm-gtk3            \
+        xorg-xsetroot           \
+        arc-icon-theme          \
+        arc-solid-gtk-theme     \
         ttf-nerd-fonts-symbols-mono
 }
