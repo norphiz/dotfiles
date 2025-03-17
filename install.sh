@@ -39,7 +39,7 @@ if test "${DUALBOOT,,}" = "y"; then
 
     mkfs.fat -F 32 "$BOOT" > /dev/null
 
-    mount -m -o fmask=0077,dmask=0077 "${PARTITIONS[0]}" /mnt/efi
+    mount -m -o umask=0077 "${PARTITIONS[0]}" /mnt/efi
 
     mount -m "$BOOT" /mnt/boot
 
@@ -51,7 +51,7 @@ if test "${DUALBOOT,,}" = "y"; then
 elif test "${DUALBOOT,,}" = "n"; then
     mkfs.fat -F 32 "${PARTITIONS[0]}" > /dev/null
 
-    mount -m -o fmask=0077,dmask=0077 "${PARTITIONS[0]}" /mnt/boot
+    mount -m -o umask=0077 "${PARTITIONS[0]}" /mnt/boot
     
     pacstrap -K /mnt "${PKGS[@]}" && clear
 
