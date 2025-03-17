@@ -69,9 +69,10 @@ function setup-stuff
 
     gc "$GH/nordtheme/dircolors" "$XDG_DATA_HOME/dircolors"
 
-    mkdir -p "$XDG_DATA_HOME/icons"
+    mkdir -p "$XDG_DATA_HOME/icons/default"
 
-    ln -s /usr/share/icons/Vanilla-DMZ "$XDG_DATA_HOME/icons/default"
+    echo "[Icon Theme]
+Inherits=Vanilla-DMZ" > "$XDG_DATA_HOME/icons/default/index.theme"
 
     sudo pacman -S --needed     \
         eza                     \
