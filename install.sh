@@ -2,19 +2,17 @@
 
 set -eu
 
-PKGS=(
-    "base"
-    "sudo"
-    "linux"
-    "dhcpcd"
-    "booster"
-    "xdg-utils"
-    "intel-ucode"
-    "glibc-locales"
-    "xdg-user-dirs"
-    "zram-generator"
-    "zsh-completions"
-)
+PACKAGES=("base"
+          "sudo"
+          "linux"
+          "dhcpcd"
+          "booster"
+          "xdg-utils"
+          "intel-ucode"
+          "glibc-locales"
+          "xdg-user-dirs"
+          "zram-generator"
+          "zsh-completions")
 
 cfdisk && clear
 
@@ -28,7 +26,7 @@ read -r -p "Install linux-firmware? [y/n]: " FIRMWARE
 
 mkfs.ext4 -q "${PARTITIONS[1]}" && mount "${PARTITIONS[1]}" /mnt
 
-test "${FIRMWARE,,}" = "y" && PKGS+=("iwd" "wireless-regdb" "linux-firmware")
+test "${FIRMWARE,,}" = "y" && PACKAGES+=("iwd" "wireless-regdb" "linux-firmware")
 
 if test "${DUALBOOT,,}" = "y"; then
     read -r -p "Enter boot partition: " BOOT
@@ -39,9 +37,7 @@ if test "${DUALBOOT,,}" = "y"; then
 
     mount -m "$BOOT" /mnt/boot
 
-    pacstrap -K /mnt "${PKGS[@]}" && clear
-
-    bootctl install --esp-path=/mnt/efi --boot-path=/mnt/boot > /dev/null 2>&1
+    bootctl --esp-path=/mnt/efi --boot-path=/mnt/boot install > /dev/null 2>&1
 
     echo "timeout 10" > /mnt/efi/loader/loader.conf
 elif test "${DUALBOOT,,}" = "n"; then
@@ -49,17 +45,15 @@ elif test "${DUALBOOT,,}" = "n"; then
 
     mount -m -o umask=0077 "${PARTITIONS[0]}" /mnt/boot
     
-    pacstrap -K /mnt "${PKGS[@]}" && clear
-
-    ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
-
-    bootctl install --esp-path=/mnt/boot > /dev/null 2>&1
+    bootctl --esp-path=/mnt/boot install > /dev/null 2>&1
 else
     exit 1
 fi
 
+pacstrap -K /mnt "${PACKAGES[@]}" && clear
+
 if test "${FIRMWARE,,}" = "y"; then
-    arch-chroot /mnt systemctl -q enable iwd
+    arch-chroot /mnt systemctl enable iwd
 
     mkdir /mnt/etc/iwd
 
@@ -76,9 +70,11 @@ passwd -R /mnt "$NAME" && clear
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-arch-chroot /mnt systemctl -q enable dhcpcd systemd-boot-update
+ln -s /usr/share/zoneinfo/America/Fortaleza /mnt/etc/localtime
 
-arch-chroot /mnt systemctl -q disable systemd-userdbd.socket
+arch-chroot /mnt systemctl disable systemd-userdbd
+
+arch-chroot /mnt systemctl enable dhcpcd systemd-boot-update
 
 echo "arch" > /mnt/etc/hostname
 
