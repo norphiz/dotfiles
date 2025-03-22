@@ -42,7 +42,7 @@ listview {
 }
 
 element {
-    padding: 10;
+    padding: 5;
 }
 
 element selected {
