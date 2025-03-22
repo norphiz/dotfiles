@@ -3,7 +3,6 @@
 @theme "/dev/null"
 
 configuration {
-    dpi: 96;
     font: "Sans 11";
     display-ssh: "";
     display-run: "";
