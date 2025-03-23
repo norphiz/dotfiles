@@ -22,7 +22,7 @@ vim.g.netrw_winsize = 20
 vim.g.netrw_dirhistmax = 0
 
 vim.api.nvim_set_keymap("n", ";", ":", {})
-vim.api.nvim_set_keymap("n", "<A-s>", ":x<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<A-x>", ":x<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<A-q>", ":q!<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<A-t>", ":tabnew<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<A-e>", ":Lexplore<CR>", { silent = true })
@@ -34,6 +34,12 @@ end
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "*", callback = function()
         vim.opt.fo:remove({ "r", "o" })
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "help", callback = function()
+        vim.cmd.winc("T")
     end
 })
 
