@@ -24,7 +24,7 @@ vim.g.netrw_dirhistmax = 0
 vim.api.nvim_set_keymap("n", ";", ":", {})
 vim.api.nvim_set_keymap("n", "<A-x>", ":x<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<A-q>", ":q!<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<A-t>", ":tabnew<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<A-t>", ":tabe<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<A-e>", ":Lexplore<CR>", { silent = true })
 
 if os.getenv("TERM") ~= "linux" then
