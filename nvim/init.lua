@@ -37,11 +37,5 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
-vim.api.nvim_create_autocmd("BufWinEnter", {
-    pattern = "*.txt", callback = function()
-        vim.cmd.winc("L")
-    end
-})
-
 vim.cmd.colo("nord")
 require("nvim-autopairs").setup()
