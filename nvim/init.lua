@@ -17,18 +17,21 @@ vim.o.sdf = "NONE"
 vim.o.fcs = "eob: "
 vim.o.cb = "unnamedplus"
 
+vim.g.mapleader = " "
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 20
 vim.g.netrw_dirhistmax = 0
 
-vim.api.nvim_set_keymap("n", ";", ":", {})
-vim.api.nvim_set_keymap("n", "<A-s>", ":x<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<A-q>", ":q!<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<A-t>", ":tabe<CR>", { silent = true })
-vim.api.nvim_set_keymap("n", "<A-e>", ":Lexplore<CR>", { silent = true })
+vim.keymap.set("n", ";", ":", {})
+vim.keymap.set("n", "<Leader>s", ":x<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>w", ":w<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>q", ":q!<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>t", ":tabe<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>e", ":Lexplore<CR>", { silent = true })
 
 if os.getenv("TERM") ~= "linux" then
     vim.o.tgc = true
+    vim.cmd.colo("nord")
 end
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -36,6 +39,3 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.fo:remove({ "r", "o" })
     end
 })
-
-vim.cmd.colo("nord")
-require("nvim-autopairs").setup()
