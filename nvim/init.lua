@@ -37,11 +37,5 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "help", callback = function()
-        vim.cmd.winc("T")
-    end
-})
-
 vim.cmd.colo("nord")
 require("nvim-autopairs").setup()
