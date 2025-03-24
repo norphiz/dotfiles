@@ -9,7 +9,7 @@ echo "Xft.dpi: 96
 Xft.rgba: rgb
 Xft.hintstyle: hintslight" | xrdb &
 
-xset s off -dpms &
+xset dpms 0 0 0 &
 redshift -PO 6000K &
 pidof -q sxhkd || sxhkd &
 xsetroot -cursor_name left_ptr &
