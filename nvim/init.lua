@@ -1,10 +1,10 @@
 vim.o.ls = 0
 vim.o.sw = 4
 
-vim.o.nu = true
 vim.o.et = true
 vim.o.ic = true
 vim.o.scs = true
+vim.o.rnu = true
 
 vim.o.ru = false
 vim.o.sc = false
@@ -41,4 +41,5 @@ vim.api.nvim_create_autocmd("FileType", {
 
 if os.execute("test -d ~/.config/nvim/pack") then
     vim.cmd.colo("nord")
+    require("nvim-autopairs").setup()
 end
