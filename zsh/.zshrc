@@ -62,6 +62,8 @@ setup-stuff()
 
     gc "$GH/nordtheme/vim" "$PACK/vim"
 
+    gc "$GH/windwp/nvim-autopairs" "$PACK/nvim-autopairs"
+
     gc "$GH/nordtheme/dircolors" "$XDG_DATA_HOME/dircolors"
 
     mkdir -p "$XDG_DATA_HOME/icons/default"
@@ -110,10 +112,10 @@ EndSection' > /etc/xorg.conf
         alsa-utils              \
         xorg-xinit              \
         xorg-server             \
+        xorg-xinput             \
         pcmanfm-gtk3            \
         xorg-xsetroot           \
         arc-icon-theme          \
-        vim-auto-pairs          \
         arc-solid-gtk-theme     \
         ttf-nerd-fonts-symbols-mono
 }
