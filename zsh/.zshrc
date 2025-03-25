@@ -69,6 +69,27 @@ setup-stuff()
     echo "[Icon Theme]
 Inherits=Vanilla-DMZ" > "$XDG_DATA_HOME/icons/default/index.theme"
 
+    sudo echo 'Section "Extensions"
+    Option "DPMS" "0"
+EndSection
+
+Section "ServerFlags"
+    Option "BlankTime" "0"
+EndSection
+
+Section "InputClass"
+    Identifier "Mouse"
+    Driver "libinput"
+    Option "AccelProfile" "flat"
+EndSection
+
+Section "InputClass"
+    Identifier "Keyboard"
+    Option "XkbLayout" "br,us"
+    Option "XkbModel" "abnt2"
+    Option "XkbOptions" "grp:win_space_toggle"
+EndSection' > /etc/xorg.conf
+
     sudo pacman -S --needed     \
         eza                     \
         bat                     \
