@@ -31,7 +31,6 @@ vim.keymap.set("n", "<Leader>e", ":Lexplore<CR>", { silent = true })
 
 if os.getenv("TERM") ~= "linux" then
     vim.o.tgc = true
-    vim.cmd.colo("nord")
 end
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -39,3 +38,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.fo:remove({ "r", "o" })
     end
 })
+
+if os.execute("test -d ~/.config/nvim/pack") then
+    vim.cmd.colo("nord")
+end
