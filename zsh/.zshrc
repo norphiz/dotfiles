@@ -110,7 +110,6 @@ EndSection' > /etc/xorg.conf
         alsa-utils              \
         xorg-xinit              \
         xorg-server             \
-        xorg-xinput             \
         pcmanfm-gtk3            \
         xorg-xsetroot           \
         arc-icon-theme          \
