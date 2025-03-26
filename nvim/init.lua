@@ -20,6 +20,7 @@ vim.o.cb = "unnamedplus"
 
 vim.g.mapleader = " "
 vim.g.netrw_banner = 0
+vim.g.netrw_cursor = 0
 vim.g.netrw_winsize = 20
 vim.g.netrw_dirhistmax = 0
 
