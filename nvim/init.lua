@@ -1,6 +1,7 @@
 vim.o.ls = 0
 vim.o.sw = 4
 
+vim.o.nu = true
 vim.o.et = true
 vim.o.ic = true
 vim.o.scs = true
