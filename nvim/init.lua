@@ -26,7 +26,7 @@ vim.g.netrw_dirhistmax = 0
 vim.keymap.set("n", ";", ":", {})
 vim.keymap.set("n", "<Leader>c", ":q<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>s", ":so<CR>", { silent = true })
-vim.keymap.set("n", "<Leader>q", ":qa<CR>", { silent = true })
+vim.keymap.set("n", "<Leader>q", ":qa!<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>e", ":Lex<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>t", ":tabe<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>w", ":sil :w<CR>", { silent = true })
@@ -44,9 +44,16 @@ if os.getenv("TERM") ~= "linux" then
 end
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "*", callback = function()
-        vim.opt.fo:remove({ "r", "o" })
-    end
+    pattern = "*", command = "se fo-=ro"
+})
+
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+    command = "ec ''"
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "help", "man" },
+    command = "sil winc T"
 })
 
 if os.execute("test -d ~/.config/nvim/pack") then
