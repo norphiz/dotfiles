@@ -87,8 +87,8 @@ EndSection
 
 Section "InputClass"
     Identifier "Keyboard"
-    Option "XkbLayout" "br,us"
     Option "XkbModel" "abnt2"
+    Option "XkbLayout" "br,us"
     Option "XkbOptions" "grp:win_space_toggle"
 EndSection' > /etc/xorg.conf
 
