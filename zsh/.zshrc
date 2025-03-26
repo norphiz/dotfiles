@@ -12,7 +12,6 @@ _comp_options+=(globdots)
 eval "$(dircolors "$XDG_DATA_HOME/dircolors/src/dir_colors")"
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-alias nv='nvim'
 alias cl='clear'
 alias cp='cp -r'
 alias rm='rm -fr'
@@ -42,6 +41,11 @@ alias updt-repos='find "$HOME" -name .git | sed s/.git// | xargs -I {} git -C {}
 alias updt-mirrors='curl -s https://archlinux.org/mirrorlist/all/ | sudo sed -n "s/#S/S/; w /etc/pacman.d/mirrorlist"'
 alias startx='pidof -q Xorg && clear || exec startx /usr/bin/bspwm -- -nolisten local -nolisten tcp > /tmp/startx.log 2>&1'
 alias vm='qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio -full-screen -hda disk.img -bios /usr/share/edk2/x64/OVMF.4m.fd'
+
+nv()
+{
+    test "$#" -eq 0 && nvim +Lex || nvim "$@"
+}
 
 ex()
 {
