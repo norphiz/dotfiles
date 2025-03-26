@@ -48,16 +48,16 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = "*", command = "se fo-=ro"
 })
 
-vim.api.nvim_create_autocmd("CmdlineLeave", {
-    command = "ec ''"
-})
-
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "help", "man" },
-    command = "sil winc T"
+    callback = function()
+        print(" ")
+        vim.cmd("sil winc T")
+    end
 })
 
 if os.execute("test -d ~/.config/nvim/pack") then
     vim.cmd.colo("nord")
     require("nvim-autopairs").setup()
+    vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#3b4252" })
 end
