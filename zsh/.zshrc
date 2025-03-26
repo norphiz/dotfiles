@@ -91,30 +91,27 @@ Section "InputClass"
     Option "XkbOptions" "grp:win_space_toggle"
 EndSection' > /etc/xorg.conf
 
-    sudo pacman -S --needed     \
-        eza                     \
-        bat                     \
-        feh                     \
-        gvfs                    \
-        rofi                    \
-        htop                    \
-        xclip                   \
-        bspwm                   \
-        sxhkd                   \
-        neovim                  \
-        man-db                  \
-        polybar                 \
-        redshift                \
-        alacritty               \
-        ttf-dejavu              \
-        noto-fonts              \
-        alsa-utils              \
-        xorg-xinit              \
-        xorg-server             \
-        xorg-xinput             \
-        pcmanfm-gtk3            \
-        xorg-xsetroot           \
-        arc-icon-theme          \
-        arc-solid-gtk-theme     \
-        ttf-nerd-fonts-symbols-mono
+    sudo pacman -S --needed                     \
+        eza                                     \
+        bat                                     \
+        feh                                     \
+        gvfs                                    \
+        rofi                                    \
+        htop                                    \
+        xclip                                   \
+        bspwm                                   \
+        sxhkd                                   \
+        neovim                                  \
+        polybar                                 \
+        redshift                                \
+        alacritty                               \
+        noto-fonts                              \
+        alsa-utils                              \
+        pcmanfm-gtk3                            \
+        man-{db,pages}                          \
+        archlinux-wallpaper                     \
+        noto-fonts-{cjk,extra,emoji}            \
+        xorg-{server,xinit,xsetroot}            \
+        arc-{icon-theme,solid-gtk-theme}        \
+        ttf-{dejavu,nerd-fonts-symbols-mono}    \
 }
