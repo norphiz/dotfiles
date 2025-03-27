@@ -105,7 +105,6 @@ EndSection' > /etc/xorg.conf
         polybar                                 \
         redshift                                \
         alacritty                               \
-        noto-fonts                              \
         alsa-utils                              \
         pcmanfm-gtk3                            \
         man-{db,pages}                          \
