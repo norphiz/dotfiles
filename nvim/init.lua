@@ -44,7 +44,10 @@ if os.getenv("TERM") ~= "linux" then
 end
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "*", command = "se fo-=ro"
+    pattern = "*",
+    callback = function()
+        vim.opt.fo:remove({ "r", "o" })
+    end
 })
 
 vim.api.nvim_create_autocmd("FileType", {
