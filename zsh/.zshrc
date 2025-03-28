@@ -57,8 +57,38 @@ ex()
 
 setup-stuff()
 {
-    local GH="https://github.com" \
-        PACK="$XDG_CONFIG_HOME/nvim/pack/plugins/start"
+    local GH PACK PKGS
+
+    GH="https://github.com"
+    
+    PACK="$XDG_CONFIG_HOME/nvim/pack/plugins/start"
+
+    PKGS=("eza"
+          "bat"
+          "feh"
+          "rofi"
+          "htop"
+          "gvfs"
+          "xclip"
+          "bspwm"
+          "sxhkd"
+          "neovim"
+          "polybar"
+          "redshift"
+          "alacritty"
+          "dosfstools"
+          "alsa-utils"
+          "pcmanfm-gtk3"
+          "polkit-gnome"
+          "man-{db,pages}"
+          "tree-sitter-bash"
+          "xcursor-vanilla-dmz"
+          "archlinux-wallpaper"
+          "zsh-syntax-highlighting"
+          "noto-fonts-{cjk,extra-emoji}"
+          "xorg-{xinit,server,xsetroot}"
+          "arc-{icon-theme,solid-gtk-theme}"
+          "ttf-{dejavu,croscore,nerd-fonts-symbols-mono}")
 
     gc "$GH/nordtheme/vim" "$PACK/vim"
 
@@ -91,26 +121,5 @@ Section "InputClass"
     Option "XkbOptions" "grp:win_space_toggle"
 EndSection' > /etc/xorg.conf
 
-    sudo pacman -S --needed                     \
-        eza                                     \
-        bat                                     \
-        feh                                     \
-        gvfs                                    \
-        rofi                                    \
-        htop                                    \
-        xclip                                   \
-        bspwm                                   \
-        sxhkd                                   \
-        neovim                                  \
-        polybar                                 \
-        redshift                                \
-        alacritty                               \
-        alsa-utils                              \
-        pcmanfm-gtk3                            \
-        man-{db,pages}                          \
-        archlinux-wallpaper                     \
-        noto-fonts-{cjk,extra,emoji}            \
-        xorg-{server,xinit,xsetroot}            \
-        arc-{icon-theme,solid-gtk-theme}        \
-        ttf-{dejavu,nerd-fonts-symbols-mono}    \
+    sudo pacman -S --needed "${PKGS[@]}"
 }
