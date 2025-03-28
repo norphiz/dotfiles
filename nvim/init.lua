@@ -5,7 +5,6 @@ vim.o.nu = true
 vim.o.et = true
 vim.o.ic = true
 vim.o.scs = true
-vim.o.rnu = true
 
 vim.o.ru = false
 vim.o.sc = false
