@@ -88,7 +88,7 @@ setup-stuff()
           "noto-fonts-{cjk,extra-emoji}"
           "xorg-{xinit,server,xsetroot}"
           "arc-{icon-theme,solid-gtk-theme}"
-          "ttf-{dejavu,caladea,carlito,croscore,nerd-fonts-symbols-mono}")
+          "ttf-{dejavu,croscore,nerd-fonts-symbols-mono}")
 
     gc "$GH/nordtheme/vim" "$PACK/vim"
 
