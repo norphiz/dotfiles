@@ -3,7 +3,7 @@ x = 5
 y = 5
 
 [font]
-size = 14.5
+size = 12
 
 [general]
 live_config_reload = true
