@@ -25,6 +25,7 @@ vim.g.netrw_dirhistmax = 0
 
 vim.keymap.set("n", ";", ":", {})
 vim.keymap.set("n", "<M-c>", ":q<CR>", { silent = true })
+vim.keymap.set("n", "<M-x>", ":x<CR>", { silent = true })
 vim.keymap.set("n", "<M-s>", ":so<CR>", { silent = true })
 vim.keymap.set("n", "<M-q>", ":qa!<CR>", { silent = true })
 vim.keymap.set("n", "<M-e>", ":Lex<CR>", { silent = true })
