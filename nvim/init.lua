@@ -43,21 +43,6 @@ if os.getenv("TERM") ~= "linux" then
     vim.o.tgc = true
 end
 
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "*",
-    callback = function()
-        vim.opt.fo:remove({ "r", "o" })
-    end
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "help", "man" },
-    callback = function()
-        print(" ")
-        vim.cmd("sil winc T")
-    end
-})
-
 if os.execute("test -d ~/.config/nvim/pack") then
     vim.cmd.colo("nord")
     require("nvim-autopairs").setup()
