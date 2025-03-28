@@ -9,7 +9,7 @@ x = 5
 y = 5
 
 [font]
-size = 13
+size = 14
 
 [colors.bright]
 black = "#4c566a"
