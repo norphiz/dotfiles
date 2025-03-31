@@ -9,7 +9,7 @@ echo "Xft.dpi: 96
 Xft.rgba: rgb
 Xft.hintstyle: hintslight" | xrdb &
 
-redshift -PO 6000K &
+redshift -P -O 6000K &
 pidof -q sxhkd || sxhkd &
 xsetroot -cursor_name left_ptr &
 pidof -q polybar || polybar -r &
