@@ -68,7 +68,6 @@ setup-pkgs()
                 "man-db"
                 "neovim"
                 "polybar"
-                "redshift"
                 "man-pages"
                 "alacritty"
                 "dosfstools"
