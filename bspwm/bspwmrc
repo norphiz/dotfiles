@@ -8,7 +8,6 @@ bspc config focused_border_color "#81a1c1"
 echo "Xft.rgba: rgb
 Xft.hintstyle: hintslight" | xrdb &
 
-redshift -P -O 6000K &
 pidof -q sxhkd || sxhkd &
 xsetroot -cursor_name left_ptr &
 pidof -q polybar || polybar -r &
