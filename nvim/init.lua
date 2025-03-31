@@ -39,10 +39,6 @@ vim.keymap.set("n", "<M-Left>", ":winc h<CR>", { silent = true })
 vim.keymap.set("n", "<M-Down>", ":winc j<CR>", { silent = true })
 vim.keymap.set("n", "<M-Right>", ":winc l<CR>", { silent = true })
 
-if os.getenv("TERM") ~= "linux" then
-    vim.o.tgc = true
-end
-
 if os.execute("test -d ~/.config/nvim/pack") then
     vim.cmd.colo("nord")
     require("nvim-autopairs").setup()
