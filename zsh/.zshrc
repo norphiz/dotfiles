@@ -9,7 +9,6 @@ zstyle ":completion:*" menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
-eval "$(dircolors "$XDG_DATA_HOME/dircolors/src/dir_colors")"
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 alias nv='nvim'
@@ -106,8 +105,6 @@ setup-stuff()
     gc "$GH/nordtheme/vim" "$PACK/vim"
 
     gc "$GH/windwp/nvim-autopairs" "$PACK/nvim-autopairs"
-
-    gc "$GH/nordtheme/dircolors" "$XDG_DATA_HOME/dircolors"
 
     mkdir -p "$XDG_DATA_HOME/icons/default"
 
