@@ -83,10 +83,10 @@ setup-pkgs()
                 "arc-icon-theme"
                 "noto-fonts-extra"
                 "noto-fonts-emoji"
-                "tree-sitter-bash"
                 "xcursor-vanilla-dmz"
                 "archlinux-wallpaper"
                 "arc-solid-gtk-theme"
+                "zsh-syntax-highlighting"
                 "ttf-nerd-fonts-symbols-mono")
     
     sudo pacman -S --needed "${PKGS[@]}"
