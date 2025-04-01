@@ -9,7 +9,7 @@ zstyle ":completion:*" menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source "$ZDOTDIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
 alias nv='nvim'
 alias cl='clear'
@@ -87,7 +87,6 @@ setup-pkgs()
                 "xcursor-vanilla-dmz"
                 "archlinux-wallpaper"
                 "arc-solid-gtk-theme"
-                "zsh-syntax-highlighting"
                 "ttf-nerd-fonts-symbols-mono")
     
     sudo pacman -S --needed "${PKGS[@]}"
@@ -104,6 +103,9 @@ setup-stuff()
     gc "$GH/nordtheme/vim" "$PACK/vim"
 
     gc "$GH/windwp/nvim-autopairs" "$PACK/nvim-autopairs"
+
+    gc "$GH/zdharma-continuum/fast-syntax-highlighting" \
+        "$ZDOTDIR/fast-syntax-highlighting"
 
     mkdir -p "$XDG_DATA_HOME/icons/default"
 
