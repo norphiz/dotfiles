@@ -5,7 +5,8 @@ bspc config window_gap 5
 bspc config normal_border_color "#2e3440"
 bspc config focused_border_color "#81a1c1"
 
-echo "Xft.rgba: rgb
+echo "Xft.dpi: 96
+Xft.rgba: rgb
 Xft.hintstyle: hintslight" | xrdb &
 
 pidof -q sxhkd || sxhkd &
