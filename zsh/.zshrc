@@ -62,6 +62,7 @@ setup-pkgs()
                 "rofi"
                 "htop"
                 "gvfs"
+                "scrot"
                 "xclip"
                 "bspwm"
                 "sxhkd"
