@@ -14,10 +14,7 @@ vim.o.hls = false
 vim.o.wrap = false
 
 vim.o.sdf = "NONE"
-vim.o.dir = "/tmp"
 vim.o.fcs = "eob: "
-vim.o.udir = "/tmp"
-vim.o.bdir = "/tmp"
 vim.o.cb = "unnamedplus"
 
 vim.g.netrw_banner = 0
