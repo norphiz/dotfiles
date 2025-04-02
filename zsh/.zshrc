@@ -11,7 +11,6 @@ compinit
 _comp_options+=(globdots)
 source "$ZDOTDIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
-alias nv='nvim'
 alias cl='clear'
 alias cp='cp -r'
 alias rm='rm -fr'
@@ -32,6 +31,7 @@ alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
 alias ls='eza -1a --icons=auto'
 alias gc='git clone -q --depth 1'
+alias nv='XDG_DATA_HOME=/tmp nvim'
 alias on='iwctl station wlan0 connect'
 alias sdls='sudo eza -1a --icons=auto'
 alias yy='xclip -selection clipboard -i'
