@@ -39,7 +39,7 @@ vim.keymap.set("n", "<M-Left>", ":winc h<CR>", { silent = true })
 vim.keymap.set("n", "<M-Down>", ":winc j<CR>", { silent = true })
 vim.keymap.set("n", "<M-Right>", ":winc l<CR>", { silent = true })
 
-if os.execute("test -d ~/.config/nvim/pack") then
+if os.execute("test -d .config/nvim/pack") then
     vim.cmd.colo("nord")
     require("nvim-autopairs").setup()
     vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#3b4252" })
