@@ -5,6 +5,7 @@ bindkey "^[[H" beginning-of-line
 
 unsetopt PROMPT_SP
 autoload -U compinit
+eval "$(dircolors -b)"
 zstyle ":completion:*" menu select
 zmodload zsh/complist
 compinit
