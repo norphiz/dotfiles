@@ -41,7 +41,7 @@ mod4 + F11
     bspc node -t {fullscreen,tiled}
 
 mod4 + Print
-    scrot -F "Pictures/$(date +%c).png"
+    scrot -F "Pictures/$(date).png"
 
 mod4 + {_,shift + } {1-9,0}
     bspc {desktop -f,node -d} ^{1-9,10}
