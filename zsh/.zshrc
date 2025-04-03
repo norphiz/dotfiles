@@ -31,7 +31,7 @@ alias pqdt='pacman -Qdtq'
 alias inst='sudo pacman -S'
 alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
-alias ls='eza -1a --icons=auto'
+alias ls='eza -1 --icons=auto'
 alias gc='git clone -q --depth 1'
 alias on='iwctl station wlan0 connect'
 alias sdls='sudo eza -1a --icons=auto'
@@ -42,16 +42,6 @@ alias updt-repos='find "$HOME" -name .git | sed s/.git// | xargs -I {} git -C {}
 alias updt-mirrors='curl -s https://archlinux.org/mirrorlist/all/ | sudo sed -n "s/#S/S/; w /etc/pacman.d/mirrorlist"'
 alias startx='pidof -q Xorg && clear || exec startx /usr/bin/bspwm -- -nolisten local -nolisten tcp > /tmp/startx.log 2>&1'
 alias vm='qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio -full-screen -hda disk.img -bios /usr/share/edk2/x64/OVMF.4m.fd'
-
-ex()
-{
-    case "$1" in
-        *.zip | *.7z | *.rar | *.tar.gz | *.tar.gz)
-            bsdtar -x -f "$1" ;;
-        *)
-            echo "Usage: ex [FILE]..." ;;
-    esac
-}
 
 setup-pkgs()
 {
