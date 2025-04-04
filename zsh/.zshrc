@@ -38,7 +38,7 @@ alias off='iwctl station wlan0 disconnect'
 alias img='qemu-img create -f qcow2 disk.img'
 alias updt-repos='find "$HOME" -name .git | sed s/.git// | xargs -I {} git -C {} pull'
 alias updt-mirrors='curl -s https://archlinux.org/mirrorlist/all/ | sudo sed -n "s/#S/S/; w /etc/pacman.d/mirrorlist"'
-alias startx='pidof -q Xorg && clear || exec startx /usr/bin/bspwm -- -nolisten local -nolisten tcp > /tmp/startx.log 2>&1'
+alias startx='pidof -q Xorg && clear || exec startx /usr/bin/bspwm -- -quiet -nolisten local -nolisten tcp > /tmp/startx.log 2>&1'
 alias vm='qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio -full-screen -hda disk.img -bios /usr/share/edk2/x64/OVMF.4m.fd'
 
 setup-pkgs()
@@ -55,6 +55,7 @@ setup-pkgs()
                 "sxhkd"
                 "man-db"
                 "neovim"
+                "thunar"
                 "polybar"
                 "man-pages"
                 "alacritty"
@@ -64,7 +65,6 @@ setup-pkgs()
                 "ttf-dejavu"
                 "xorg-server"
                 "ttf-croscore"
-                "pcmanfm-gtk3"
                 "polkit-gnome"
                 "xorg-xsetroot"
                 "noto-fonts-cjk"
