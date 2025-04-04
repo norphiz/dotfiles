@@ -15,7 +15,7 @@ configuration {
 }
 
 * {
-    bg:#2e3440;
+    bg: #2e3440;
     text-color: #d8dee9;
     accent-color: #81a1c1;
     background-color: transparent;
