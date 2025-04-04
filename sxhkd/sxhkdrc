@@ -11,7 +11,7 @@ XF86AudioMute
     amixer set Master toggle
 
 mod4 + e
-    pcmanfm
+    thunar
 
 mod4 + Return
     alacritty
