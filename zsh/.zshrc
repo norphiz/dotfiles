@@ -3,8 +3,9 @@ bindkey "^[[F" end-of-line
 bindkey "^[[3~" delete-char
 bindkey "^[[H" beginning-of-line
 
-unsetopt PROMPT_SP
+unsetopt promptsp
 autoload -U compinit
+setopt autocd correct
 eval "$(dircolors -b)"
 zstyle ":completion:*" menu select
 zmodload zsh/complist
