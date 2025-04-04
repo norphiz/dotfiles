@@ -8,7 +8,6 @@ autoload -U compinit
 setopt autocd correct
 eval "$(dircolors -b)"
 zstyle ":completion:*" menu select
-zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
 source "$ZDOTDIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
