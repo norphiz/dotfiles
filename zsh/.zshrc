@@ -4,12 +4,10 @@ bindkey "^[[3~" delete-char
 bindkey "^[[H" beginning-of-line
 
 unsetopt promptsp
-autoload -U compinit
-setopt autocd correct
 eval "$(dircolors -b)"
+setopt autocd correct globdots
+autoload -U compinit && compinit
 zstyle ":completion:*" menu select
-compinit
-_comp_options+=(globdots)
 source "$ZDOTDIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
 alias nv='nvim'
