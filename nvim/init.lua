@@ -20,7 +20,6 @@ vim.o.cb = "unnamedplus"
 vim.g.netrw_banner = 0
 vim.g.netrw_cursor = 0
 vim.g.netrw_winsize = 20
-vim.g.netrw_liststyle = 1
 vim.g.netrw_dirhistmax = 0
 
 vim.keymap.set("n", ";", ":", {})
@@ -39,6 +38,10 @@ vim.keymap.set("n", "<M-Up>", ":winc k<CR>", { silent = true })
 vim.keymap.set("n", "<M-Left>", ":winc h<CR>", { silent = true })
 vim.keymap.set("n", "<M-Down>", ":winc j<CR>", { silent = true })
 vim.keymap.set("n", "<M-Right>", ":winc l<CR>", { silent = true })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    command = "se fo-=ro"
+})
 
 if os.execute("test -d .config/nvim/pack") then
     vim.cmd.colo("nord")
