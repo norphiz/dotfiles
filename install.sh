@@ -6,8 +6,6 @@ PACKAGES=("base"
           "sudo"
           "linux"
           "dhcpcd"
-          "booster"
-          "xdg-utils"
           "intel-ucode"
           "glibc-locales"
           "xdg-user-dirs"
@@ -50,7 +48,7 @@ else
     exit 1
 fi
 
-pacstrap -K /mnt "${PACKAGES[@]}" && clear
+pacstrap -i -K /mnt "${PACKAGES[@]}" && clear
 
 if test "${FIRMWARE,,}" = "y"; then
     arch-chroot /mnt systemctl enable iwd
