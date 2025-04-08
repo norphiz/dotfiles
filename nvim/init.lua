@@ -23,6 +23,7 @@ vim.g.netrw_winsize = 20
 vim.g.netrw_dirhistmax = 0
 
 vim.keymap.set("n", ";", ":", {})
+vim.keymap.set("n", "<M-w>", ":w<CR>", { silent = true })
 vim.keymap.set("n", "<M-q>", ":qa!<CR>", { silent = true })
 vim.keymap.set("n", "<M-e>", ":Lex<CR>", { silent = true })
 vim.keymap.set("n", "<M-t>", ":tabe<CR>", { silent = true })
