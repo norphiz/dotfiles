@@ -44,7 +44,7 @@ mod4 + F11
     bspc node -t {fullscreen,tiled}
 
 mod4 + {_,shift+} {1-9,0}
-    bspc {desktop -f,node -d} ^{1-9,10}
+    bspc {desktop -f,node -d} {0-9}
 
 mod4 + {_,shift+} {Left,Down,Up,Right}
     bspc node -{f,s} {west,south,north,east}
