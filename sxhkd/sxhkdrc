@@ -56,4 +56,4 @@ mod4 + d
     bspc node {-g hidden,$(bspc query -N -n .hidden) -g hidden=off}
 
 mod4 + o
-    WINEDLLOVERRIDES=services.exe=d gamemoderun wine .local/share/osu/osu\!.exe
+    gamemoderun WINEDLLOVERRIDES=services.exe=d wine .local/share/osu/osu\!.exe
