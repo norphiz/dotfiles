@@ -48,3 +48,12 @@ mod4 + {_,shift+} {1-9,0}
 
 mod4 + {_,shift+} {Left,Down,Up,Right}
     bspc node -{f,s} {west,south,north,east}
+
+mod4 + b
+    mv Downloads/*.osz .local/share/osu/Songs
+
+mod4 + d
+    bspc node {-g hidden=on,$(bspc query -N -n .hidden) -g hidden=off}
+
+mod4 + o
+    WINEDLLOVERRIDES=services.exe=d gamemoderun wine .local/share/osu/osu\!.exe
