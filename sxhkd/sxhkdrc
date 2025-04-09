@@ -25,12 +25,6 @@ mod4 + c
 mod4 + shift + {q,r}
     bspc {quit,wm -r}
 
-alt + Tab
-    bspc node -f last
-
-mod4 + m
-    bspc desktop -l next
-
 mod4 + s
     pkill -USR1 -x sxhkd
 
@@ -46,14 +40,14 @@ mod4 + F11
 mod4 + {_,shift+} {1-9,0}
     bspc {desktop -f,node -d} {0-9}
 
-mod4 + {_,shift+} {Left,Down,Up,Right}
-    bspc node -{f,s} {west,south,north,east}
-
 mod4 + b
     mv Downloads/*.osz .wine/osu/Songs
 
-mod4 + d
-    bspc node {-g hidden,$(bspc query -N -n .hidden) -g hidden=off}
-
 mod4 + o
-    WINEDLLOVERRIDES=services.exe=d gamemoderun wine .wine/osu/osu\!.exe
+    gamemoderun wine .wine/osu/osu\!.exe
+
+mod4 + {_,shift+} {Left,Down,Up,Right}
+    bspc node -{f,s} {west,south,north,east}
+
+mod4 + d
+    bspc node {-g hidden=on,$(bspc query -N -n .hidden) -g hidden=off}
