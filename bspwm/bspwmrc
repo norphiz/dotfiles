@@ -12,6 +12,6 @@ Xft.hintstyle: hintslight" | xrdb &
 
 pidof -q sxhkd || sxhkd &
 xsetroot -cursor_name left_ptr &
-pidof -q polybar || polybar -q -r &
+pidof -q polybar || polybar -r &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 feh --no-fehbg --bg-scale /usr/share/backgrounds/archlinux/small.png &
