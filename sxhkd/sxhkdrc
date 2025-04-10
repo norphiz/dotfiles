@@ -52,7 +52,7 @@ mod4 + o
 mod4 + {Left,Down,Up,Right}
     bspc node -f {west,south,north,east}
 
-mod4 + shift {Left,Down,Up,Right}
+mod4 + shift + {Left,Down,Up,Right}
     bspc node -s {west,south,north,east}
 
 mod4 + d
