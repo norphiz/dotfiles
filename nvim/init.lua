@@ -23,15 +23,15 @@ vim.g.netrw_winsize = 20
 vim.g.netrw_dirhistmax = 0
 
 vim.keymap.set("n", ";", ":", {})
-vim.keymap.set("n", "<M-w>", ":w<CR>", { silent = true })
-vim.keymap.set("n", "<M-c>", ":q<CR>", { silent = true })
-vim.keymap.set("n", "<M-q>", ":qa!<CR>", { silent = true })
-vim.keymap.set("n", "<M-e>", ":Lex<CR>", { silent = true })
-vim.keymap.set("n", "<M-t>", ":tabe<CR>", { silent = true })
-vim.keymap.set("n", "<M-Up>", ":winc k<CR>", { silent = true })
-vim.keymap.set("n", "<M-Left>", ":winc h<CR>", { silent = true })
-vim.keymap.set("n", "<M-Down>", ":winc j<CR>", { silent = true })
-vim.keymap.set("n", "<M-Right>", ":winc l<CR>", { silent = true })
+vim.keymap.set("n", "<A-w>", ":w<CR>", { silent = true })
+vim.keymap.set("n", "<A-c>", ":q<CR>", { silent = true })
+vim.keymap.set("n", "<A-q>", ":qa!<CR>", { silent = true })
+vim.keymap.set("n", "<A-e>", ":Lex<CR>", { silent = true })
+vim.keymap.set("n", "<A-t>", ":tabe<CR>", { silent = true })
+vim.keymap.set("n", "<A-Up>", ":winc k<CR>", { silent = true })
+vim.keymap.set("n", "<A-Left>", ":winc h<CR>", { silent = true })
+vim.keymap.set("n", "<A-Down>", ":winc j<CR>", { silent = true })
+vim.keymap.set("n", "<A-Right>", ":winc l<CR>", { silent = true })
 
 vim.api.nvim_create_autocmd("BufEnter", {
     command = "se fo-=ro"
