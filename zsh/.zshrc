@@ -68,6 +68,7 @@ setup-pkgs()
                 "ttf-croscore"
                 "polkit-gnome"
                 "xorg-xsetroot"
+                "pacman-contrib"
                 "noto-fonts-cjk"
                 "arc-icon-theme"
                 "noto-fonts-extra"
