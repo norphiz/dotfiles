@@ -40,6 +40,12 @@ mod4 + Print
 mod4 + f
     bspc node -t {floating,tiled}
 
+alt + Print
+    scrot -u "Pictures/$(date).png"
+
+mod4 + shift + s
+    scrot -s "Pictures/$(date).png"
+
 mod4 + F11
     bspc node -t {fullscreen,tiled}
 
