@@ -10,7 +10,6 @@ autoload -U compinit && compinit
 zstyle ":completion:*" menu select
 source "$ZDOTDIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
-alias nv='nvim'
 alias cl='clear'
 alias cp='cp -r'
 alias rm='rm -fr'
@@ -30,7 +29,9 @@ alias inst='sudo pacman -S'
 alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
 alias ls='eza -1a --icons=auto'
+alias lf='XDG_DATA_HOME=/tmp lf'
 alias gc='git clone -q --depth 1'
+alias nv='XDG_DATA_HOME=/tmp nvim'
 alias yy='xclip -selection clip -i'
 alias on='iwctl station wlan0 connect'
 alias sdls='sudo eza -1a --icons=auto'
@@ -43,7 +44,8 @@ alias vm='qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio
 
 setup-pkgs()
 {
-    local PKGS=("eza"
+    local PKGS=("lf"
+                "eza"
                 "bat"
                 "feh"
                 "rofi"
@@ -70,12 +72,10 @@ setup-pkgs()
                 "xorg-xsetroot"
                 "pacman-contrib"
                 "noto-fonts-cjk"
-                "arc-icon-theme"
                 "noto-fonts-extra"
                 "noto-fonts-emoji"
                 "xcursor-vanilla-dmz"
                 "archlinux-wallpaper"
-                "arc-solid-gtk-theme"
                 "zsh-syntax-highlighting"
                 "ttf-nerd-fonts-symbols-mono")
     
