@@ -10,6 +10,7 @@ autoload -U compinit && compinit
 zstyle ":completion:*" menu select
 source "$ZDOTDIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
+alias nv='nvim'
 alias cl='clear'
 alias cp='cp -r'
 alias rm='rm -fr'
@@ -29,10 +30,9 @@ alias inst='sudo pacman -S'
 alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
 alias ls='eza -1a --icons=auto'
+alias lf='XDG_DATA_HOME=/tmp lf'
 alias gc='git clone -q --depth 1'
 alias yy='xclip -selection clip -i'
-alias lf='env XDG_DATA_HOME=/tmp lf'
-alias nv='env XDG_DATA_HOME=/tmp nvim'
 alias on='iwctl station wlan0 connect'
 alias sdls='sudo eza -1a --icons=auto'
 alias off='iwctl station wlan0 disconnect'
