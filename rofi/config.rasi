@@ -8,7 +8,6 @@ configuration {
     display-run: "";
     display-drun: "";
     show-icons: true;
-    icon-theme: "Arc";
     display-window: "";
     disable-history: true;
     drun-display-format: "{name}";
