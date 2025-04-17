@@ -70,7 +70,6 @@ setup-pkgs()
                 "ttf-croscore"
                 "polkit-gnome"
                 "xorg-xsetroot"
-                "pacman-contrib"
                 "noto-fonts-cjk"
                 "noto-fonts-extra"
                 "noto-fonts-emoji"
