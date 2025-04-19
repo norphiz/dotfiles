@@ -30,7 +30,6 @@ alias inst='sudo pacman -S'
 alias updt='sudo pacman -Syu'
 alias unst='sudo pacman -Rns'
 alias ls='eza -1a --icons=auto'
-alias lf='XDG_DATA_HOME=/tmp lf'
 alias gc='git clone -q --depth 1'
 alias yy='xclip -selection clip -i'
 alias on='iwctl station wlan0 connect'
@@ -44,8 +43,7 @@ alias vm='qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio
 
 setup-pkgs()
 {
-    local PKGS=("lf"
-                "eza"
+    local PKGS=("eza"
                 "bat"
                 "feh"
                 "rofi"
@@ -58,6 +56,7 @@ setup-pkgs()
                 "man-db"
                 "neovim"
                 "polybar"
+                "xarchiver"
                 "xdg-utils"
                 "man-pages"
                 "alacritty"
