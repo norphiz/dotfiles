@@ -72,6 +72,7 @@ setup-pkgs()
                 "noto-fonts-cjk"
                 "noto-fonts-extra"
                 "noto-fonts-emoji"
+                "papirus-icon-theme"
                 "xcursor-vanilla-dmz"
                 "archlinux-wallpaper"
                 "zsh-syntax-highlighting"
