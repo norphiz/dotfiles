@@ -5,7 +5,7 @@ bindkey "^[[H" beginning-of-line
 
 unsetopt promptsp
 eval "$(dircolors -b)"
-setopt autocd correct globdots
+setopt autocd globdots
 autoload -U compinit && compinit
 zstyle ":completion:*" menu select
 source "$ZDOTDIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
