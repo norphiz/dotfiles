@@ -4,7 +4,7 @@ bindkey "^[[3~" delete-char
 bindkey "^[[H" beginning-of-line
 
 unsetopt promptsp
-eval "$(dircolors -b)"
+eval "$(dircolors)"
 setopt autocd globdots
 autoload -U compinit && compinit
 zstyle ":completion:*" menu select
@@ -58,7 +58,6 @@ setup-pkgs()
                 "polybar"
                 "xarchiver"
                 "xdg-utils"
-                "man-pages"
                 "alacritty"
                 "dosfstools"
                 "alsa-utils"
