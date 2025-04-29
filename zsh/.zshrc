@@ -99,11 +99,7 @@ setup-stuff()
 
     echo "Inherits=Vanilla-DMZ" > "$XDG_DATA_HOME/icons/default/index.theme"
 
-    sudo echo 'Section "Extensions"
-    Option "DPMS" "0"
-EndSection
-
-Section "ServerFlags"
+    sudo echo 'Section "ServerFlags"
     Option "BlankTime" "0"
 EndSection
 
