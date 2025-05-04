@@ -2,8 +2,8 @@
 
 * {
     bg: #2e3440;
-    blue: #81a1c1;
     color: #d8dee9;
+    border-color: #81a1c1;
     background-color: transparent;
 }
 
@@ -15,24 +15,23 @@ inputbar {
     enabled: false;
 }
 
-window {
+mainbox {
     border: 1;
     padding: 5;
-    border-color: @blue;
     background-color: @bg;
 }
 
 configuration {
-    font: "Sans 12";
+    font: "Sans 14";
     show-icons: true;
     disable-history: true;
     drun-display-format: "{name}";
 }
 
-element selected {
+element.selected {
     color: @bg;
     border-radius: 5;
-    background-color: @blue;
+    background-color: @border-color;
 }
 
 element-text, element-icon {
