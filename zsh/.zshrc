@@ -6,6 +6,7 @@ bindkey "^[[H" beginning-of-line
 unsetopt promptsp
 eval "$(dircolors)"
 setopt autocd globdots
+eval "$(starship init zsh)"
 autoload -U compinit && compinit
 zstyle ":completion:*" menu select
 source "$ZDOTDIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
@@ -56,6 +57,7 @@ setup-pkgs()
                 "man-db"
                 "neovim"
                 "polybar"
+                "starship"
                 "xarchiver"
                 "xdg-utils"
                 "alacritty"
