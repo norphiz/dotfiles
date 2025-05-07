@@ -3,9 +3,9 @@ bindkey "^[[F" end-of-line
 bindkey "^[[3~" delete-char
 bindkey "^[[H" beginning-of-line
 
+setopt globdots
 unsetopt promptsp
 eval "$(dircolors)"
-setopt autocd globdots
 eval "$(starship init zsh)"
 autoload -U compinit && compinit
 zstyle ":completion:*" menu select
