@@ -27,7 +27,7 @@ alias pqi="pacman -Qi"
 alias pql="pacman -Qlq"
 alias sdcp="sudo cp -r"
 alias sdrm="sudo rm -fr"
-alias pqdt="pacman -Qdtq"
+alias pqdt="pacman -Qqdt"
 alias sdls="sudo eza -1a"
 alias inst="sudo pacman -S"
 alias updt="sudo pacman -Syu"
@@ -76,7 +76,6 @@ setup-pkgs()
                 "papirus-icon-theme"
                 "xcursor-vanilla-dmz"
                 "archlinux-wallpaper"
-                "zsh-syntax-highlighting"
                 "ttf-nerd-fonts-symbols-mono")
     
     sudo pacman -S --needed "${PKGS[@]}"
