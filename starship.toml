@@ -1,1 +1,5 @@
 add_newline = false
+
+[directory]
+style = "bold blue"
+truncation_length = 1
