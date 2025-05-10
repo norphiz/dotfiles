@@ -22,8 +22,8 @@ mainbox {
 }
 
 configuration {
-    font: "Sans 14";
     show-icons: true;
+    font: "sans-serif 14";
     disable-history: true;
     drun-display-format: "{name}";
 }
