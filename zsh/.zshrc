@@ -38,8 +38,8 @@ alias on="iwctl station wlan0 connect"
 alias off="iwctl station wlan0 disconnect"
 alias img="qemu-img create -f qcow2 disk.img"
 alias updt-repos="find ~ -name .git | sed s/.git// | xargs -I {} git -C {} pull"
-alias startx="pidof -q Xorg || exec startx /usr/bin/bspwm -- -nolisten local -nolisten tcp > /dev/null 2>&1"
 alias updt-mirrors="curl -s https://archlinux.org/mirrorlist/all/https/ | sudo sed -n 's/#S/S/; w /etc/pacman.d/mirrorlist'"
+alias startx="pidof -q Xorg || exec startx /usr/bin/bspwm -- -logfile /dev/null -nolisten tcp -nolisten local > /dev/null 2>&1"
 alias vm="qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio -full-screen -hda disk.img -bios /usr/share/edk2/x64/OVMF.4m.fd"
 
 setup-pkgs()
