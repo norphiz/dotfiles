@@ -22,6 +22,7 @@ alias sdmv="sudo mv"
 alias gc="git clone"
 alias psi="pacman -Si"
 alias pss="pacman -Ss"
+alias pqs="pacman -Qs"
 alias pqe="pacman -Qe"
 alias pqi="pacman -Qi"
 alias pql="pacman -Qlq"
@@ -30,17 +31,21 @@ alias sdrm="sudo rm -fr"
 alias pqdt="pacman -Qqdt"
 alias sdls="sudo eza -1a"
 alias inst="sudo pacman -S"
-alias updt="sudo pacman -Syu"
 alias unst="sudo pacman -Rns"
 alias yy="xclip -selection clip -i"
 alias pp="xclip -selection clip -o"
 alias on="iwctl station wlan0 connect"
 alias off="iwctl station wlan0 disconnect"
 alias img="qemu-img create -f qcow2 disk.img"
-alias updt-repos="find ~ -name .git | sed s/.git// | xargs -I {} git -C {} pull"
-alias updt-mirrors="curl -s https://archlinux.org/mirrorlist/all/https/ | sudo sed -n 's/#S/S/; w /etc/pacman.d/mirrorlist'"
 alias startx="pidof -q Xorg || exec startx /usr/bin/bspwm -- -logfile /dev/null -nolisten tcp -nolisten local > /dev/null 2>&1"
 alias vm="qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio -full-screen -hda disk.img -bios /usr/share/edk2/x64/OVMF.4m.fd"
+
+updt()
+{
+    curl -s "https://archlinux.org/mirrorlist/all/https/" | sudo sed -n "s/#S/S/; w /etc/pacman.d/mirrorlist"
+    find "$HOME" -name ".git" | sed "s/.git//" | xargs -I {} git -C {} pull
+    sudo pacman -Syu
+}
 
 setup-pkgs()
 {
