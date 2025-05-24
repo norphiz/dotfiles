@@ -1,7 +1,7 @@
 export EDITOR="nvim"
 export WINEARCH="win32"
-export BAT_THEME="Nord"
 export EZA_ICONS_AUTO=""
+export BAT_THEME="Dracula"
 export MANPAGER="nvim +Man!"
 export XDG_CACHE_HOME="/tmp"
 export XDG_STATE_HOME="/tmp"
