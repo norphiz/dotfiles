@@ -46,7 +46,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 if os.execute("test -d .config/nvim/pack") then
-    vim.cmd.colo("nord")
+    vim.cmd.colo("dracula")
     require("nvim-autopairs").setup()
-    vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#3b4252" })
 end
