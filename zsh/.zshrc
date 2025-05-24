@@ -93,7 +93,7 @@ setup-stuff()
     
     PACK="$XDG_CONFIG_HOME/nvim/pack/plugins/start"
 
-    gc "$GH/nordtheme/vim" "$PACK/vim"
+    gc "$GH/dracula/vim" "$PACK/vim"
 
     gc "$GH/windwp/nvim-autopairs" "$PACK/nvim-autopairs"
 
