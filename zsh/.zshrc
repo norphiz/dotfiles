@@ -69,7 +69,6 @@ setup-pkgs()
                 "dosfstools"
                 "alsa-utils"
                 "xorg-xinit"
-                "ttf-dejavu"
                 "xorg-server"
                 "pcmanfm-gtk3"
                 "ttf-croscore"
