@@ -79,7 +79,6 @@ setup-pkgs()
                 "noto-fonts-emoji"
                 "papirus-icon-theme"
                 "xcursor-vanilla-dmz"
-                "archlinux-wallpaper"
                 "ttf-nerd-fonts-symbols-mono")
     
     sudo pacman -S --needed "${PKGS[@]}"
@@ -94,6 +93,8 @@ setup-stuff()
     PACK="$XDG_CONFIG_HOME/nvim/pack/plugins/start"
 
     gc "$GH/dracula/vim" "$PACK/vim"
+
+    gc "$GH/dracula/wallpaper" "$XDG_DATA_HOME/wallpaper"
 
     gc "$GH/windwp/nvim-autopairs" "$PACK/nvim-autopairs"
 
