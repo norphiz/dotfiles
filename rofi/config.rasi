@@ -1,10 +1,9 @@
 @theme "/dev/null"
 
 * {
-    bg: #282a36;
     color: #f8f8f2;
     border-color: #bd93f9;
-    background-color: transparent;
+    background-color: #282a36;
 }
 
 listview {
@@ -18,7 +17,6 @@ inputbar {
 mainbox {
     border: 1;
     padding: 5;
-    background-color: @bg;
 }
 
 configuration {
@@ -29,8 +27,7 @@ configuration {
 }
 
 element.selected {
-    color: @bg;
-    border-radius: 5;
+    color: @background-color;
     background-color: @border-color;
 }
 
