@@ -42,9 +42,18 @@ alias vm="qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio
 
 updt()
 {
-    curl -s "https://archlinux.org/mirrorlist/all/https/" | sudo sed -n "s/#S/S/ ; w /etc/pacman.d/mirrorlist"
-    find "$HOME" -name ".git" | sed "s/.git//" | xargs -I {} git -C {} pull
-    sudo pacman -Syu
+    case "$1" in
+        -g)
+            find "$HOME" -name ".git" | sed "s/.git//" | xargs -I {} git -C {} pull ;;
+        -m)
+            curl -s "https://archlinux.org/mirrorlist/all/https/" | sudo sed -n "s/#S/S/ ; w /etc/pacman.d/mirrorlist" ;;
+        -a)
+            curl -s "https://archlinux.org/mirrorlist/all/https/" | sudo sed -n "s/#S/S/ ; w /etc/pacman.d/mirrorlist"
+            find "$HOME" -name ".git" | sed "s/.git//" | xargs -I {} git -C {} pull
+            sudo pacman -Syu ;;
+        *)
+            sudo pacman -Syu ;;
+    esac
 }
 
 setup-pkgs()
