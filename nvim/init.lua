@@ -11,7 +11,6 @@ vim.o.sc = false
 vim.o.swf = false
 vim.o.smd = false
 vim.o.hls = false
-vim.o.wrap = false
 
 vim.o.sdf = "NONE"
 vim.o.fcs = "eob: "
