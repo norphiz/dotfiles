@@ -1,5 +1,4 @@
 export EDITOR="nvim"
-export WINEARCH="win32"
 export EZA_ICONS_AUTO=""
 export BAT_THEME="Dracula"
 export MANPAGER="nvim +Man!"
