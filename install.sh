@@ -24,7 +24,7 @@ read -r -p "Install linux-firmware? [y/n]: " FIRMWARE
 
 mkfs.ext4 -q "${PARTITIONS[1]}" && mount "${PARTITIONS[1]}" /mnt
 
-test "${FIRMWARE,,}" = "y" && PACKAGES+=("iwd" "wireless-regdb" "linux-firmware")
+test "${FIRMWARE,,}" = "y" && PACKAGES+=("iwd" "wireless-regdb" "linux-firmware-intel")
 
 if test "${DUALBOOT,,}" = "y"; then
     read -r -p "Enter boot partition: " BOOT
