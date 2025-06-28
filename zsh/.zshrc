@@ -68,6 +68,7 @@ setup-pkgs()
                 "sxhkd"
                 "man-db"
                 "neovim"
+                "firefox"
                 "polybar"
                 "starship"
                 "xarchiver"
@@ -84,8 +85,10 @@ setup-pkgs()
                 "noto-fonts-cjk"
                 "noto-fonts-extra"
                 "noto-fonts-emoji"
+                "libva-intel-driver"
                 "papirus-icon-theme"
                 "xcursor-vanilla-dmz"
+                "firefox-ublock-origin"
                 "ttf-nerd-fonts-symbols-mono")
     
     sudo pacman -S --needed "${PKGS[@]}"
