@@ -1,5 +1,5 @@
 XF86HomePage
-    brave
+    firefox
 
 XF86AudioRaiseVolume
     amixer set Master 10%+
