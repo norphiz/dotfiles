@@ -1,3 +1,6 @@
+XF86HomePage
+    brave
+
 XF86AudioRaiseVolume
     amixer set Master 10%+
 
@@ -6,9 +9,6 @@ XF86AudioLowerVolume
 
 XF86AudioMute
     amixer set Master toggle
-
-XF86HomePage
-    brave --disable-font-subpixel-positioning
 
 mod4 + e
     pcmanfm
