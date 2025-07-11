@@ -8,7 +8,7 @@ XF86AudioMute
     amixer set Master toggle
 
 XF86HomePage
-    brave --disable-subpixel-positioning
+    brave --disable-font-subpixel-positioning
 
 mod4 + e
     pcmanfm
