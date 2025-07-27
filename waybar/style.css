@@ -1,0 +1,35 @@
+* {
+    font-size: 16px;
+    border-radius: 0px;
+    font-family: sans-serif;
+}
+
+.modules-left {
+    margin-left: 5px;
+}
+
+.modules-right {
+    margin-right: 5px;
+}
+
+#waybar {
+    background: #282a36;
+    border: 1px solid #bd93f9;
+}
+
+#tags button {
+    color: #f8f8f2;
+    padding: 0px 3px;
+    background: none;
+}
+
+#tags button.focused {
+    color: #bd93f9;
+}
+
+#clock,
+#network,
+#wireplumber {
+    color: #bd93f9;
+    padding: 0px 4px;
+}
