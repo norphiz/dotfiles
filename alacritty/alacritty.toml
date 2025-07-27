@@ -5,9 +5,6 @@ y = 5
 [font]
 size = 14
 
-[general]
-live_config_reload = true
-
 [colors.bright]
 black = "#4c566a"
 red = "#bf616a"
