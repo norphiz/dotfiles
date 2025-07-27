@@ -1,2 +1,2 @@
 source "$ZDOTDIR/.zshrc"
-startx
+river
