@@ -1,0 +1,46 @@
+#!/usr/bin/zsh
+
+for INDEX in {1..9}; do
+    TAGS=$(( 1 << ( INDEX - 1 )))
+    riverctl map normal Mod4 "$INDEX" set-focused-tags "$TAGS"
+    riverctl map normal Mod4+Shift "$INDEX" set-view-tags "$TAGS"
+done
+
+waybar &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+rivertile -view-padding 2 -outer-padding 2 -main-ratio 0.5 &
+swaybg -i "$XDG_DATA_HOME/wallpaper/second-collection/illustrations/trees-and-mountains/dracula-mnt-bd93f9.png" &
+
+riverctl rule-add ssd
+riverctl border-width 1
+riverctl allow-tearing enabled
+riverctl default-layout rivertile
+riverctl default-attach-mode below
+riverctl input "*" accel-profile flat
+riverctl xcursor-theme Vanilla-DMZ 24
+riverctl border-color-focused 0xbd93f9
+riverctl border-color-unfocused 0x6272a4
+riverctl keyboard-layout -options grp:win_space_toggle br,us
+
+riverctl map-pointer normal Mod4 BTN_LEFT move-view
+riverctl map-pointer normal Mod4 BTN_RIGHT resize-view
+
+riverctl map normal Mod4 c close
+riverctl map normal Mod4 l spawn wofi
+riverctl map normal Mod4+Shift q exit
+riverctl map normal Mod4 f toggle-float
+riverctl map normal Mod4 e spawn pcmanfm
+riverctl map normal Mod4 Print spawn grim
+riverctl map normal Mod4 F11 toggle-fullscreen
+riverctl map normal Mod4 Right focus-view next
+riverctl map normal Mod4+Shift Right swap next
+riverctl map normal Mod4 Return spawn alacritty
+riverctl map normal Mod4 Left focus-view previous
+riverctl map normal Mod4+Shift Left swap previous
+riverctl map normal Mod4 b spawn "mv Downloads/*.osz .wine/osu/Songs"
+riverctl map normal Mod4 o spawn "gamemoderun wine .wine/osu/osu\!.exe"
+
+riverctl map normal None XF86HomePage spawn brave
+riverctl map normal None XF86AudioMute spawn "amixer set Master toggle"
+riverctl map normal None XF86AudioRaiseVolume spawn "amixer set Master 10%+"
+riverctl map normal None XF86AudioLowerVolume spawn "amixer set Master 10%-"
