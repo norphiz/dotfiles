@@ -32,12 +32,10 @@ alias pqdt="pacman -Qqdt"
 alias sdls="sudo eza -1a"
 alias inst="sudo pacman -S"
 alias unst="sudo pacman -Rns"
-alias yy="xclip -selection clip -i"
-alias pp="xclip -selection clip -o"
 alias on="iwctl station wlan0 connect"
 alias off="iwctl station wlan0 disconnect"
 alias img="qemu-img create -f qcow2 disk.img"
-alias startx="pidof -q Xorg || exec startx /usr/bin/bspwm -- -logfile /dev/null -nolisten tcp -nolisten local > /dev/null 2>&1"
+alias river="pidof -q river || exec river -no-xwayland > /dev/null 2>&1"
 alias vm="qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio -full-screen -hda disk.img -bios /usr/share/edk2/x64/OVMF.4m.fd"
 
 updt()
@@ -58,30 +56,26 @@ setup-pkgs()
 {
     local PKGS=("eza"
                 "bat"
-                "feh"
-                "rofi"
                 "htop"
                 "gvfs"
-                "scrot"
-                "xclip"
-                "bspwm"
-                "sxhkd"
+                "grim"
+                "wofi"
+                "river"
+                "swaybg"
                 "man-db"
                 "neovim"
+                "waybar"
                 "firefox"
-                "polybar"
                 "starship"
                 "xarchiver"
                 "xdg-utils"
                 "alacritty"
                 "dosfstools"
                 "alsa-utils"
-                "xorg-xinit"
-                "xorg-server"
                 "pcmanfm-gtk3"
                 "ttf-croscore"
                 "polkit-gnome"
-                "xorg-xsetroot"
+                "pipewire-alsa"
                 "noto-fonts-cjk"
                 "noto-fonts-extra"
                 "noto-fonts-emoji"
@@ -110,24 +104,4 @@ setup-stuff()
 
     gc "$GH/zdharma-continuum/fast-syntax-highlighting" \
         "$ZDOTDIR/fast-syntax-highlighting"
-
-    mkdir -p "$XDG_DATA_HOME/icons/default"
-
-    echo "Inherits=Vanilla-DMZ" > "$XDG_DATA_HOME/icons/default/index.theme"
-
-    sudo echo 'Section "ServerFlags"
-    Option "BlankTime" "0"
-EndSection
-
-Section "InputClass"
-    Identifier "Mouse"
-    Driver "libinput"
-    Option "AccelProfile" "flat"
-EndSection
-
-Section "InputClass"
-    Identifier "Keyboard"
-    Option "XkbLayout" "br,us"
-    Option "XkbOptions" "grp:win_space_toggle"
-EndSection' > /etc/xorg.conf
 }
