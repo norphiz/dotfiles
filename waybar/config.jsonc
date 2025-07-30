@@ -12,8 +12,8 @@
     },
     "wireplumber": {
         "tooltip": false,
-        "format-muted": "󰖁  0%",
         "format-icons": ["󰕿", "󰖀", "󰕾"],
+        "format-muted": "󰖁  <span color=\"#f8f8f2\">0%</span>",
         "format": "{icon}  <span color=\"#f8f8f2\">{volume}%</span>"
     },
     "clock": {
