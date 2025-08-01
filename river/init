@@ -13,7 +13,6 @@ swaybg -i "$XDG_DATA_HOME/wallpaper/second-collection/illustrations/trees-and-mo
 
 riverctl rule-add ssd
 riverctl border-width 1
-riverctl allow-tearing enabled
 riverctl default-layout rivertile
 riverctl default-attach-mode below
 riverctl xcursor-theme Vanilla-DMZ
