@@ -19,6 +19,7 @@ riverctl xcursor-theme Vanilla-DMZ
 riverctl input "*" accel-profile flat
 riverctl border-color-focused 0xbd93f9
 riverctl border-color-unfocused 0x6272a4
+riverctl rule-add -app-id "osu!.exe" float
 riverctl keyboard-layout -options grp:win_space_toggle br,us
 
 riverctl map-pointer normal Mod4 BTN_LEFT move-view
