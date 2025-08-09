@@ -1,7 +1,6 @@
 {
     "spacing": 4,
-    "width": 1912,
-    "margin-top": 4,
+    "margin": "4px 4px 0px 4px",
     "modules-left": ["river/tags"],
     "reload_style_on_change": true,
     "modules-right": ["wireplumber", "clock", "network"],
