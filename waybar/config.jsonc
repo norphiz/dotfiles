@@ -5,9 +5,7 @@
     "reload_style_on_change": true,
     "modules-right": ["wireplumber", "clock", "network"],
     "river/tags": {
-        "tag-labels": [
-            "", "", "", "", "", "", "", "", ""
-        ]
+        "tag-labels": ["", "", "", "", "", "", "", "", ""]
     },
     "wireplumber": {
         "tooltip": false,
