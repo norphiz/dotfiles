@@ -1,15 +1,14 @@
 * {
+    all: unset;
     font-size: 16px;
-    border-radius: 0px;
-    font-family: sans-serif;
 }
 
 .modules-left {
-    margin-left: 5px;
+    margin-left: 4px;
 }
 
 .modules-right {
-    margin-right: 5px;
+    margin-right: 4px;
 }
 
 #waybar {
@@ -18,17 +17,14 @@
 }
 
 #tags button {
-    color: #f8f8f2;
-    padding: 0px 3px;
-    background: none;
+    padding: 0px 4px;
 }
 
 #tags button.focused {
-    color: #282a36;
-    background: #bd93f9;
+    color: #bd93f9;
 }
 
 #clock, #wireplumber {
-    color: #f8f8f2;
+    color: #bd93f9;
     padding: 0px 4px;
 }
