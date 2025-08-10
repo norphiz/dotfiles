@@ -2,16 +2,18 @@
     "spacing": 4,
     "margin": "4px 4px 0px 4px",
     "modules-left": ["river/tags"],
-    "reload_style_on_change": true,
     "modules-right": ["wireplumber", "clock"],
+    "river/tags": {
+        "tag-labels": ["", "", "", "", "", "", "", "", ""]
+    },
     "wireplumber": {
         "tooltip": false,
-        "format-muted": "0%",
-        "format": "{icon}  {volume}%",
-        "format-icons": ["🔈", "🔉", "🔊"]
+        "format-icons": ["󰕿", "󰖀", "󰕾"],
+        "format-muted": "󰖁  <span rise='-2000' color=\"#f8f8f2\">0%</span>",
+        "format": "{icon}  <span rise='-2000' color=\"#f8f8f2\">{volume}%</span>"
     },
     "clock": {
         "tooltip": false,
-        "format": "🕑  {:%R}"
+        "format": "󰥔  <span rise='-2000' color=\"#f8f8f2\">{:%R}</span>"
     }
 }
