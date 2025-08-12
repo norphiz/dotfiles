@@ -1,0 +1,18 @@
+* {
+    all: unset;
+    font-size: 18px;
+}
+
+#img {
+    margin: 4px;
+}
+
+#window {
+    background: #282a36;
+    border: 1px solid #bd93f9;
+}
+
+#entry:selected {
+    color: #282a36;
+    background: #bd93f9;
+}
