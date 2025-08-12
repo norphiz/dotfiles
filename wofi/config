@@ -4,3 +4,4 @@ no_actions=true
 hide_search=true
 allow_images=true
 cache_file=/dev/null
+sort_order=alphabetical
