@@ -80,10 +80,10 @@ setup-pkgs()
                 "noto-fonts-extra"
                 "noto-fonts-emoji"
                 "libva-intel-driver"
-                "papirus-icon-theme"
                 "xcursor-vanilla-dmz"
                 "firefox-ublock-origin"
-                "ttf-nerd-fonts-symbols-mono")
+                "ttf-nerd-fonts-symbols-mono"
+                "tela-circle-icon-theme-dracula")
     
     sudo pacman -S --needed "${PKGS[@]}"
 }
