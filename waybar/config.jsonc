@@ -8,11 +8,11 @@
     "wireplumber": {
         "tooltip": false,
         "format-icons": ["󰕿", "󰖀", "󰕾"],
-        "format-muted": "󰖁  <span rise='-2pt' color='#f8f8f2'>0%</span>",
-        "format": "{icon}  <span rise='-2pt' color='#f8f8f2'>{volume}%</span>"
+        "format-muted": "<span rise='2pt' color='#bd93f9'>󰖁</span>  0%",
+        "format": "<span rise='2pt' color='#bd93f9'>{icon}</span>  {volume}%"
     },
     "clock": {
         "tooltip": false,
-        "format": "󰥔  <span rise='-2pt' color='#f8f8f2'>{:%R}</span>"
+        "format": "<span rise='2pt' color='#bd93f9'>󰥔</span>  {:%R}"
     }
 }
