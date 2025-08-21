@@ -37,6 +37,7 @@ riverctl map normal Mod4+Shift Right swap next
 riverctl map normal Mod4 Return spawn alacritty
 riverctl map normal Mod4 Left focus-view previous
 riverctl map normal Mod4+Shift Left swap previous
+riverctl map normal Mod4+Shift s spawn 'grim -g "$(slurp)"'
 riverctl map normal Mod4 b spawn "mv Downloads/*.osz .wine/osu/Songs"
 riverctl map normal Mod4 o spawn "gamemoderun wine .wine/osu/osu\!.exe"
 
