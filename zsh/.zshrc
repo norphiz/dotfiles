@@ -61,6 +61,7 @@ setup-pkgs()
                 "grim"
                 "wofi"
                 "river"
+                "slurp"
                 "swaybg"
                 "man-db"
                 "neovim"
