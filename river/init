@@ -13,6 +13,7 @@ swaybg -i "$XDG_DATA_HOME/wallpaper/second-collection/illustrations/trees-and-mo
 
 riverctl rule-add ssd
 riverctl border-width 1
+riverctl keyboard-layout br
 riverctl default-layout rivertile
 riverctl default-attach-mode below
 riverctl xcursor-theme Vanilla-DMZ
@@ -20,10 +21,14 @@ riverctl input '*' accel-profile flat
 riverctl border-color-focused 0xbd93f9
 riverctl border-color-unfocused 0x6272a4
 riverctl rule-add -app-id 'osu!.exe' float
-riverctl keyboard-layout -options grp:win_space_toggle br,us
 
 riverctl map-pointer normal Mod4 BTN_LEFT move-view
 riverctl map-pointer normal Mod4 BTN_RIGHT resize-view
+
+riverctl map normal None XF86HomePage spawn brave
+riverctl map normal None XF86AudioMute spawn 'amixer set Master toggle'
+riverctl map normal None XF86AudioRaiseVolume spawn 'amixer set Master 10%+'
+riverctl map normal None XF86AudioLowerVolume spawn 'amixer set Master 10%-'
 
 riverctl map normal Mod4 c close
 riverctl map normal Mod4 l spawn wofi
@@ -37,11 +42,6 @@ riverctl map normal Mod4+Shift Right swap next
 riverctl map normal Mod4 Return spawn alacritty
 riverctl map normal Mod4 Left focus-view previous
 riverctl map normal Mod4+Shift Left swap previous
-riverctl map normal Mod4+Shift s spawn 'grim -g "$(slurp)"'
 riverctl map normal Mod4 b spawn 'mv Downloads/*.osz .wine/osu/Songs'
 riverctl map normal Mod4 o spawn 'gamemoderun wine .wine/osu/osu\!.exe'
-
-riverctl map normal None XF86HomePage spawn brave
-riverctl map normal None XF86AudioMute spawn 'amixer set Master toggle'
-riverctl map normal None XF86AudioRaiseVolume spawn 'amixer set Master 10%+'
-riverctl map normal None XF86AudioLowerVolume spawn 'amixer set Master 10%-'
+riverctl map normal Mod4+Shift s spawn 'grim -g "$(slurp -c bd93f97f -s 282a367f -b 00000000)"'
