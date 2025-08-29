@@ -16,14 +16,12 @@
     border: 1px solid #bd93f9;
 }
 
-#clock,
-#wireplumber,
-#tags button {
-    color: #f8f8f2;
+#tags button.focused {
+    color: #bd93f9;
     padding: 0px 4px;
 }
 
-#tags button.focused {
-    color: #bd93f9;
+#clock, #wireplumber, #tags button {
+    color: #f8f8f2;
     padding: 0px 4px;
 }
