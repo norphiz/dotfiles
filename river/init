@@ -31,10 +31,9 @@ riverctl map normal None XF86AudioRaiseVolume spawn 'amixer set Master 10%+'
 riverctl map normal None XF86AudioLowerVolume spawn 'amixer set Master 10%-'
 
 riverctl map normal Mod4 c close
-riverctl map normal Mod4 l spawn wofi
 riverctl map normal Mod4+Shift q exit
 riverctl map normal Mod4 f toggle-float
-riverctl map normal Mod4 e spawn pcmanfm
+riverctl map normal Mod4 Space spawn wofi
 riverctl map normal Mod4 Print spawn grim
 riverctl map normal Mod4 F11 toggle-fullscreen
 riverctl map normal Mod4 Right focus-view next
