@@ -43,8 +43,9 @@ updt()
     case "$1" in
         -r)
             curl -s "https://archlinux.org/mirrorlist/all/https/" | sudo sed -n "s/#S/S/ ; w /etc/pacman.d/mirrorlist" ;;
+        -g)
+            find "$HOME" -name ".git" | sed "s/.git//" | xargs -I {} git -C {} pull ;;
         *)
-            find "$HOME" -name ".git" | sed "s/.git//" | xargs -I {} git -C {} pull
             sudo pacman -Syu ;;
     esac
 }
