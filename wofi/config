@@ -1,6 +1,6 @@
 lines=10
 show=drun
-image_size=36
+image_size=48
 no_actions=true
 hide_search=true
 allow_images=true
