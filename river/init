@@ -21,6 +21,7 @@ riverctl input '*' accel-profile flat
 riverctl border-color-focused 0xbd93f9
 riverctl border-color-unfocused 0x6272a4
 riverctl rule-add -app-id 'osu!.exe' float
+riverctl rule-add -app-id 'org.vinegarhq.Sober' float
 
 riverctl map-pointer normal Mod4 BTN_LEFT move-view
 riverctl map-pointer normal Mod4 BTN_RIGHT resize-view
@@ -31,10 +32,10 @@ riverctl map normal None XF86AudioRaiseVolume spawn 'amixer set Master 10%+'
 riverctl map normal None XF86AudioLowerVolume spawn 'amixer set Master 10%-'
 
 riverctl map normal Mod4 c close
+riverctl map normal Mod4 a spawn wofi
 riverctl map normal Mod4+Shift q exit
 riverctl map normal Mod4 f toggle-float
 riverctl map normal Mod4 e spawn pcmanfm
-riverctl map normal Mod4 Space spawn wofi
 riverctl map normal Mod4 Print spawn grim
 riverctl map normal Mod4 F11 toggle-fullscreen
 riverctl map normal Mod4 Right focus-view next
