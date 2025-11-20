@@ -9,7 +9,7 @@ done
 waybar &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 rivertile -view-padding 2 -outer-padding 2 -main-ratio 0.5 &
-swaybg -i "$XDG_DATA_HOME/wallpaper/second-collection/illustrations/trees-and-mountains/dracula-mnt-bd93f9.png" &
+swaybg -i "$XDG_DATA_HOME/wallpaper/first-collection/base.png" &
 
 riverctl rule-add ssd
 riverctl border-width 1
