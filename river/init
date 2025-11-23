@@ -18,6 +18,7 @@ riverctl default-layout rivertile
 riverctl default-attach-mode below
 riverctl xcursor-theme Vanilla-DMZ
 riverctl input '*' accel-profile flat
+riverctl border-color-urgent 0x6272a4
 riverctl border-color-focused 0xbd93f9
 riverctl rule-add -app-id '*.exe' float
 riverctl border-color-unfocused 0x6272a4
