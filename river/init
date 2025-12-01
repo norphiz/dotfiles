@@ -23,8 +23,8 @@ riverctl border-color-focused 0xbd93f9
 riverctl border-color-unfocused 0x6272a4
 
 riverctl rule-add ssd
-riverctl rule-add -app-id 'imv' float
 riverctl rule-add -app-id '*.exe' float
+riverctl rule-add -app-id 'swayimg' float
 
 riverctl map normal Mod4 C close
 riverctl map normal Mod4+Shift q exit
