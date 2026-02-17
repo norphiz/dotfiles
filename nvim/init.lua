@@ -22,6 +22,7 @@ vim.g.netrw_winsize = 12
 vim.g.netrw_dirhistmax = 0
 
 vim.keymap.set("n", ";", ":", {})
+vim.keymap.set("n", "<A-f>", [[:%s/\v\w{2,}/[\0]/g]])
 vim.keymap.set("n", "<A-w>", ":w<CR>", { silent = true })
 vim.keymap.set("n", "<A-c>", ":q<CR>", { silent = true })
 vim.keymap.set("n", "<A-q>", ":qa!<CR>", { silent = true })
