@@ -7,9 +7,9 @@ for INDEX in {1..9}; do
 done
 
 waybar &
+swaybg -i "$XDG_DATA_HOME/wallpaper/base.png" &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 rivertile -view-padding 2 -outer-padding 2 -main-ratio 0.5 &
-swaybg -i "$XDG_DATA_HOME/wallpaper/first-collection/base.png" &
 
 riverctl border-width 1
 riverctl keyboard-layout br
@@ -25,6 +25,7 @@ riverctl border-color-unfocused 0x6272a4
 riverctl rule-add ssd
 riverctl rule-add -app-id '*.exe' float
 riverctl rule-add -app-id 'swayimg' float
+riverctl rule-add -app-id 'net.sourceforge.VMPK' float
 
 riverctl map normal Mod4 C close
 riverctl map normal Mod4+Shift q exit
@@ -44,6 +45,7 @@ riverctl map normal None XF86AudioRaiseVolume spawn 'amixer set Master 10%+'
 riverctl map normal None XF86AudioLowerVolume spawn 'amixer set Master 10%-'
 
 riverctl map normal Mod4 A spawn 'wofi'
+riverctl map normal Mod4 V spawn 'vmpk'
 riverctl map normal Mod4 E spawn 'pcmanfm'
 riverctl map normal Mod4 Print spawn 'grim'
 riverctl map normal Mod4 Return spawn 'alacritty'
