@@ -37,6 +37,7 @@ alias swayimg="swayimg -c info.show=no"
 alias off="iwctl station wlan0 disconnect"
 alias img="qemu-img create -f qcow2 disk.img"
 alias river="pidof -q river || exec river -no-xwayland > /dev/null 2>&1"
+alias fs="fluidsynth -c 2 -z 256 -a alsa -m alsa_seq -r 48000 /usr/share/soundfonts/FluidR3_GM.sf2"
 alias vm="qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio -full-screen -hda disk.img -bios /usr/share/edk2/x64/OVMF.4m.fd"
 
 updt()
