@@ -10,6 +10,7 @@ waybar &
 swaybg -i "$XDG_DATA_HOME/wallpaper/base.png" &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 rivertile -view-padding 2 -outer-padding 2 -main-ratio 0.5 &
+fluidsynth -s -c 2 -z 256 -a alsa -m alsa_seq -r 48000 /usr/share/soundfonts/FluidR3_GM.sf2 &
 
 riverctl border-width 1
 riverctl keyboard-layout br
