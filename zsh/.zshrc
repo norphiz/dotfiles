@@ -37,14 +37,11 @@ alias pqdt="pacman --config ~/.config/pacman/pacman.conf -Qqdt"
 alias inst="sudo pacman --config ~/.config/pacman/pacman.conf -S"
 alias unst="sudo pacman --config ~/.config/pacman/pacman.conf -Rns"
 alias river="pidof -q river || exec river -no-xwayland > /dev/null 2>&1"
-alias fs="fluidsynth -c 2 -z 256 -a alsa -m alsa_seq -r 48000 /usr/share/soundfonts/FluidR3_GM.sf2"
 alias vm="qemu-system-x86_64 -m 2G -smp 2 -M q35 -cpu max -accel kvm -vga virtio -full-screen -hda disk.img -bios /usr/share/edk2/x64/OVMF.4m.fd"
 
 updt()
 {
     case "$1" in
-        -r)
-            curl -s -f "https://archlinux.org/mirrorlist/all/https/" | sed -n "s/#S/S/ ; w $XDG_CONFIG_HOME/pacman/mirrorlist" ;;
         -g)
             find "$HOME" -name ".git" | sed "s/.git//" | xargs -I {} git -C {} pull ;;
         -a)
@@ -104,7 +101,7 @@ setup-stuff()
     mkdir -p "$XDG_DATA_HOME/wallpaper"
 
     curl 'https://raw.githubusercontent.com/dracula/wallpaper/refs/heads/master/first-collection/base.png' \
-        -o "$XDG_DATA_HOME/wallpaper/base.png"
+        -s -f -o "$XDG_DATA_HOME/wallpaper/base.png"
 
     sudo pacman -S --needed "${PKGS[@]}"
 }
