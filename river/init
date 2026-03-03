@@ -40,14 +40,13 @@ riverctl map normal Mod4+Shift Left swap previous
 riverctl map-pointer normal Mod4 BTN_LEFT move-view
 riverctl map-pointer normal Mod4 BTN_RIGHT resize-view
 
-riverctl map normal None XF86AudioMute spawn 'amixer set Master toggle'
-riverctl map normal None XF86AudioRaiseVolume spawn 'amixer set Master 10%+'
-riverctl map normal None XF86AudioLowerVolume spawn 'amixer set Master 10%-'
+riverctl map normal None XF86AudioMute spawn 'wpctl set-mute @DEFAULT_SINK@ toggle'
+riverctl map normal None XF86AudioRaiseVolume spawn 'wpctl set-volume @DEFAULT_SINK@ 10%+'
+riverctl map normal None XF86AudioLowerVolume spawn 'wpctl set-volume @DEFAULT_SINK@ 10%-'
 
 riverctl map normal Mod4 A spawn 'wofi'
 riverctl map normal Mod4 Print spawn 'grim'
 riverctl map normal Mod4 Return spawn 'alacritty'
 riverctl map normal Mod4 B spawn 'mv Downloads/*.osz .wine/osu/Songs'
-riverctl map normal Mod4 O spawn 'gamemoderun wine .wine/osu/osu\!.exe'
 riverctl map normal Mod4 L spawn 'gtklock -b ~/.local/share/wallpaper/base.png'
 riverctl map normal Mod4+Shift s spawn 'grim -g "$(slurp -c bd93f97f -s 282a367f -b 00000000)"'
