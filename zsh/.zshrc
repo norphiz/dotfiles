@@ -75,6 +75,8 @@ setup-stuff()
           "gtklock"
           "gvfs-mtp"
           "starship"
+          "fakeroot"
+          "debugedit"
           "xarchiver"
           "xdg-utils"
           "alacritty"
