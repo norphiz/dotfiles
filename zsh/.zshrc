@@ -58,7 +58,7 @@ setup-stuff()
 
     GH="https://github.com"
     
-    PACK="$XDG_CONFIG_HOME/nvim/pack/plugins/start"
+    PACK="$XDG_DATA_HOME/nvim/site/pack/plugins/start"
 
     PKGS=("eza"
           "bat"
@@ -99,7 +99,7 @@ setup-stuff()
     gc "$GH/zdharma-continuum/fast-syntax-highlighting" \
         "$ZDOTDIR/fast-syntax-highlighting"
 
-    mkdir -p "$XDG_DATA_HOME/wallpaper"
+    mkdir -p "$PACK" "$XDG_DATA_HOME/wallpaper"
 
     curl 'https://raw.githubusercontent.com/dracula/wallpaper/refs/heads/master/first-collection/base.png' \
         -s -f -o "$XDG_DATA_HOME/wallpaper/base.png"
