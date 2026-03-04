@@ -45,7 +45,5 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
-if os.execute("test -d .config/nvim/pack") then
-    vim.cmd.colo("dracula")
-    require("nvim-autopairs").setup()
-end
+pcall(vim.cmd.colo, "dracula")
+pcall(require, "nvim-autopairs")
