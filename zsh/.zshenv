@@ -1,4 +1,5 @@
 export EDITOR="nvim"
+exoirt QT_FONT_DPI="110"
 export EZA_ICONS_AUTO=""
 export BAT_THEME="Dracula"
 export MANPAGER="nvim +Man!"
