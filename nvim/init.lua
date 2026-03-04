@@ -46,4 +46,4 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 pcall(vim.cmd.colo, "dracula")
-pcall(require, "nvim-autopairs")
+pcall(function() require("nvim-autopairs").setup() end)
