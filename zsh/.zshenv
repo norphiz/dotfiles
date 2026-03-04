@@ -1,6 +1,6 @@
 export EDITOR="nvim"
-export QT_FONT_DPI="110"
 export EZA_ICONS_AUTO=""
+export QT_FONT_DPI="110"
 export BAT_THEME="Dracula"
 export MANPAGER="nvim +Man!"
 export XDG_CACHE_HOME="/tmp"
