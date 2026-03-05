@@ -1,7 +1,6 @@
 * {
+    all: unset;
     font-size: 16px;
-    min-height: 0px;
-    border-radius: 0px;
 }
 
 #waybar {
@@ -15,10 +14,6 @@
 
 .modules-right {
     margin-right: 4px;
-}
-
-#tags button:hover {
-    background: none;
 }
 
 #tags button.focused {
