@@ -1,6 +1,12 @@
 * {
-    all: unset;
     font-size: 16px;
+    min-height: 0px;
+    border-radius: 0px;
+}
+
+#waybar {
+    background: #282a36;
+    border: 1px solid #bd93f9;
 }
 
 .modules-left {
@@ -11,17 +17,17 @@
     margin-right: 4px;
 }
 
-#waybar {
-    background: #282a36;
-    border: 1px solid #bd93f9;
+#tags button:hover {
+    background: none;
 }
 
 #tags button.focused {
     color: #bd93f9;
-    padding: 0px 4px;
+    padding: 0px 2px;
 }
 
 #clock, #wireplumber, #tags button {
     color: #f8f8f2;
-    padding: 0px 4px;
+    margin: 2px 0px;
+    padding: 0px 2px;
 }
