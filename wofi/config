@@ -1,6 +1,6 @@
+prompt=
 lines=10
 show=drun
-prompt=Search
 no_actions=true
 hide_scroll=true
 insensitive=true
