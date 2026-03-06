@@ -1,5 +1,5 @@
 {
-    "spacing": 3,
+    "spacing": 2,
     "margin": "4px 4px 0px 4px",
     "modules-left": ["river/tags"],
     "modules-right": ["wireplumber", "clock"],
