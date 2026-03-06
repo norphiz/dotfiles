@@ -5,14 +5,12 @@
     background-image: none;
 }
 
-#outer-box {
-    margin: 4px;
+#input * {
+    color: #bd93f9;
 }
 
-#text {
-    all: initial;
+#outer-box {
     margin: 4px;
-    font-size: 16px;
 }
 
 #text:selected {
@@ -26,6 +24,12 @@
 #window {
     background: #282a36;
     border: 1px solid #bd93f9;
+}
+
+#text {
+    all: initial;
+    margin: 4px;
+    font-size: 16px;
 }
 
 #input {
