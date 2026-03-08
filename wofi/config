@@ -1,5 +1,6 @@
 prompt=
-lines=10
+lines=5
+width=15%
 show=drun
 no_actions=true
 hide_scroll=true
