@@ -9,12 +9,12 @@
     color: #bd93f9;
 }
 
-#outer-box {
-    margin: 4px;
-}
-
 #text:selected {
     color: #282a36;
+}
+
+#entry {
+    margin: 0px 4px 4px;
 }
 
 #entry:selected {
@@ -34,9 +34,8 @@
 }
 
 #input {
+    margin: 4px;
     border: none;
     color: #f8f8f2;
-    margin-bottom: 4px;
     background: #44475a;
-    border: 1px solid #bd93f9;
 }
